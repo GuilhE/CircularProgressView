@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircularProgressView">
+        <attr name="max" format="integer"/>
+        <attr name="shadow" format="boolean"/>
+        <attr name="startingAngle" format="integer"/>
+        <attr name="progress" format="integer"/>
+        <attr name="progressBarThickness" format="dimension"/>
+        <attr name="progressBarColor" format="color"/>
+        <attr name="backgroundColor" format="color"/>
+    </declare-styleable>
+</resources>
