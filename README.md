@@ -1,7 +1,7 @@
 # CircularProgressView:
-[![Build Status](https://travis-ci.org/GuilhE/android-circular-progress-view.svg?branch=master)](https://travis-ci.org/GuilhE/android-circular-progress-view)
+![header](sample1.png)
 
-![sample1]
+[![Build Status](https://travis-ci.org/GuilhE/android-circular-progress-view.svg?branch=master)](https://travis-ci.org/GuilhE/android-circular-progress-view)
 
 A fancy CircularProgressView.
 
