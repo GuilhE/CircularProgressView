@@ -2,236 +2,222 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="match_parent">
 
-        <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <com.github.guilhe.circularprogressview.CircularProgressView
+                android:id="@+id/sample_CircularProgressView"
+                android:layout_width="@dimen/progress_size"
+                android:layout_height="@dimen/progress_size"
+                app:progressBarColor="@android:color/holo_red_dark"
+                app:progress="20"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/sample_CircularProgressView"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:text="@string/hint_for_size"/>
+
+            <SeekBar
+                    android:id="@+id/size_SeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="200"
+                    android:progress="200"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:text="@string/hint_for_progress_thickness"/>
+
+            <SeekBar
+                    android:id="@+id/thickness_SeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="60"
+                    android:progress="10"/>
 
             <LinearLayout
-                    android:id="@+id/const_top_linearLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:gravity="center"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <com.github.guilhe.circularprogressview.CircularProgressView
-                        android:id="@+id/sample_CircularProgressView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:progressBarColor="@android:color/holo_red_dark"
-                        app:progress="20"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:text="@string/hint_for_progress"/>
+
+                <Switch
+                        android:id="@+id/animated_Switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:checked="false"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/symbol_closing"/>
+            </LinearLayout>
+
+            <SeekBar
+                    android:id="@+id/progress_SeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="20"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:text="@string/hint_for_angle"/>
+
+            <SeekBar
+                    android:id="@+id/angle_SeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="360"
+                    android:progress="275"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:text="@string/hint_for_shadow"/>
+
+                <Switch
+                        android:id="@+id/shadow_Switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"/>
 
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:padding="20dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/const_top_linearLayout"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="1.0">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="10dp"
-                        android:text="@string/hint_for_size"/>
+                        android:text="@string/hint_for_color"/>
 
-                <SeekBar
-                        android:id="@+id/size_SeekBar"
-                        android:layout_width="match_parent"
+                <Switch
+                        android:id="@+id/colors_Switch"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:max="200"
-                        android:progress="200"/>
+                        android:layout_marginStart="5dp"
+                        android:checked="true"/>
 
                 <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:text="@string/hint_for_progress_thickness"/>
+                        android:text="@string/symbol_closing"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
                 <SeekBar
-                        android:id="@+id/thickness_SeekBar"
-                        android:layout_width="match_parent"
+                        android:id="@+id/color_r_SeekBar"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:max="60"
-                        android:progress="10"/>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:text="@string/hint_for_progress"/>
-
-                    <Switch
-                            android:id="@+id/animated_Switch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:checked="false"/>
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/symbol_closing"/>
-                </LinearLayout>
+                        android:max="255"
+                        android:progress="204"
+                        android:layout_weight="1"/>
 
                 <SeekBar
-                        android:id="@+id/progress_SeekBar"
-                        android:layout_width="match_parent"
+                        android:id="@+id/color_g_SeekBar"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:max="100"
-                        android:progress="20"/>
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:text="@string/hint_for_angle"/>
+                        android:max="255"
+                        android:progress="0"
+                        android:layout_weight="1"/>
 
                 <SeekBar
-                        android:id="@+id/angle_SeekBar"
-                        android:layout_width="match_parent"
+                        android:id="@+id/color_b_SeekBar"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:max="360"
-                        android:progress="275"/>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:text="@string/hint_for_shadow"/>
-
-                    <Switch
-                            android:id="@+id/shadow_Switch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:text="@string/hint_for_color"/>
-
-                    <Switch
-                            android:id="@+id/colors_Switch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:checked="true"/>
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/symbol_closing"/>
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-
-                    <SeekBar
-                            android:id="@+id/color_r_SeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:max="255"
-                            android:progress="204"
-                            android:layout_weight="1"/>
-
-                    <SeekBar
-                            android:id="@+id/color_g_SeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:max="255"
-                            android:progress="0"
-                            android:layout_weight="1"/>
-
-                    <SeekBar
-                            android:id="@+id/color_b_SeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:max="255"
-                            android:progress="0"
-                            android:layout_weight="1"/>
-
-                </LinearLayout>
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
-                        android:text="@string/hint_for_background_color"/>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-
-                    <SeekBar
-                            android:id="@+id/bg_r_SeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:max="255"
-                            android:progress="204"
-                            android:layout_weight="1"/>
-
-                    <SeekBar
-                            android:id="@+id/bg_g_SeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:max="255"
-                            android:progress="0"
-                            android:layout_weight="1"/>
-
-                    <SeekBar
-                            android:id="@+id/bg_b_SeekBar"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:max="255"
-                            android:progress="0"
-                            android:layout_weight="1"/>
-
-                </LinearLayout>
+                        android:max="255"
+                        android:progress="0"
+                        android:layout_weight="1"/>
 
             </LinearLayout>
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:text="@string/hint_for_background_color"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                <SeekBar
+                        android:id="@+id/bg_r_SeekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:max="255"
+                        android:progress="204"
+                        android:layout_weight="1"/>
+
+                <SeekBar
+                        android:id="@+id/bg_g_SeekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:max="255"
+                        android:progress="0"
+                        android:layout_weight="1"/>
+
+                <SeekBar
+                        android:id="@+id/bg_b_SeekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:max="255"
+                        android:progress="0"
+                        android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>
