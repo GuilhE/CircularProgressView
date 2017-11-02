@@ -11,7 +11,7 @@
                 android:layout_width="@dimen/progress_size"
                 android:layout_height="@dimen/progress_size"
                 app:progressBarColor="@android:color/holo_red_dark"
-                app:progress="90"
+                app:progress="20"
                 app:progressIcon="true"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
