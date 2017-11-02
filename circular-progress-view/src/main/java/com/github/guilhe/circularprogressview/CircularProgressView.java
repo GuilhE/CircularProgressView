@@ -26,6 +26,7 @@ public class CircularProgressView extends View {
     private static final float DEFAULT_VIEW_PADDING_DP = 10;
     private static final float DEFAULT_SHADOW_PADDING_DP = 5;
     private static final float DEFAULT_STROKE_THICKNESS_DP = 10;
+    private static final float DEFAULT_PROGRESS_ICON_THICKNESS_DP = 5;
     private static final int DEFAULT_MAX_WIDTH_DP = 100;
     private static final int DEFAULT_MAX = 100;
     private static final int DEFAULT_STARTING_ANGLE = 275;
@@ -34,8 +35,15 @@ public class CircularProgressView extends View {
     private static final float DEFAULT_BACKGROUND_ALPHA = 0.3f;
     private static final TimeInterpolator DEFAULT_INTERPOLATOR = new DecelerateInterpolator();
 
+    private final float mDefaultViewPadding = convertDpToPx(getContext(), DEFAULT_VIEW_PADDING_DP);
+    private final float mDefaultShadowPadding = convertDpToPx(getContext(), DEFAULT_SHADOW_PADDING_DP);
+    private final float mDefaultStrokeThickness = convertDpToPx(getContext(), DEFAULT_STROKE_THICKNESS_DP);
+    private final float mDefaultProgressIconThickness = convertDpToPx(getContext(), DEFAULT_PROGRESS_ICON_THICKNESS_DP);
+    private final int mDefaultMaxWidth = convertDpToPx(getContext(), DEFAULT_MAX_WIDTH_DP);
+
     private int mMax;
     private boolean mShadowEnabled;
+    private boolean mProgressIconEnabled;
     private int mStartingAngle;
     private float mProgress;
     private float mProgressStrokeThickness;
@@ -44,7 +52,6 @@ public class CircularProgressView extends View {
 
     private RectF mProgressRectF;
     private RectF mShadowRectF;
-    private Outline mOutline;
     private Paint mBackgroundPaint;
     private Paint mProgressPaint;
     private Paint mShadowPaint;
@@ -93,16 +100,17 @@ public class CircularProgressView extends View {
             try {
                 mMax = typedArray.getInt(R.styleable.CircularProgressView_max, DEFAULT_MAX);
                 mShadowEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_shadow, true);
+                mProgressIconEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_progressIcon, false);
                 mStartingAngle = typedArray.getInteger(R.styleable.CircularProgressView_startingAngle, DEFAULT_STARTING_ANGLE);
                 mProgress = typedArray.getFloat(R.styleable.CircularProgressView_progress, 0);
-                mProgressStrokeThickness = typedArray.getDimension(R.styleable.CircularProgressView_progressBarThickness, convertDpToPx(context, DEFAULT_STROKE_THICKNESS_DP));
+                mProgressStrokeThickness = typedArray.getDimension(R.styleable.CircularProgressView_progressBarThickness, mDefaultStrokeThickness);
                 mProgressColor = typedArray.getInt(R.styleable.CircularProgressView_progressBarColor, DEFAULT_PROGRESS_COLOR);
                 mBackgroundColor = typedArray.getInt(R.styleable.CircularProgressView_backgroundColor, mProgressColor);
             } finally {
                 typedArray.recycle();
             }
         } else {
-            mProgressStrokeThickness = convertDpToPx(context, DEFAULT_STROKE_THICKNESS_DP);
+            mProgressStrokeThickness = mDefaultStrokeThickness;
             mShadowEnabled = true;
             mMax = DEFAULT_MAX;
             mStartingAngle = DEFAULT_STARTING_ANGLE;
@@ -221,6 +229,15 @@ public class CircularProgressView extends View {
         return mShadowEnabled;
     }
 
+    public void setProgressIconEnabled(boolean enable) {
+        mProgressIconEnabled = enable;
+        invalidate();
+    }
+
+    public boolean isProgressIconEnabled() {
+        return mProgressIconEnabled;
+    }
+
     /**
      * Changes progressBar, background and shadow line width.
      *
@@ -330,11 +347,10 @@ public class CircularProgressView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = MeasureSpec.getMode(heightMeasureSpec) != MeasureSpec.UNSPECIFIED ?
-                MeasureSpec.getSize(heightMeasureSpec) : convertDpToPx(getContext(), DEFAULT_MAX_WIDTH_DP);
+        int height = MeasureSpec.getMode(heightMeasureSpec) != MeasureSpec.UNSPECIFIED ? MeasureSpec.getSize(heightMeasureSpec) : mDefaultMaxWidth;
 
         int rawMeasuredDim = Math.max(Math.min(width, height), 0);
-        float arcDim = mProgressStrokeThickness + convertDpToPx(getContext(), DEFAULT_VIEW_PADDING_DP);
+        float arcDim = mProgressStrokeThickness + mDefaultViewPadding;
         mProgressRectF.set(arcDim, arcDim, rawMeasuredDim - arcDim, rawMeasuredDim - arcDim);
 
         //To avoid creating a messy composition
@@ -346,8 +362,7 @@ public class CircularProgressView extends View {
         mLastValidRawMeasuredDim = rawMeasuredDim;
         mLastValidStrokeThickness = mProgressStrokeThickness;
 
-        int shadowPadding = convertDpToPx(getContext(), DEFAULT_SHADOW_PADDING_DP);
-        mShadowRectF.set(mProgressRectF.left, shadowPadding + mProgressRectF.top, mProgressRectF.right, shadowPadding + mProgressRectF.bottom);
+        mShadowRectF.set(mProgressRectF.left, mDefaultShadowPadding + mProgressRectF.top, mProgressRectF.right, mDefaultShadowPadding + mProgressRectF.bottom);
         setMeasuredDimension(rawMeasuredDim, rawMeasuredDim);
     }
 
@@ -355,21 +370,26 @@ public class CircularProgressView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        float angle = 360 * mProgress / mMax;
-        if (mShadowEnabled) {
-            canvas.drawArc(mShadowRectF, mStartingAngle, angle, false, mShadowPaint);
-        }
-        canvas.drawOval(mProgressRectF, mBackgroundPaint);
-        canvas.drawArc(mProgressRectF, mStartingAngle, angle, false, mProgressPaint);
-
         //cos(a) = adj/hyp <> cos(angle) = x/radius <> x = cos(angle)*radius
         //sin(a) = opp/hyp <> sin(angle) = y/radius <> y = sin(angle)*radius
         //x = cos(startingAngle + progressAngle)*radius + originX (center)
         //y = sin(startingAngle + progressAngle)*radius + originY (center)
-        float radius = getWidth() / 2 - convertDpToPx(getContext(), DEFAULT_VIEW_PADDING_DP);
+        float angle = 360 * mProgress / mMax;
+        float radius = getWidth() / 2 - mDefaultViewPadding - mDefaultProgressIconThickness - mDefaultStrokeThickness / 2;
         double endX = (float) (Math.cos(Math.toRadians(mStartingAngle + angle)) * radius + mProgressRectF.centerX());
         double endY = (float) (Math.sin(Math.toRadians(mStartingAngle + angle)) * radius + mProgressRectF.centerY());
-        canvas.drawCircle((float) endX, (float) endY, 10, mShadowPaint);
+        if (mShadowEnabled) {
+            canvas.drawArc(mShadowRectF, mStartingAngle, angle, false, mShadowPaint);
+            if (mProgressIconEnabled) {
+                canvas.drawCircle((float) endX + mDefaultShadowPadding, (float) endY + mDefaultShadowPadding, mDefaultProgressIconThickness, mShadowPaint);
+            }
+        }
+        canvas.drawOval(mProgressRectF, mBackgroundPaint);
+        canvas.drawArc(mProgressRectF, mStartingAngle, angle, false, mProgressPaint);
+
+        if (mProgressIconEnabled) {
+            canvas.drawCircle((float) endX, (float) endY, mDefaultProgressIconThickness, mProgressPaint);
+        }
     }
 
     private static int convertDpToPx(Context context, float dp) {
