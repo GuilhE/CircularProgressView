@@ -12,7 +12,6 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -362,6 +361,15 @@ public class CircularProgressView extends View {
         }
         canvas.drawOval(mProgressRectF, mBackgroundPaint);
         canvas.drawArc(mProgressRectF, mStartingAngle, angle, false, mProgressPaint);
+
+        //cos(a) = adj/hyp <> cos(angle) = x/radius <> x = cos(angle)*radius
+        //sin(a) = opp/hyp <> sin(angle) = y/radius <> y = sin(angle)*radius
+        //x = cos(startingAngle + progressAngle)*radius + originX (center)
+        //y = sin(startingAngle + progressAngle)*radius + originY (center)
+        float radius = getWidth() / 2 - convertDpToPx(getContext(), DEFAULT_VIEW_PADDING_DP);
+        double endX = (float) (Math.cos(Math.toRadians(mStartingAngle + angle)) * radius + mProgressRectF.centerX());
+        double endY = (float) (Math.sin(Math.toRadians(mStartingAngle + angle)) * radius + mProgressRectF.centerY());
+        canvas.drawCircle((float) endX, (float) endY, 10, mShadowPaint);
     }
 
     private static int convertDpToPx(Context context, float dp) {
