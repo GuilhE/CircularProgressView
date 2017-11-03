@@ -6,16 +6,20 @@
 A fancy CircularProgressView.
 
 #### Version 1.x
-
+  - **November, 2017**  - Progress icon
   - **September, 2017** - CircularProgressView
 
 
 ## Getting started
 
-Include it into your project, for example, as a Gradle compile dependency:
+Include it into your project, for example, as a Gradle dependency:
 
 ```groovy
+<<<<<<< HEAD
 compile 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
+=======
+implementation 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
+>>>>>>> 7221aa7... Removed appcompat-v7 dependency
 ```
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.guilhe/circular-progress-view/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22circular-progress-view%22)  [ ![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg) ](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion)  
 
@@ -28,6 +32,7 @@ Attributes accepted in xml:
 <declare-styleable name="CircularProgressView">
     <attr name="max" format="integer"/>
     <attr name="shadow" format="boolean"/>
+    <attr name="progressIcon" format="boolean"/>
     <attr name="startingAngle" format="integer"/>
     <attr name="progress" format="integer"/>
     <attr name="progressBarThickness" format="dimension"/>
@@ -86,6 +91,10 @@ To customize this `View` by code, these are the available methods to do so:
     
     public boolean isShadowEnabled() {}
     
+    public void setProgressIconEnabled(boolean enable) {}
+    
+    public boolean isProgressIconEnabled() {}
+    
     public void setProgressStrokeThickness(float thickness) {}
     
     public float getProgressStrokeThickness() {}
@@ -112,6 +121,9 @@ For more details checkout the __sample app__, _javadocs_ or the code itself.
 ![example](sample.gif)
  
 
+## Sample
+Available at Playstore:
+
 ## Binaries
 
 Binaries and dependency information for Gradle, Maven, Ivy and others can be found at [https://search.maven.org](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22circular-progress-view%22).
@@ -120,7 +132,6 @@ Binaries and dependency information for Gradle, Maven, Ivy and others can be fou
 
 ## Dependencies
 - [com.android.support:support-annotations](https://developer.android.com/topic/libraries/support-library/packages.html#annotations)
-- [com.android.support:appcompat-v7](https://developer.android.com/topic/libraries/support-library/features.html#v7-appcompat)
 
 ## Bugs and Feedback
 

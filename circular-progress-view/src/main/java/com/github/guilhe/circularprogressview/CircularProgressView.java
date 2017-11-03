@@ -10,7 +10,6 @@ import android.graphics.*;
 import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -171,8 +170,13 @@ public class CircularProgressView extends View {
         setBackgroundColor(color);
     }
 
+    /**
+     * You can simulate the use of this method with by calling {@link #setColor(int)} with ContextCompat:
+     * setBackgroundColor(ContextCompat.getColor(getContext(), resId));
+     */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setColorResource(@ColorRes int resId) {
-        setColor(ContextCompat.getColor(getContext(), resId));
+        setColor(getContext().getColor(resId));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -189,8 +193,13 @@ public class CircularProgressView extends View {
         invalidate();
     }
 
+    /**
+     * You can simulate the use of this method with by calling {@link #setProgressColor(int)} with ContextCompat:
+     * setProgressColor(ContextCompat.getColor(getContext(), resId));
+     */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setProgressColorResource(@ColorRes int resId) {
-        setProgressColor(ContextCompat.getColor(getContext(), resId));
+        setProgressColor(getContext().getColor(resId));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -208,8 +217,13 @@ public class CircularProgressView extends View {
         invalidate();
     }
 
+    /**
+     * You can simulate the use of this method with by calling {@link #setBackgroundColor(int)} with ContextCompat:
+     * setBackgroundColor(ContextCompat.getColor(getContext(), resId));
+     */
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setShadowColorResource(@ColorRes int resId) {
-        setBackgroundColor(ContextCompat.getColor(getContext(), resId));
+        setBackgroundColor(getContext().getColor(resId));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -395,7 +409,7 @@ public class CircularProgressView extends View {
         }
     }
 
-    private static int convertDpToPx(Context context, float dp) {
+    private int convertDpToPx(Context context, float dp) {
         return (int) (dp * context.getResources().getDisplayMetrics().density + 0.5f);
     }
 }
