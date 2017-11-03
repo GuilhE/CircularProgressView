@@ -359,7 +359,7 @@ public class CircularProgressView extends View {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getMode(heightMeasureSpec) != MeasureSpec.UNSPECIFIED ? MeasureSpec.getSize(heightMeasureSpec) : mDefaultMaxWidth;
 
@@ -381,7 +381,7 @@ public class CircularProgressView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         //Who doesn't love a bit of math? :)

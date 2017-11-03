@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleEditorBinding;
 
@@ -33,18 +32,8 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
         mBinding.bgGSeekBar.setOnSeekBarChangeListener(this);
         mBinding.bgBSeekBar.setOnSeekBarChangeListener(this);
 
-        mBinding.colorsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                mBinding.sampleCircularProgressView.setBackgroundColor(mBinding.sampleCircularProgressView.getProgressColor());
-            }
-        });
-        mBinding.shadowSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                mBinding.sampleCircularProgressView.setShadowEnabled(checked);
-            }
-        });
+        mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, b) -> mBinding.sampleCircularProgressView.setBackgroundColor(mBinding.sampleCircularProgressView.getProgressColor()));
+        mBinding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setShadowEnabled(checked));
     }
 
     @Override
