@@ -15,6 +15,7 @@ import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleE
 public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
     private ActivitySampleEditorBinding mBinding;
+    private boolean mTransparent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,54 +33,75 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
         mBinding.bgGSeekBar.setOnSeekBarChangeListener(this);
         mBinding.bgBSeekBar.setOnSeekBarChangeListener(this);
 
-        mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, b) -> mBinding.sampleCircularProgressView.setBackgroundColor(mBinding.sampleCircularProgressView.getProgressColor()));
         mBinding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setShadowEnabled(checked));
+        mBinding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressThumbEnabled(checked));
+        mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (!mTransparent) {
+                mBinding.sampleCircularProgressView.setBackgroundColor(mBinding.sampleCircularProgressView.getProgressColor());
+            }
+        });
+        mBinding.transparentSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
+            mTransparent = checked;
+            mBinding.sampleCircularProgressView.setBackgroundColor(Color.TRANSPARENT);
+        });
     }
 
     @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()) {
             case R.id.size_SeekBar:
-                mBinding.sampleCircularProgressView.setSize((int) (i * getResources().getDisplayMetrics().density + 0.5f));
+                mBinding.sampleCircularProgressView.setSize((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
                 break;
             case R.id.thickness_SeekBar:
-                mBinding.sampleCircularProgressView.setProgressStrokeThickness((int) (i * getResources().getDisplayMetrics().density + 0.5f));
+                mBinding.sampleCircularProgressView.setProgressStrokeThickness((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
                 break;
             case R.id.progress_SeekBar:
-                mBinding.sampleCircularProgressView.setProgress(i, mBinding.animatedSwitch.isChecked());
+                mBinding.sampleCircularProgressView.setProgress(progress, mBinding.animatedSwitch.isChecked());
                 break;
             case R.id.angle_SeekBar:
-                mBinding.sampleCircularProgressView.setStartingAngle(i);
+                mBinding.sampleCircularProgressView.setStartingAngle(progress);
                 break;
             case R.id.color_r_SeekBar:
                 if (mBinding.colorsSwitch.isChecked()) {
-                    mBinding.sampleCircularProgressView.setColor(Color.rgb(i, mBinding.colorGSeekBar.getProgress(), mBinding.colorBSeekBar.getProgress()));
-                } else {
-                    mBinding.sampleCircularProgressView.setProgressColor(Color.rgb(i, mBinding.colorGSeekBar.getProgress(), mBinding.colorBSeekBar.getProgress()));
+                    mBinding.bgRSeekBar.setProgress(progress);
                 }
+                mBinding.sampleCircularProgressView.setProgressColor(Color.rgb(progress, mBinding.colorGSeekBar.getProgress(), mBinding.colorBSeekBar.getProgress()));
                 break;
             case R.id.color_g_SeekBar:
                 if (mBinding.colorsSwitch.isChecked()) {
-                    mBinding.sampleCircularProgressView.setColor(Color.rgb(mBinding.colorRSeekBar.getProgress(), i, mBinding.colorBSeekBar.getProgress()));
-                } else {
-                    mBinding.sampleCircularProgressView.setProgressColor(Color.rgb(mBinding.colorRSeekBar.getProgress(), i, mBinding.colorBSeekBar.getProgress()));
+                    mBinding.bgGSeekBar.setProgress(progress);
                 }
+                mBinding.sampleCircularProgressView.setProgressColor(Color.rgb(mBinding.colorRSeekBar.getProgress(), progress, mBinding.colorBSeekBar.getProgress()));
                 break;
             case R.id.color_b_SeekBar:
                 if (mBinding.colorsSwitch.isChecked()) {
-                    mBinding.sampleCircularProgressView.setColor(Color.rgb(mBinding.colorRSeekBar.getProgress(), mBinding.colorGSeekBar.getProgress(), i));
-                } else {
-                    mBinding.sampleCircularProgressView.setProgressColor(Color.rgb(mBinding.colorRSeekBar.getProgress(), mBinding.colorGSeekBar.getProgress(), i));
+                    mBinding.bgBSeekBar.setProgress(progress);
                 }
+                mBinding.sampleCircularProgressView.setProgressColor(Color.rgb(mBinding.colorRSeekBar.getProgress(), mBinding.colorGSeekBar.getProgress(), progress));
                 break;
             case R.id.bg_r_SeekBar:
-                mBinding.sampleCircularProgressView.setBackgroundColor(Color.rgb(i, mBinding.bgGSeekBar.getProgress(), mBinding.bgBSeekBar.getProgress()));
+                if (mBinding.colorsSwitch.isChecked()) {
+                    mBinding.colorRSeekBar.setProgress(progress);
+                }
+                if (!mTransparent) {
+                    mBinding.sampleCircularProgressView.setBackgroundColor(Color.rgb(progress, mBinding.bgGSeekBar.getProgress(), mBinding.bgBSeekBar.getProgress()));
+                }
                 break;
             case R.id.bg_g_SeekBar:
-                mBinding.sampleCircularProgressView.setBackgroundColor(Color.rgb(mBinding.bgRSeekBar.getProgress(), i, mBinding.bgBSeekBar.getProgress()));
+                if (mBinding.colorsSwitch.isChecked()) {
+                    mBinding.colorGSeekBar.setProgress(progress);
+                }
+                if (!mTransparent) {
+                    mBinding.sampleCircularProgressView.setBackgroundColor(Color.rgb(mBinding.bgRSeekBar.getProgress(), progress, mBinding.bgBSeekBar.getProgress()));
+                }
                 break;
             case R.id.bg_b_SeekBar:
-                mBinding.sampleCircularProgressView.setBackgroundColor(Color.rgb(mBinding.bgRSeekBar.getProgress(), mBinding.bgGSeekBar.getProgress(), i));
+                if (mBinding.colorsSwitch.isChecked()) {
+                    mBinding.colorBSeekBar.setProgress(progress);
+                }
+                if (!mTransparent) {
+                    mBinding.sampleCircularProgressView.setBackgroundColor(Color.rgb(mBinding.bgRSeekBar.getProgress(), mBinding.bgGSeekBar.getProgress(), progress));
+                }
                 break;
         }
     }

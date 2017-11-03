@@ -163,6 +163,10 @@ public class CircularProgressView extends View {
         return mMax;
     }
 
+    /**
+     * Changes progress and background color
+     * @param color - Color
+     */
     public void setColor(int color) {
         setProgressColor(color);
         setBackgroundColor(color);

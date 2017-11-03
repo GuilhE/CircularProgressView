@@ -15,11 +15,7 @@ A fancy CircularProgressView.
 Include it into your project, for example, as a Gradle dependency:
 
 ```groovy
-<<<<<<< HEAD
-compile 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
-=======
 implementation 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
->>>>>>> 7221aa7... Removed appcompat-v7 dependency
 ```
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.guilhe/circular-progress-view/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22circular-progress-view%22)  [ ![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg) ](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion)  
 
@@ -64,6 +60,7 @@ To customize this `View` by code, these are the available methods to do so:
     
     public void setColor(int color) {}
     
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setColorResource(@ColorRes int resId) {}
     
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -71,6 +68,7 @@ To customize this `View` by code, these are the available methods to do so:
     
     public void setProgressColor(int color) {}
     
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setProgressColorResource(@ColorRes int resId) {}
     
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -80,6 +78,7 @@ To customize this `View` by code, these are the available methods to do so:
     
     public void setBackgroundColor(int color) {}
     
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void setShadowColorResource(@ColorRes int resId) {}
     
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -118,11 +117,10 @@ To customize this `View` by code, these are the available methods to do so:
 
 For more details checkout the __sample app__, _javadocs_ or the code itself.
 
-![example](sample.gif)
- 
-
 ## Sample
-Available at Playstore:
+<img src="sample.gif" alt="Sample" width="30%"/>
+
+<a href='https://play.google.com/store/apps/details?id=com.github.guilhe.cicularprogressview.sample&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="30%" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
 ## Binaries
 

@@ -1,14 +1,27 @@
 language: android
+dist: trusty
+
 android:
-        components:
-                - platform-tools
-                - build-tools-26.0.1
-                - android-26
-                - extra-android-support
+  components:
+    - tools # see https://github.com/travis-ci/travis-ci/issues/6040#issuecomment-219367943)
+    - platform-tools
+    - build-tools-26.0.1
+    - build-tools-26.0.2
+    - android-26
+    - extra-android-support
+  licenses:
+    - 'android-sdk-license-.+'
+    - '.+'
+
+jdk:
+  - oraclejdk8
+
 script:
-        - ./gradlew build
+  - ./gradlew build
+
 before_install:
-        - chmod +x gradlew
+  - chmod +x gradlew
+
 branches:
-        only:
-        - master
+  only:
+    - master
