@@ -40,7 +40,7 @@ public class CircularProgressView extends View {
 
     private int mMax;
     private boolean mShadowEnabled;
-    private boolean mProgressIconEnabled;
+    private boolean mProgressThumbEnabled;
     private int mStartingAngle;
     private float mProgress;
     private float mProgressStrokeThickness;
@@ -50,7 +50,6 @@ public class CircularProgressView extends View {
 
     private RectF mProgressRectF;
     private RectF mShadowRectF;
-    private Path mShadowPath;
     private Paint mBackgroundPaint;
     private Paint mProgressPaint;
     private Paint mShadowPaint;
@@ -86,7 +85,6 @@ public class CircularProgressView extends View {
         mInterpolator = DEFAULT_INTERPOLATOR;
         mProgressRectF = new RectF();
         mShadowRectF = new RectF();
-        mShadowPath = new Path();
 
         mBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBackgroundPaint.setStyle(Paint.Style.STROKE);
@@ -100,7 +98,7 @@ public class CircularProgressView extends View {
             try {
                 mMax = typedArray.getInt(R.styleable.CircularProgressView_max, DEFAULT_MAX);
                 mShadowEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_shadow, true);
-                mProgressIconEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_progressIcon, false);
+                mProgressThumbEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_progressThumb, false);
                 mStartingAngle = typedArray.getInteger(R.styleable.CircularProgressView_startingAngle, DEFAULT_STARTING_ANGLE);
                 mProgress = typedArray.getFloat(R.styleable.CircularProgressView_progress, 0);
                 mProgressStrokeThickness = typedArray.getDimension(R.styleable.CircularProgressView_progressBarThickness, mDefaultStrokeThickness);
@@ -244,13 +242,13 @@ public class CircularProgressView extends View {
         return mShadowEnabled;
     }
 
-    public void setProgressIconEnabled(boolean enable) {
-        mProgressIconEnabled = enable;
+    public void setProgressThumbEnabled(boolean enable) {
+        mProgressThumbEnabled = enable;
         invalidate();
     }
 
-    public boolean isProgressIconEnabled() {
-        return mProgressIconEnabled;
+    public boolean isProgressThumbEnabled() {
+        return mProgressThumbEnabled;
     }
 
     /**
@@ -386,25 +384,25 @@ public class CircularProgressView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //cos(a) = adj/hyp <> cos(angle) = x/radius <> x = cos(angle)*radius
-        //sin(a) = opp/hyp <> sin(angle) = y/radius <> y = sin(angle)*radius
-        //x = cos(startingAngle + progressAngle)*radius + originX (center)
-        //y = sin(startingAngle + progressAngle)*radius + originY (center)
+        //Who doesn't love a bit of math? :)
+        //cos(a) = adj / hyp <>cos(angle) = x / radius <>x = cos(angle) * radius
+        //sin(a) = opp / hyp <>sin(angle) = y / radius <>y = sin(angle) * radius
+        //x = cos(startingAngle + progressAngle) * radius + originX(center)
+        //y = sin(startingAngle + progressAngle) * radius + originY(center)
         float angle = 360 * mProgress / mMax;
         float radius = getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2;
         double endX = (Math.cos(Math.toRadians(mStartingAngle + angle)) * radius);
         double endY = (Math.sin(Math.toRadians(mStartingAngle + angle)) * radius);
         if (mShadowEnabled) {
-            if (mProgressIconEnabled) {
-                mShadowPath.addCircle((float) endX + mShadowRectF.centerX(), (float) endY + mShadowRectF.centerY(), mProgressIconThickness, Path.Direction.CW);
+            if (mProgressThumbEnabled) {
+                canvas.drawCircle((float) endX + mShadowRectF.centerX(), (float) endY + mShadowRectF.centerY(), mProgressIconThickness, mShadowPaint);
             }
-            mShadowPath.addArc(mShadowRectF, mStartingAngle, angle);
-            canvas.drawPath(mShadowPath, mShadowPaint);
+            canvas.drawArc(mShadowRectF, mStartingAngle, angle, false, mShadowPaint);
         }
         canvas.drawOval(mProgressRectF, mBackgroundPaint);
         canvas.drawArc(mProgressRectF, mStartingAngle, angle, false, mProgressPaint);
 
-        if (mProgressIconEnabled) {
+        if (mProgressThumbEnabled) {
             canvas.drawCircle((float) endX + mProgressRectF.centerX(), (float) endY + mProgressRectF.centerY(), mProgressIconThickness, mProgressPaint);
         }
     }

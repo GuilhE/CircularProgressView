@@ -1,10 +1,10 @@
 package com.github.guilhe.circularprogressview_sample;
 
-import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleEditorBinding;
@@ -13,7 +13,7 @@ import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleE
  * Created by gdelgado on 30/08/2017.
  */
 
-public class SampleActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
+public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
     private ActivitySampleEditorBinding mBinding;
 

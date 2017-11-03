@@ -3,7 +3,7 @@
     <declare-styleable name="CircularProgressView">
         <attr name="max" format="integer"/>
         <attr name="shadow" format="boolean"/>
-        <attr name="progressIcon" format="boolean"/>
+        <attr name="progressThumb" format="boolean"/>
         <attr name="startingAngle" format="integer"/>
         <attr name="progress" format="integer"/>
         <attr name="progressBarThickness" format="dimension"/>

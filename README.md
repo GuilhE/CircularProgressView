@@ -6,7 +6,7 @@
 A fancy CircularProgressView.
 
 #### Version 1.x
-  - **November, 2017**  - Progress icon
+  - **November, 2017**  - Progress thumb
   - **September, 2017** - CircularProgressView
 
 
@@ -32,7 +32,7 @@ Attributes accepted in xml:
 <declare-styleable name="CircularProgressView">
     <attr name="max" format="integer"/>
     <attr name="shadow" format="boolean"/>
-    <attr name="progressIcon" format="boolean"/>
+    <attr name="progressThumb" format="boolean"/>
     <attr name="startingAngle" format="integer"/>
     <attr name="progress" format="integer"/>
     <attr name="progressBarThickness" format="dimension"/>
@@ -91,9 +91,9 @@ To customize this `View` by code, these are the available methods to do so:
     
     public boolean isShadowEnabled() {}
     
-    public void setProgressIconEnabled(boolean enable) {}
+    public void setProgressThumbEnabled(boolean enable) {}
     
-    public boolean isProgressIconEnabled() {}
+    public boolean isProgressThumbEnabled() {}
     
     public void setProgressStrokeThickness(float thickness) {}
     
