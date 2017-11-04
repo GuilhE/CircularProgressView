@@ -1,7 +1,7 @@
 # CircularProgressView:
 ![header](sample1.png)
 
-[![Build Status](https://travis-ci.org/GuilhE/android-circular-progress-view.svg?branch=master)](https://travis-ci.org/GuilhE/android-circular-progress-view) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CircularProgressView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6152)
+[![Build Status](https://travis-ci.org/GuilhE/android-circular-progress-view.svg?branch=master)](https://travis-ci.org/GuilhE/android-circular-progress-view) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CircularProgressView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6152) [![Preview-Appetize.io](https://img.shields.io/badge/Preview-Appetize.io-brightgreen.svg?style=flat.svg)](https://appetize.io/app/yqf57p0pmtf2gfv1tqq4fk87qm)
 
 A fancy CircularProgressView.
 
