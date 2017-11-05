@@ -7,7 +7,7 @@
 A fancy CircularProgressView.
 
 #### Version 1.x
-  - **November, 2017**  - Progress thumb
+  - **November, 2017**  - Progress thumb and animation callback
   - **September, 2017** - CircularProgressView
 
 
@@ -104,7 +104,7 @@ To customize this `View` by code, these are the available methods to do so:
     public void setProgress(float progress, boolean animate) {}
     
     public void setProgress(float progress, boolean animate, long duration) {}
-    
+           
     public float getProgress() {}
     
     public void resetProgress() {}
@@ -114,6 +114,8 @@ To customize this `View` by code, these are the available methods to do so:
     public void resetProgress(boolean animate, long duration) {}
     
     public void setAnimationInterpolator(TimeInterpolator interpolator) {}
+    
+    public void setProgressAnimationCallback(OnProgressChangeAnimationCallback callback) {}
 ```
 
 For more details checkout the __sample app__, _javadocs_ or the code itself.

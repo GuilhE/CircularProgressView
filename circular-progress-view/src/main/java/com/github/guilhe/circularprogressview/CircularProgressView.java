@@ -58,6 +58,13 @@ public class CircularProgressView extends View {
 
     private TimeInterpolator mInterpolator;
     private Animator mProgressAnimator;
+    private OnProgressChangeAnimationCallback mCallback;
+
+    public interface OnProgressChangeAnimationCallback {
+        void onProgressChanged(float progress);
+
+        void onAnimationFinished(float progress);
+    }
 
     public CircularProgressView(Context context) {
         super(context);
@@ -165,6 +172,7 @@ public class CircularProgressView extends View {
 
     /**
      * Changes progress and background color
+     *
      * @param color - Color
      */
     public void setColor(int color) {
@@ -311,6 +319,10 @@ public class CircularProgressView extends View {
         mInterpolator = interpolator == null ? DEFAULT_INTERPOLATOR : interpolator;
     }
 
+    public void setProgressAnimationCallback(OnProgressChangeAnimationCallback callback){
+        mCallback = callback;
+    }
+
     private void setProgress(float progress, boolean animate, long duration, boolean clockwise) {
         if (animate) {
             if (mProgressAnimator != null) {
@@ -320,6 +332,29 @@ public class CircularProgressView extends View {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     setProgressValue(((Float) valueAnimator.getAnimatedValue()));
+                    if (mCallback != null) {
+                        mCallback.onProgressChanged(mProgress);
+                    }
+                }
+            });
+            mProgressAnimator.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    if (mCallback != null) {
+                        mCallback.onAnimationFinished(mProgress);
+                    }
+                }
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
                 }
             });
             mProgressAnimator.start();

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
+import android.widget.Toast;
+import com.github.guilhe.circularprogressview.CircularProgressView;
 import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleEditorBinding;
 
 /**
@@ -43,6 +45,17 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
         mBinding.transparentSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
             mTransparent = checked;
             mBinding.sampleCircularProgressView.setBackgroundColor(Color.TRANSPARENT);
+        });
+
+        mBinding.sampleCircularProgressView.setProgressAnimationCallback(new CircularProgressView.OnProgressChangeAnimationCallback() {
+            @Override
+            public void onProgressChanged(float progress) {
+            }
+
+            @Override
+            public void onAnimationFinished(float progress) {
+                Toast.makeText(SampleActivity.this, String.valueOf(progress) + "%", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
