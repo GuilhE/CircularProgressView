@@ -347,14 +347,17 @@ public class CircularProgressView extends View {
 
                 @Override
                 public void onAnimationStart(Animator animation) {
+                    //not in use
                 }
 
                 @Override
                 public void onAnimationCancel(Animator animation) {
+                    //not in use
                 }
 
                 @Override
                 public void onAnimationRepeat(Animator animation) {
+                    //not in use
                 }
             });
             mProgressAnimator.start();
