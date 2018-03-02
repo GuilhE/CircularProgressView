@@ -10,5 +10,7 @@
     <string name="hint_for_shadow_padding">Shadow padding</string>
     <string name="hint_for_background_color">Background color RGB</string>
     <string name="hint_for_transparent">(transparent :</string>
+    <string name="symbol_separator">, </string>
+    <string name="hint_for_alpha">alpha :</string>
     <string name="symbol_closing">)</string>
 </resources>

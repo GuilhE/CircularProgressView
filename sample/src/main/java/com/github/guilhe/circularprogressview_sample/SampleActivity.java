@@ -18,6 +18,7 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
     private ActivitySampleEditorBinding mBinding;
     private boolean mTransparent;
+    private Toast mToast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
         mBinding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setShadowEnabled(checked));
         mBinding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressThumbEnabled(checked));
+        mBinding.alphaSwitch.setOnCheckedChangeListener(((compoundButton, checked) -> mBinding.sampleCircularProgressView.setBackgroundAlphaEnabled(checked)));
         mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, b) -> {
             if (!mTransparent) {
                 mBinding.sampleCircularProgressView.setBackgroundColor(mBinding.sampleCircularProgressView.getProgressColor());
@@ -54,7 +56,9 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
             @Override
             public void onAnimationFinished(float progress) {
-                Toast.makeText(SampleActivity.this, String.valueOf(progress) + "%", Toast.LENGTH_SHORT).show();
+                if (mToast != null) mToast.cancel(); //Prevent toasts from overlapping.
+                mToast = Toast.makeText(SampleActivity.this, String.valueOf(progress) + "%", Toast.LENGTH_SHORT);
+                mToast.show();
             }
         });
     }

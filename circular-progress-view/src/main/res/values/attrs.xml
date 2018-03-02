@@ -9,5 +9,6 @@
         <attr name="progressBarThickness" format="dimension"/>
         <attr name="progressBarColor" format="color"/>
         <attr name="backgroundColor" format="color"/>
+        <attr name="backgroundAlphaEnabled" format="boolean"/>
     </declare-styleable>
 </resources>
