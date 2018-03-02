@@ -5,6 +5,7 @@ import android.animation.FloatEvaluator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.os.Build;
@@ -33,10 +34,10 @@ public class CircularProgressView extends View {
     private static final float DEFAULT_BACKGROUND_ALPHA = 0.3f;
     private static final TimeInterpolator DEFAULT_INTERPOLATOR = new DecelerateInterpolator();
 
-    private final float mDefaultViewPadding = convertDpToPx(getContext(), DEFAULT_VIEW_PADDING_DP);
-    private final float mDefaultShadowPadding = convertDpToPx(getContext(), DEFAULT_SHADOW_PADDING_DP);
-    private final float mDefaultStrokeThickness = convertDpToPx(getContext(), DEFAULT_STROKE_THICKNESS_DP);
-    private final int mDefaultMaxWidth = convertDpToPx(getContext(), DEFAULT_MAX_WIDTH_DP);
+    private final float mDefaultViewPadding = dpToPx(DEFAULT_VIEW_PADDING_DP);
+    private final float mDefaultShadowPadding = dpToPx(DEFAULT_SHADOW_PADDING_DP);
+    private final float mDefaultStrokeThickness = dpToPx(DEFAULT_STROKE_THICKNESS_DP);
+    private final int mDefaultMaxWidth = dpToPx(DEFAULT_MAX_WIDTH_DP);
 
     private int mMax;
     private boolean mShadowEnabled;
@@ -185,7 +186,7 @@ public class CircularProgressView extends View {
 
     /**
      * You can simulate the use of this method with by calling {@link #setColor(int)} with ContextCompat:
-     * setBackgroundColor(ContextCompat.getColor(getContext(), resId));
+     * setBackgroundColor(ContextCompat.getColor(resId));
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void setColorResource(@ColorRes int resId) {
@@ -208,7 +209,7 @@ public class CircularProgressView extends View {
 
     /**
      * You can simulate the use of this method with by calling {@link #setProgressColor(int)} with ContextCompat:
-     * setProgressColor(ContextCompat.getColor(getContext(), resId));
+     * setProgressColor(ContextCompat.getColor(resId));
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void setProgressColorResource(@ColorRes int resId) {
@@ -230,7 +231,7 @@ public class CircularProgressView extends View {
         invalidate();
     }
 
-    public void setBackgroundAlphaEnabled(boolean enabled){
+    public void setBackgroundAlphaEnabled(boolean enabled) {
         mBackgroundAlphaEnabled = enabled;
         resetBackgroundPaint();
         invalidate();
@@ -238,7 +239,7 @@ public class CircularProgressView extends View {
 
     /**
      * You can simulate the use of this method with by calling {@link #setBackgroundColor(int)} with ContextCompat:
-     * setBackgroundColor(ContextCompat.getColor(getContext(), resId));
+     * setBackgroundColor(ContextCompat.getColor(resId));
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void setShadowColorResource(@ColorRes int resId) {
@@ -328,7 +329,7 @@ public class CircularProgressView extends View {
         mInterpolator = interpolator == null ? DEFAULT_INTERPOLATOR : interpolator;
     }
 
-    public void setProgressAnimationCallback(OnProgressChangeAnimationCallback callback){
+    public void setProgressAnimationCallback(OnProgressChangeAnimationCallback callback) {
         mCallback = callback;
     }
 
@@ -462,7 +463,7 @@ public class CircularProgressView extends View {
         }
     }
 
-    private int convertDpToPx(Context context, float dp) {
-        return (int) (dp * context.getResources().getDisplayMetrics().density + 0.5f);
+    public int dpToPx(float dp) {
+        return (int) Math.ceil(dp * Resources.getSystem().getDisplayMetrics().density);
     }
 }
