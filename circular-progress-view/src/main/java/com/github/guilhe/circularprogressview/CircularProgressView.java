@@ -237,6 +237,10 @@ public class CircularProgressView extends View {
         invalidate();
     }
 
+    public boolean isBackgroundAlphaEnabled(){
+        return mBackgroundAlphaEnabled;
+    }
+
     /**
      * You can simulate the use of this method with by calling {@link #setBackgroundColor(int)} with ContextCompat:
      * setBackgroundColor(ContextCompat.getColor(resId));

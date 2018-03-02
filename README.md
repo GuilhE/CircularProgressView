@@ -7,6 +7,7 @@
 A fancy CircularProgressView.
 
 #### Version 1.x
+  - **February, 2018**  - Background alpha enable/disable
   - **November, 2017**  - Progress thumb and animation callback
   - **September, 2017** - CircularProgressView
 
@@ -87,6 +88,8 @@ To customize this `View` by code, these are the available methods to do so:
     public void setBackgroundColor(Color color) {}
 
     public void setBackgroundAlphaEnabled(boolean alphaEnabled){}
+    
+    public boolean isBackgroundAlphaEnabled(){}
     
     public int getBackgroundColor() {}
     
