@@ -17,17 +17,22 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/sample_CircularProgressView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            >
+
         <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:padding="20dp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/sample_CircularProgressView"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="1.0">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
                     android:layout_width="match_parent"
@@ -193,17 +198,28 @@
             </LinearLayout>
 
             <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_for_background_color"/>
+
+
+        </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:paddingStart="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hint_for_background_color"/>
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -216,6 +232,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hint_for_alpha"/>
+
+                <Switch
+                    android:id="@+id/alpha_Switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:layout_marginStart="5dp"/>
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -256,5 +284,8 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        </ScrollView>
+
     </android.support.constraint.ConstraintLayout>
 </layout>

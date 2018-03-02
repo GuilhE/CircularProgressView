@@ -47,6 +47,7 @@ public class CircularProgressView extends View {
     private float mProgressIconThickness;
     private int mProgressColor;
     private int mBackgroundColor;
+    private boolean mBackgroundAlphaEnabled;
 
     private RectF mProgressRectF;
     private RectF mShadowRectF;
@@ -111,6 +112,7 @@ public class CircularProgressView extends View {
                 mProgressStrokeThickness = typedArray.getDimension(R.styleable.CircularProgressView_progressBarThickness, mDefaultStrokeThickness);
                 mProgressColor = typedArray.getInt(R.styleable.CircularProgressView_progressBarColor, DEFAULT_PROGRESS_COLOR);
                 mBackgroundColor = typedArray.getInt(R.styleable.CircularProgressView_backgroundColor, mProgressColor);
+                mBackgroundAlphaEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_backgroundAlphaEnabled, true);
             } finally {
                 typedArray.recycle();
             }
@@ -121,9 +123,10 @@ public class CircularProgressView extends View {
             mStartingAngle = DEFAULT_STARTING_ANGLE;
             mProgressColor = DEFAULT_PROGRESS_COLOR;
             mBackgroundColor = mProgressColor;
+            mBackgroundAlphaEnabled = true;
         }
 
-        mBackgroundPaint.setColor(adjustAlpha(mBackgroundColor, DEFAULT_BACKGROUND_ALPHA));
+        resetBackgroundPaint();
         mProgressPaint.setColor(mProgressColor);
         mShadowPaint.setColor(adjustAlpha(Color.BLACK, 0.2f));
         setThickness(mProgressStrokeThickness, false);
@@ -223,7 +226,13 @@ public class CircularProgressView extends View {
 
     public void setBackgroundColor(int color) {
         mBackgroundColor = color;
-        mBackgroundPaint.setColor(adjustAlpha(color, DEFAULT_BACKGROUND_ALPHA));
+        resetBackgroundPaint();
+        invalidate();
+    }
+
+    public void setBackgroundAlphaEnabled(boolean enabled){
+        mBackgroundAlphaEnabled = enabled;
+        resetBackgroundPaint();
         invalidate();
     }
 
@@ -321,6 +330,10 @@ public class CircularProgressView extends View {
 
     public void setProgressAnimationCallback(OnProgressChangeAnimationCallback callback){
         mCallback = callback;
+    }
+
+    private void resetBackgroundPaint() {
+        mBackgroundPaint.setColor(mBackgroundAlphaEnabled ? adjustAlpha(mBackgroundColor, DEFAULT_BACKGROUND_ALPHA) : mBackgroundColor);
     }
 
     private void setProgress(float progress, boolean animate, long duration, boolean clockwise) {

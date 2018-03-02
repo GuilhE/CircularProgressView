@@ -35,6 +35,7 @@ Attributes accepted in xml:
     <attr name="progressBarThickness" format="dimension"/>
     <attr name="progressBarColor" format="color"/>
     <attr name="backgroundColor" format="color"/>
+    <attr name="backgroundAlphaEnabled" format="boolean"/>
 </declare-styleable>
 ```
 Example:
@@ -84,6 +85,8 @@ To customize this `View` by code, these are the available methods to do so:
     
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setBackgroundColor(Color color) {}
+
+    public void setBackgroundAlphaEnabled(boolean alphaEnabled){}
     
     public int getBackgroundColor() {}
     
