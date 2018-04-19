@@ -56,7 +56,9 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
             @Override
             public void onAnimationFinished(float progress) {
-                if (mToast != null) mToast.cancel(); //Prevent toasts from overlapping.
+                if (mToast != null){
+                    mToast.cancel(); //Prevent toasts from overlapping.
+                }
                 mToast = Toast.makeText(SampleActivity.this, String.valueOf(progress) + "%", Toast.LENGTH_SHORT);
                 mToast.show();
             }
