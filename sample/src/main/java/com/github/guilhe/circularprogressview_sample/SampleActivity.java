@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.github.guilhe.circularprogressview.CircularProgressView;
 import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleEditorBinding;
 
+import java.util.ArrayList;
+
 /**
  * Created by gdelgado on 30/08/2017.
  */
@@ -56,13 +58,23 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
             @Override
             public void onAnimationFinished(float progress) {
-                if (mToast != null){
+                if (mToast != null) {
                     mToast.cancel(); //Prevent toasts from overlapping.
                 }
                 mToast = Toast.makeText(SampleActivity.this, String.valueOf(progress) + "%", Toast.LENGTH_SHORT);
                 mToast.show();
             }
         });
+
+        mBinding.sampleCircularProgressView.setProgress(new ArrayList<Float>() {{
+            add(10f);
+            add(50f);
+            add(40f);
+        }}, new ArrayList<Integer>() {{
+            add(Color.rgb(255, 0, 0));
+            add(Color.rgb(0, 255, 0));
+            add(Color.rgb(0, 0, 255));
+        }});
     }
 
     @Override

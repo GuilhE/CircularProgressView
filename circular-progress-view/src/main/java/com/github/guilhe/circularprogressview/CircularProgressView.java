@@ -10,10 +10,15 @@ import android.content.res.TypedArray;
 import android.graphics.*;
 import android.os.Build;
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by gdelgado on 30/08/2017.
@@ -43,12 +48,16 @@ public class CircularProgressView extends View {
     private boolean mShadowEnabled;
     private boolean mProgressThumbEnabled;
     private int mStartingAngle;
+    private boolean mMultipleArcsEnabled;
+    private ArrayList<Float> mProgressList;
+    private ArrayList<Paint> mProgressPaintList;
     private float mProgress;
     private float mProgressStrokeThickness;
     private float mProgressIconThickness;
     private int mProgressColor;
     private int mBackgroundColor;
     private boolean mBackgroundAlphaEnabled;
+    private List<Float> mValuesToDrawList = new ArrayList<>();
 
     private RectF mProgressRectF;
     private RectF mShadowRectF;
@@ -237,7 +246,7 @@ public class CircularProgressView extends View {
         invalidate();
     }
 
-    public boolean isBackgroundAlphaEnabled(){
+    public boolean isBackgroundAlphaEnabled() {
         return mBackgroundAlphaEnabled;
     }
 
@@ -291,6 +300,11 @@ public class CircularProgressView extends View {
         mProgressIconThickness = mProgressStrokeThickness / 2;
         mBackgroundPaint.setStrokeWidth(mProgressStrokeThickness);
         mProgressPaint.setStrokeWidth(mProgressStrokeThickness);
+        if (mProgressPaintList != null) {
+            for (Paint paint : mProgressPaintList) {
+                paint.setStrokeWidth(mProgressStrokeThickness);
+            }
+        }
         mShadowPaint.setStrokeWidth(mProgressStrokeThickness);
         if (requestLayout) {
             requestLayout();
@@ -311,6 +325,32 @@ public class CircularProgressView extends View {
 
     public void setProgress(float progress, boolean animate, long duration) {
         setProgress(progress, animate, duration, true);
+    }
+
+    public void setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList) throws RuntimeException {
+        if (progressList == null || progressColorList == null) {
+            throw new RuntimeException("ArcColorList and ArcProgressList may not be null");
+        }
+        int total = 0;
+        for (float value : progressList) {
+            total += value;
+            if (total > mMax) {
+                throw new RuntimeException(String.format("Progress entities sum (%s) is greater than max value (%s)", total, mMax));
+            }
+        }
+
+        mMultipleArcsEnabled = true;
+        mProgress = 0;
+        mProgressList = new ArrayList<>(progressList);
+        mProgressPaintList = new ArrayList<>();
+        for (int i = 0; i < mProgressList.size(); i++) {
+            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(i < progressColorList.size() ? progressColorList.get(i) : Color.TRANSPARENT);
+            mProgressPaintList.add(paint);
+        }
+        setThickness(mProgressStrokeThickness, false);
+        invalidate();
     }
 
     public float getProgress() {
@@ -342,6 +382,7 @@ public class CircularProgressView extends View {
     }
 
     private void setProgress(float progress, boolean animate, long duration, boolean clockwise) {
+        mMultipleArcsEnabled = false;
         if (animate) {
             if (mProgressAnimator != null) {
                 mProgressAnimator.cancel();
@@ -443,27 +484,37 @@ public class CircularProgressView extends View {
     @Override
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        //Who doesn't love a bit of math? :)
-        //cos(a) = adj / hyp <>cos(angle) = x / radius <>x = cos(angle) * radius
-        //sin(a) = opp / hyp <>sin(angle) = y / radius <>y = sin(angle) * radius
-        //x = cos(startingAngle + progressAngle) * radius + originX(center)
-        //y = sin(startingAngle + progressAngle) * radius + originY(center)
-        float angle = 360 * mProgress / mMax;
-        float radius = getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2;
-        double endX = (Math.cos(Math.toRadians(mStartingAngle + angle)) * radius);
-        double endY = (Math.sin(Math.toRadians(mStartingAngle + angle)) * radius);
-        if (mShadowEnabled) {
-            if (mProgressThumbEnabled) {
-                canvas.drawCircle((float) endX + mShadowRectF.centerX(), (float) endY + mShadowRectF.centerY(), mProgressIconThickness, mShadowPaint);
-            }
-            canvas.drawArc(mShadowRectF, mStartingAngle, angle, false, mShadowPaint);
+        mValuesToDrawList.clear();
+        float previousAngle = mStartingAngle;
+        if (!mMultipleArcsEnabled) {
+            mValuesToDrawList.add(mProgress);
+        } else {
+            mValuesToDrawList.addAll(mProgressList);
         }
-        canvas.drawOval(mProgressRectF, mBackgroundPaint);
-        canvas.drawArc(mProgressRectF, mStartingAngle, angle, false, mProgressPaint);
 
-        if (mProgressThumbEnabled) {
-            canvas.drawCircle((float) endX + mProgressRectF.centerX(), (float) endY + mProgressRectF.centerY(), mProgressIconThickness, mProgressPaint);
+        for (int i = 0; i < mValuesToDrawList.size(); i++) {
+            //Who doesn't love a bit of math? :)
+            //cos(a) = adj / hyp <>cos(angle) = x / radius <>x = cos(angle) * radius
+            //sin(a) = opp / hyp <>sin(angle) = y / radius <>y = sin(angle) * radius
+            //x = cos(startingAngle + progressAngle) * radius + originX(center)
+            //y = sin(startingAngle + progressAngle) * radius + originY(center)
+            float angle = 360 * mValuesToDrawList.get(i) / mMax;
+            float radius = getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2;
+            double endX = (Math.cos(Math.toRadians(previousAngle + angle)) * radius);
+            double endY = (Math.sin(Math.toRadians(previousAngle + angle)) * radius);
+            if (mShadowEnabled) {
+                if (!mMultipleArcsEnabled && mProgressThumbEnabled) {
+                    canvas.drawCircle((float) endX + mShadowRectF.centerX(), (float) endY + mShadowRectF.centerY(), mProgressIconThickness, mShadowPaint);
+                }
+                canvas.drawArc(mShadowRectF, previousAngle, angle, false, mShadowPaint);
+            }
+            canvas.drawOval(mProgressRectF, mBackgroundPaint);
+            canvas.drawArc(mProgressRectF, previousAngle, angle, false, mProgressPaintList.get(i));
+
+            if (!mMultipleArcsEnabled && mProgressThumbEnabled) {
+                canvas.drawCircle((float) endX + mProgressRectF.centerX(), (float) endY + mProgressRectF.centerY(), mProgressIconThickness, mProgressPaintList.get(i));
+            }
+            previousAngle = angle;
         }
     }
 
