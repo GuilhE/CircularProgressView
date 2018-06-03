@@ -11,6 +11,8 @@ import com.github.guilhe.circularprogressview.CircularProgressView;
 import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleEditorBinding;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by gdelgado on 30/08/2017.
@@ -41,7 +43,7 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
         mBinding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setShadowEnabled(checked));
         mBinding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressThumbEnabled(checked));
         mBinding.alphaSwitch.setOnCheckedChangeListener(((compoundButton, checked) -> mBinding.sampleCircularProgressView.setBackgroundAlphaEnabled(checked)));
-        mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, b) -> {
+        mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
             if (!mTransparent) {
                 mBinding.sampleCircularProgressView.setBackgroundColor(mBinding.sampleCircularProgressView.getProgressColor());
             }
@@ -66,14 +68,22 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
             }
         });
 
-        mBinding.sampleCircularProgressView.setProgress(new ArrayList<Float>() {{
+        List<Float> values = new ArrayList<Float>() {{
             add(10f);
-            add(50f);
-            add(40f);
-        }}, new ArrayList<Integer>() {{
-            add(Color.rgb(255, 0, 0));
-            add(Color.rgb(0, 255, 0));
-            add(Color.rgb(0, 0, 255));
+            add(10f);
+            add(10f);
+//            add(10f);
+//            add(10f);
+//            add(10f);
+//            add(10f);
+//            add(10f);
+//            add(10f);
+//            add(10f);
+        }};
+        mBinding.sampleCircularProgressView.setProgress(values, new ArrayList<Integer>() {{
+            for (Float ignored : values) {
+                add(Color.rgb(new Random().nextInt(), new Random().nextInt(), new Random().nextInt()));
+            }
         }});
     }
 
