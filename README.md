@@ -7,7 +7,7 @@
 A fancy CircularProgressView.
 
 #### Version 1.x
-  - **May, 2018**       - Added multiple arcs for progress
+  - **May, 2018**       - Added _"multiple-arc-progress"_
   - **February, 2018**  - Background alpha enable/disable
   - **November, 2017**  - Progress thumb and animation callback
   - **September, 2017** - CircularProgressView

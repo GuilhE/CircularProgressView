@@ -72,7 +72,7 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
         mBinding.sampleFloatingActionButton.setOnClickListener(v -> {
             List<Float> values = new ArrayList<Float>() {{
                 add(12.5f);
-                add(12.5f);
+//                add(12.5f);
                 add(25f);
                 add(50f);
             }};

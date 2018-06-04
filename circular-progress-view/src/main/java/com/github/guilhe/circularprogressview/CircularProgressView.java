@@ -13,11 +13,9 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +27,7 @@ public class CircularProgressView extends View {
 
     private static final String TAG = CircularProgressView.class.getSimpleName();
 
+    private static final float ANGLE_OFFSET_FOR_MULTIPLE_ARC_PROGRESS = 6;
     private static final float DEFAULT_VIEW_PADDING_DP = 10;
     private static final float DEFAULT_SHADOW_PADDING_DP = 5;
     private static final float DEFAULT_STROKE_THICKNESS_DP = 10;
@@ -330,7 +329,7 @@ public class CircularProgressView extends View {
     }
 
     /**
-     * This method will activate the "multiple-arc-progress" and disable the progress thumb.
+     * This method will activate the "multiple-arc-progress" and disable the progress thumb and background.
      * This method disables the "single-arc-progress".
      *
      * @param progressList      - list containing all the progress "step-per-arc". Their sum most be less or equal to {@link #getMax()}.
@@ -388,7 +387,7 @@ public class CircularProgressView extends View {
     }
 
     /**
-     * This method will activate the "single-arc-progress" and enable the progress thumb.
+     * This method will activate the "single-arc-progress" and enable the progress thumb and background.
      * This method disables the "multiple-arc-progress".
      */
     private void setProgress(float progress, boolean animate, long duration, boolean clockwise) {
@@ -512,16 +511,17 @@ public class CircularProgressView extends View {
 
         //Shadow logic
         if (mShadowEnabled) {
-            //Who doesn't love a bit of math? :)
-            //cos(a) = adj / hyp <>cos(angle) = x / radius <>x = cos(angle) * radius
-            //sin(a) = opp / hyp <>sin(angle) = y / radius <>y = sin(angle) * radius
-            //x = cos(startingAngle + progressAngle) * radius + originX(center)
-            //y = sin(startingAngle + progressAngle) * radius + originY(center)
             angle = 360 * (mMultipleArcsEnabled ? mProgressListTotal : mProgress) / mMax;
-            endX = (Math.cos(Math.toRadians(previousAngle + angle)) * radius);
-            endY = (Math.sin(Math.toRadians(previousAngle + angle)) * radius);
             if (!mMultipleArcsEnabled && mProgressThumbEnabled) {
                 //Only in "single-arc-progress", otherwise we'll end up with N thumbs
+
+                //Who doesn't love a bit of math? :)
+                //cos(a) = adj / hyp <>cos(angle) = x / radius <>x = cos(angle) * radius
+                //sin(a) = opp / hyp <>sin(angle) = y / radius <>y = sin(angle) * radius
+                //x = cos(startingAngle + progressAngle) * radius + originX(center)
+                //y = sin(startingAngle + progressAngle) * radius + originY(center)
+                endX = (Math.cos(Math.toRadians(previousAngle + angle)) * radius);
+                endY = (Math.sin(Math.toRadians(previousAngle + angle)) * radius);
                 canvas.drawCircle((float) endX + mShadowRectF.centerX(), (float) endY + mShadowRectF.centerY(), mProgressIconThickness, mShadowPaint);
             }
             canvas.drawArc(mShadowRectF, previousAngle, angle, false, mShadowPaint);
@@ -529,13 +529,14 @@ public class CircularProgressView extends View {
 
         //Progress logic
         for (int i = 0; i < mValuesToDrawList.size(); i++) {
-            angle = 360 * mValuesToDrawList.get(i) / mMax;
-            //No background will be used when "multiple-arc-progress" is enable because it will be mixed with the "progress-colors"
             if (!mMultipleArcsEnabled) {
+                //No background will be used when "multiple-arc-progress" is enable because it will be mixed with the "progress-colors"
                 canvas.drawOval(mProgressRectF, mBackgroundPaint);
             }
 
-            canvas.drawArc(mProgressRectF, previousAngle, angle, false, mProgressPaintList.get(i));
+            angle = 360 * mValuesToDrawList.get(i) / mMax;
+            float offset = mMultipleArcsEnabled ? ANGLE_OFFSET_FOR_MULTIPLE_ARC_PROGRESS : 0; //to better glue all the "pieces"
+            canvas.drawArc(mProgressRectF, previousAngle - offset, angle + offset, false, mProgressPaintList.get(i));
             if (!mMultipleArcsEnabled && mProgressThumbEnabled) {
                 //Only in "single-arc-progress", otherwise we'll end up with N thumbs
                 endX = (Math.cos(Math.toRadians(previousAngle + angle)) * radius);
