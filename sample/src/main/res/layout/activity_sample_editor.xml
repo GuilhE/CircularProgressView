@@ -13,8 +13,18 @@
                 app:progressBarColor="@android:color/holo_red_dark"
                 app:progress="20"
                 app:progressThumb="true"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/sample_FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_camera_black_24dp"
+                app:backgroundTint="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <View
@@ -27,20 +37,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sample_CircularProgressView"
-                app:layout_constraintBottom_toTopOf="@id/const_toggles"/>
+                app:layout_constraintBottom_toTopOf="@id/const_ScrollView"/>
 
         <ScrollView
-                android:id="@+id/const_toggles"
+                android:id="@+id/const_ScrollView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="20dp"
                 android:clipToPadding="false"
                 android:fadeScrollbars="false"
                 app:layout_constraintTop_toBottomOf="@+id/sample_CircularProgressView"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
 
             <LinearLayout
                     android:layout_width="match_parent"

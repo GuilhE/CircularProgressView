@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import com.github.guilhe.circularprogressview.CircularProgressView;
@@ -68,23 +69,19 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
             }
         });
 
-        List<Float> values = new ArrayList<Float>() {{
-            add(10f);
-            add(10f);
-            add(10f);
-//            add(10f);
-//            add(10f);
-//            add(10f);
-//            add(10f);
-//            add(10f);
-//            add(10f);
-//            add(10f);
-        }};
-        mBinding.sampleCircularProgressView.setProgress(values, new ArrayList<Integer>() {{
-            for (Float ignored : values) {
-                add(Color.rgb(new Random().nextInt(), new Random().nextInt(), new Random().nextInt()));
-            }
-        }});
+        mBinding.sampleFloatingActionButton.setOnClickListener(v -> {
+            List<Float> values = new ArrayList<Float>() {{
+                add(12.5f);
+                add(12.5f);
+                add(25f);
+                add(50f);
+            }};
+            mBinding.sampleCircularProgressView.setProgress(values, new ArrayList<Integer>() {{
+                for (Float ignored : values) {
+                    add(Color.rgb(new Random().nextInt(), new Random().nextInt(), new Random().nextInt()));
+                }
+            }});
+        });
     }
 
     @Override

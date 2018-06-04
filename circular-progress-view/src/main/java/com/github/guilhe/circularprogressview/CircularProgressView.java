@@ -51,8 +51,8 @@ public class CircularProgressView extends View {
     private int mStartingAngle;
     private boolean mMultipleArcsEnabled;
     private float mProgressListTotal;
-    private ArrayList<Float> mProgressList;
-    private ArrayList<Paint> mProgressPaintList;
+    private ArrayList<Float> mProgressList = new ArrayList<>();
+    private ArrayList<Paint> mProgressPaintList = new ArrayList<>();
     private float mProgress;
     private float mProgressStrokeThickness;
     private float mProgressIconThickness;
@@ -329,7 +329,16 @@ public class CircularProgressView extends View {
         setProgress(progress, animate, duration, true);
     }
 
+    /**
+     * This method will activate the "multiple-arc-progress" and disable the progress thumb.
+     * This method disables the "single-arc-progress".
+     *
+     * @param progressList      - list containing all the progress "step-per-arc". Their sum most be less or equal to {@link #getMax()}.
+     * @param progressColorList - list containing the progress "step-per-arc" color. If progressColorList.size() is less than progressList.size(), Color.TRANSPARENT will be used for the missing colors.
+     * @throws RuntimeException - will be thrown if progress entities sum is greater than max value.
+     */
     public void setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList) throws RuntimeException {
+        mProgress = mProgressListTotal = 0;
         for (float value : progressList) {
             mProgressListTotal += value;
             if (mProgressListTotal > mMax) {
@@ -338,7 +347,6 @@ public class CircularProgressView extends View {
         }
 
         mMultipleArcsEnabled = true;
-        mProgress = mProgressListTotal = 0;
         mProgressList = new ArrayList<>(progressList);
         mProgressPaintList = new ArrayList<>();
         for (int i = 0; i < mProgressList.size(); i++) {
@@ -379,6 +387,10 @@ public class CircularProgressView extends View {
         mBackgroundPaint.setColor(mBackgroundAlphaEnabled ? adjustAlpha(mBackgroundColor, DEFAULT_BACKGROUND_ALPHA) : mBackgroundColor);
     }
 
+    /**
+     * This method will activate the "single-arc-progress" and enable the progress thumb.
+     * This method disables the "multiple-arc-progress".
+     */
     private void setProgress(float progress, boolean animate, long duration, boolean clockwise) {
         mMultipleArcsEnabled = false;
         if (animate) {
@@ -487,6 +499,8 @@ public class CircularProgressView extends View {
         mValuesToDrawList.clear();
         if (!mMultipleArcsEnabled) {
             mValuesToDrawList.add(mProgress);
+            mProgressPaintList.clear();
+            mProgressPaintList.add(mProgressPaint);
         } else {
             mValuesToDrawList.addAll(mProgressList);
         }
@@ -507,7 +521,7 @@ public class CircularProgressView extends View {
             endX = (Math.cos(Math.toRadians(previousAngle + angle)) * radius);
             endY = (Math.sin(Math.toRadians(previousAngle + angle)) * radius);
             if (!mMultipleArcsEnabled && mProgressThumbEnabled) {
-                //only in "single-arc-progress", otherwise we'll end up with N thumbs
+                //Only in "single-arc-progress", otherwise we'll end up with N thumbs
                 canvas.drawCircle((float) endX + mShadowRectF.centerX(), (float) endY + mShadowRectF.centerY(), mProgressIconThickness, mShadowPaint);
             }
             canvas.drawArc(mShadowRectF, previousAngle, angle, false, mShadowPaint);
@@ -523,12 +537,11 @@ public class CircularProgressView extends View {
 
             canvas.drawArc(mProgressRectF, previousAngle, angle, false, mProgressPaintList.get(i));
             if (!mMultipleArcsEnabled && mProgressThumbEnabled) {
-                //only in "single-arc-progress", otherwise we'll end up with N thumbs
+                //Only in "single-arc-progress", otherwise we'll end up with N thumbs
                 endX = (Math.cos(Math.toRadians(previousAngle + angle)) * radius);
                 endY = (Math.sin(Math.toRadians(previousAngle + angle)) * radius);
                 canvas.drawCircle((float) endX + mProgressRectF.centerX(), (float) endY + mProgressRectF.centerY(), mProgressIconThickness, mProgressPaintList.get(i));
             }
-            Log.i("angle", String.format("angle = %s, previousAngle = %s", angle, previousAngle));
             previousAngle += angle;
         }
     }
