@@ -5,10 +5,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import com.github.guilhe.circularprogressview.CircularProgressView;
 import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleEditorBinding;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by gdelgado on 30/08/2017.
@@ -39,7 +44,7 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
         mBinding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setShadowEnabled(checked));
         mBinding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressThumbEnabled(checked));
         mBinding.alphaSwitch.setOnCheckedChangeListener(((compoundButton, checked) -> mBinding.sampleCircularProgressView.setBackgroundAlphaEnabled(checked)));
-        mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, b) -> {
+        mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
             if (!mTransparent) {
                 mBinding.sampleCircularProgressView.setBackgroundColor(mBinding.sampleCircularProgressView.getProgressColor());
             }
@@ -56,12 +61,26 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
             @Override
             public void onAnimationFinished(float progress) {
-                if (mToast != null){
+                if (mToast != null) {
                     mToast.cancel(); //Prevent toasts from overlapping.
                 }
                 mToast = Toast.makeText(SampleActivity.this, String.valueOf(progress) + "%", Toast.LENGTH_SHORT);
                 mToast.show();
             }
+        });
+
+        mBinding.sampleFloatingActionButton.setOnClickListener(v -> {
+            List<Float> values = new ArrayList<Float>() {{
+                add(12.5f);
+//                add(12.5f);
+                add(25f);
+                add(50f);
+            }};
+            mBinding.sampleCircularProgressView.setProgress(values, new ArrayList<Integer>() {{
+                for (Float ignored : values) {
+                    add(Color.rgb(new Random().nextInt(), new Random().nextInt(), new Random().nextInt()));
+                }
+            }});
         });
     }
 

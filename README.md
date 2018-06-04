@@ -7,6 +7,7 @@
 A fancy CircularProgressView.
 
 #### Version 1.x
+  - **May, 2018**       - Added _"multiple-arc-progress"_
   - **February, 2018**  - Background alpha enable/disable
   - **November, 2017**  - Progress thumb and animation callback
   - **September, 2017** - CircularProgressView
@@ -49,85 +50,12 @@ Example:
                     app:progressBarColor="@android:color/holo_purple"/>
  ```
 
-To customize this `View` by code, these are the available methods to do so:
-```java
-    public void setSize(int size) {}
-    
-    public void setStartingAngle(int angle) {}
-    
-    public int getStartingAngle() {}
-    
-    public void setMax(int max) {}
-    
-    public int getMax() {}
-    
-    public void setColor(int color) {}
-    
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void setColorResource(@ColorRes int resId) {}
-    
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setColor(Color color) {}
-    
-    public void setProgressColor(int color) {}
-    
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void setProgressColorResource(@ColorRes int resId) {}
-    
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setProgressColor(Color color) {}
-    
-    public int getProgressColor() {}
-    
-    public void setBackgroundColor(int color) {}
-    
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void setShadowColorResource(@ColorRes int resId) {}
-    
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setBackgroundColor(Color color) {}
-
-    public void setBackgroundAlphaEnabled(boolean alphaEnabled){}
-    
-    public boolean isBackgroundAlphaEnabled(){}
-    
-    public int getBackgroundColor() {}
-    
-    public void setShadowEnabled(boolean enable) {}
-    
-    public boolean isShadowEnabled() {}
-    
-    public void setProgressThumbEnabled(boolean enable) {}
-    
-    public boolean isProgressThumbEnabled() {}
-    
-    public void setProgressStrokeThickness(float thickness) {}
-    
-    public float getProgressStrokeThickness() {}
-    
-    public void setProgress(float progress) {}
-    
-    public void setProgress(float progress, boolean animate) {}
-    
-    public void setProgress(float progress, boolean animate, long duration) {}
-           
-    public float getProgress() {}
-    
-    public void resetProgress() {}
-    
-    public void resetProgress(boolean animate) {}
-    
-    public void resetProgress(boolean animate, long duration) {}
-    
-    public void setAnimationInterpolator(TimeInterpolator interpolator) {}
-    
-    public void setProgressAnimationCallback(OnProgressChangeAnimationCallback callback) {}
-```
-
-For more details checkout the __sample app__, _javadocs_ or the code itself.
+There are many methods to help you customize this `View` by code. For more details checkout the __sample app__, _javadocs_ or the code itself.
 
 ## Sample
 <img src="sample.gif" alt="Sample" width="30%"/>
+
+_Animation last update on September, 2017_
 
 <a href='https://play.google.com/store/apps/details?id=com.github.guilhe.cicularprogressview.sample&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="30%" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 

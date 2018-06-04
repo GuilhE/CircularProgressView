@@ -5,7 +5,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
     }
 }
 
@@ -32,5 +32,5 @@ ext {
     compileSdkVersion = 27
     buildToolsVersion = '27.0.3'
 
-    supportLibraryVersion = '27.1.0'
+    supportLibraryVersion = '27.1.1'
 }
