@@ -58,6 +58,7 @@ public class CircularProgressView extends View {
     private int mProgressColor;
     private int mBackgroundColor;
     private boolean mBackgroundAlphaEnabled;
+    private boolean mReverseEnabled;
     private List<Float> mValuesToDrawList = new ArrayList<>();
 
     private RectF mProgressRectF;
@@ -124,6 +125,7 @@ public class CircularProgressView extends View {
                 mProgressColor = typedArray.getInt(R.styleable.CircularProgressView_progressBarColor, DEFAULT_PROGRESS_COLOR);
                 mBackgroundColor = typedArray.getInt(R.styleable.CircularProgressView_backgroundColor, mProgressColor);
                 mBackgroundAlphaEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_backgroundAlphaEnabled, true);
+                mReverseEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_reverse, false);
             } finally {
                 typedArray.recycle();
             }
@@ -135,6 +137,7 @@ public class CircularProgressView extends View {
             mProgressColor = DEFAULT_PROGRESS_COLOR;
             mBackgroundColor = mProgressColor;
             mBackgroundAlphaEnabled = true;
+            mReverseEnabled = false;
         }
 
         resetBackgroundPaint();
@@ -249,6 +252,15 @@ public class CircularProgressView extends View {
 
     public boolean isBackgroundAlphaEnabled() {
         return mBackgroundAlphaEnabled;
+    }
+
+    public void setReverseEnabled(boolean enabled) {
+        mReverseEnabled = enabled;
+        invalidate();
+    }
+
+    public boolean isReverseEnabled() {
+        return mReverseEnabled;
     }
 
     /**
@@ -512,6 +524,9 @@ public class CircularProgressView extends View {
         //Shadow logic
         if (mShadowEnabled) {
             angle = 360 * (mMultipleArcsEnabled ? mProgressListTotal : mProgress) / mMax;
+            if (mReverseEnabled) {
+                angle *= -1;
+            }
             if (!mMultipleArcsEnabled && mProgressThumbEnabled) {
                 //Only in "single-arc-progress", otherwise we'll end up with N thumbs
 
@@ -535,7 +550,10 @@ public class CircularProgressView extends View {
             }
 
             angle = 360 * mValuesToDrawList.get(i) / mMax;
-            float offset = mMultipleArcsEnabled ? ANGLE_OFFSET_FOR_MULTIPLE_ARC_PROGRESS : 0; //to better glue all the "pieces"
+            if (mReverseEnabled) {
+                angle *= -1;
+            }
+            float offset = !mReverseEnabled && mMultipleArcsEnabled ? ANGLE_OFFSET_FOR_MULTIPLE_ARC_PROGRESS : 0; //to better glue all the "pieces"
             canvas.drawArc(mProgressRectF, previousAngle - offset, angle + offset, false, mProgressPaintList.get(i));
             if (!mMultipleArcsEnabled && mProgressThumbEnabled) {
                 //Only in "single-arc-progress", otherwise we'll end up with N thumbs

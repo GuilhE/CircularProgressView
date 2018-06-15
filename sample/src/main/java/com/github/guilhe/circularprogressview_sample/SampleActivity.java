@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import com.github.guilhe.circularprogressview.CircularProgressView;
@@ -43,6 +42,7 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
         mBinding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setShadowEnabled(checked));
         mBinding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressThumbEnabled(checked));
+        mBinding.reverseSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setReverseEnabled(checked));
         mBinding.alphaSwitch.setOnCheckedChangeListener(((compoundButton, checked) -> mBinding.sampleCircularProgressView.setBackgroundAlphaEnabled(checked)));
         mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
             if (!mTransparent) {
