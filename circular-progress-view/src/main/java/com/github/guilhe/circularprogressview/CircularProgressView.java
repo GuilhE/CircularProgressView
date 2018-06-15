@@ -553,7 +553,7 @@ public class CircularProgressView extends View {
             if (mReverseEnabled) {
                 angle *= -1;
             }
-            float offset = mMultipleArcsEnabled ? ANGLE_OFFSET_FOR_MULTIPLE_ARC_PROGRESS : 0; //to better glue all the "pieces"
+            float offset = !mReverseEnabled && mMultipleArcsEnabled ? ANGLE_OFFSET_FOR_MULTIPLE_ARC_PROGRESS : 0; //to better glue all the "pieces"
             canvas.drawArc(mProgressRectF, previousAngle - offset, angle + offset, false, mProgressPaintList.get(i));
             if (!mMultipleArcsEnabled && mProgressThumbEnabled) {
                 //Only in "single-arc-progress", otherwise we'll end up with N thumbs
