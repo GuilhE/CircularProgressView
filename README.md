@@ -39,6 +39,7 @@ Attributes accepted in xml:
     <attr name="progressBarColor" format="color"/>
     <attr name="backgroundColor" format="color"/>
     <attr name="backgroundAlphaEnabled" format="boolean"/>
+    <attr name="reverse" format="boolean"/>
 </declare-styleable>
 ```
 Example:
