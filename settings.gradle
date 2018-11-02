@@ -1,1 +1,1 @@
-include ':sample', ':circular-progress-view'
+include ':sample', ':library'

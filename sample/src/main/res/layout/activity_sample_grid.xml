@@ -12,7 +12,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -24,7 +24,7 @@
                     layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintRight_toLeftOf="@+id/circularProgressView2"/>
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView2"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -37,7 +37,7 @@
                     app:layout_constraintLeft_toRightOf="@+id/circularProgressView"
             />
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView3"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -50,7 +50,7 @@
                     layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintLeft_toRightOf="@+id/circularProgressView2"/>
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView4"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -64,7 +64,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView"
                     app:layout_constraintRight_toLeftOf="@+id/circularProgressView5"/>
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView5"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -78,7 +78,7 @@
                     app:layout_constraintRight_toLeftOf="@+id/circularProgressView6"
             />
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView6"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -93,7 +93,7 @@
                     app:layout_constraintLeft_toRightOf="@+id/circularProgressView5"
             />
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView7"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -107,7 +107,7 @@
                     app:layout_constraintRight_toLeftOf="@+id/circularProgressView8"
             />
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView8"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -121,7 +121,7 @@
                     app:layout_constraintRight_toLeftOf="@+id/circularProgressView9"
             />
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView9"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -137,7 +137,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView6"
             />
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView10"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -151,7 +151,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/circularProgressView11"/>
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView11"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -165,7 +165,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView8"
                     app:layout_constraintRight_toLeftOf="@+id/circularProgressView12"/>
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView12"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -179,7 +179,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView9"
                     app:layout_constraintRight_toRightOf="parent"/>
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView13"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -194,7 +194,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView10"
                     app:layout_constraintStart_toStartOf="parent"/>
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView14"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -211,7 +211,7 @@
                     app:layout_constraintStart_toEndOf="@+id/circularProgressView13"
             />
 
-            <com.github.guilhe.circularprogressview.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView15"
                     android:layout_width="100dp"
                     android:layout_height="100dp"

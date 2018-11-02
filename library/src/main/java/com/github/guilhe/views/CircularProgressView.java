@@ -1,4 +1,4 @@
-package com.github.guilhe.circularprogressview;
+package com.github.guilhe.views;
 
 import android.animation.Animator;
 import android.animation.FloatEvaluator;

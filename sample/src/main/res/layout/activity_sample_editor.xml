@@ -6,7 +6,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <com.github.guilhe.circularprogressview.CircularProgressView
+        <com.github.guilhe.views.CircularProgressView
                 android:id="@+id/sample_CircularProgressView"
                 android:layout_width="@dimen/progress_size"
                 android:layout_height="@dimen/progress_size"

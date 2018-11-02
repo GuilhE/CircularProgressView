@@ -1,5 +1,3 @@
-package com.github.guilhe.circularprogressview_sample;
-
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,7 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.Toast;
-import com.github.guilhe.circularprogressview.CircularProgressView;
+import com.github.guilhe.views.CircularProgressView;
+import com.github.guilhe.circularprogressview_sample.R;
 import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleEditorBinding;
 
 import java.util.ArrayList;
