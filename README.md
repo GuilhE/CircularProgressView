@@ -44,7 +44,7 @@ Attributes accepted in xml:
 ```
 Example:
 ```xml
-<com.github.guilhe.circularprogressview.CircularProgressView
+<com.github.guilhe.views.CircularProgressView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     app:progress="60"
