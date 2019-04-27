@@ -1,3 +1,5 @@
+package sample;
+
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import com.github.guilhe.views.CircularProgressView;
-import com.github.guilhe.circularprogressview_sample.R;
-import com.github.guilhe.circularprogressview_sample.databinding.ActivitySampleEditorBinding;
+import com.github.guilhe.circularprogressview.sample.R;
+import com.github.guilhe.circularprogressview.sample.databinding.ActivitySampleEditorBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,7 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
         mBinding.bgGSeekBar.setOnSeekBarChangeListener(this);
         mBinding.bgBSeekBar.setOnSeekBarChangeListener(this);
 
+        mBinding.roundedSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressRounded(checked));
         mBinding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setShadowEnabled(checked));
         mBinding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressThumbEnabled(checked));
         mBinding.reverseSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setReverseEnabled(checked));

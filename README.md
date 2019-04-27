@@ -7,6 +7,7 @@
 A fancy CircularProgressView.
 
 #### Version 1.x
+  - **Apr, 2019**       - Added rounded progress
   - **Jun, 2018**       - Added reverse progress
   - **May, 2018**       - Added _"multiple-arc-progress"_
   - **February, 2018**  - Background alpha enable/disable
@@ -37,6 +38,7 @@ Attributes accepted in xml:
     <attr name="progress" format="integer"/>
     <attr name="progressBarThickness" format="dimension"/>
     <attr name="progressBarColor" format="color"/>
+    <attr name="progressBarRounded" format="boolean"/>
     <attr name="backgroundColor" format="color"/>
     <attr name="backgroundAlphaEnabled" format="boolean"/>
     <attr name="reverse" format="boolean"/>

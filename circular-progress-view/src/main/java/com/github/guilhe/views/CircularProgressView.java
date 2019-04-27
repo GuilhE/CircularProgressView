@@ -59,6 +59,7 @@ public class CircularProgressView extends View {
     private int mBackgroundColor;
     private boolean mBackgroundAlphaEnabled;
     private boolean mReverseEnabled;
+    private boolean mProgressRounded;
     private List<Float> mValuesToDrawList = new ArrayList<>();
 
     private RectF mProgressRectF;
@@ -123,6 +124,7 @@ public class CircularProgressView extends View {
                 mProgress = typedArray.getFloat(R.styleable.CircularProgressView_progress, 0);
                 mProgressStrokeThickness = typedArray.getDimension(R.styleable.CircularProgressView_progressBarThickness, mDefaultStrokeThickness);
                 mProgressColor = typedArray.getInt(R.styleable.CircularProgressView_progressBarColor, DEFAULT_PROGRESS_COLOR);
+                mProgressRounded = typedArray.getBoolean(R.styleable.CircularProgressView_progressBarRounded, false);
                 mBackgroundColor = typedArray.getInt(R.styleable.CircularProgressView_backgroundColor, mProgressColor);
                 mBackgroundAlphaEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_backgroundAlphaEnabled, true);
                 mReverseEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_reverse, false);
@@ -138,11 +140,14 @@ public class CircularProgressView extends View {
             mBackgroundColor = mProgressColor;
             mBackgroundAlphaEnabled = true;
             mReverseEnabled = false;
+            mProgressRounded = false;
         }
 
         resetBackgroundPaint();
         mProgressPaint.setColor(mProgressColor);
+        mProgressPaint.setStrokeCap(mProgressRounded ? Paint.Cap.ROUND : Paint.Cap.SQUARE);
         mShadowPaint.setColor(adjustAlpha(Color.BLACK, 0.2f));
+        mShadowPaint.setStrokeCap(mProgressPaint.getStrokeCap());
         setThickness(mProgressStrokeThickness, false);
     }
 
@@ -263,6 +268,17 @@ public class CircularProgressView extends View {
         return mReverseEnabled;
     }
 
+    public boolean isProgressRounded() {
+        return mProgressRounded;
+    }
+
+    public void setProgressRounded(boolean enabled) {
+        mProgressRounded = enabled;
+        mProgressPaint.setStrokeCap(mProgressRounded ? Paint.Cap.ROUND : Paint.Cap.SQUARE);
+        mShadowPaint.setStrokeCap(mProgressPaint.getStrokeCap());
+        invalidate();
+    }
+
     /**
      * You can simulate the use of this method with by calling {@link #setBackgroundColor(int)} with ContextCompat:
      * setBackgroundColor(ContextCompat.getColor(resId));
@@ -341,7 +357,7 @@ public class CircularProgressView extends View {
     }
 
     /**
-     * This method will activate the "multiple-arc-progress" and disable the progress thumb and background.
+     * This method will activate the "multiple-arc-progress" and disable the progress thumb, progress round and background.
      * This method disables the "single-arc-progress".
      *
      * @param progressList      - list containing all the progress "step-per-arc". Their sum most be less or equal to {@link #getMax()}.
@@ -349,6 +365,7 @@ public class CircularProgressView extends View {
      * @throws RuntimeException - will be thrown if progress entities sum is greater than max value.
      */
     public void setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList) throws RuntimeException {
+        setProgressRounded(false);
         mProgress = mProgressListTotal = 0;
         for (float value : progressList) {
             mProgressListTotal += value;
