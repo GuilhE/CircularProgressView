@@ -22,7 +22,7 @@ Include it into your project, for example, as a Gradle dependency:
 ```groovy
 implementation 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
 ```
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.guilhe/circular-progress-view/badge.svg)](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22circular-progress-view%22)  [ ![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg) ](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion)  
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.guilhe/circular-progress-view/badge.svg)](https://search.maven.org/search?q=a:circular-progress-view)  [![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg)](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion)  
 
 ## Sample usage
 
