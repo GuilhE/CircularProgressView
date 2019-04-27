@@ -59,7 +59,7 @@ There are many methods to help you customize this `View` by code. For more detai
 ## Sample
 <img src="sample.gif" alt="Sample" width="30%"/>
 
-_Animation last update on September, 2017_
+_Animation last update on April, 2019_
 
 <a href='https://play.google.com/store/apps/details?id=com.github.guilhe.cicularprogressview.sample&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="30%" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
