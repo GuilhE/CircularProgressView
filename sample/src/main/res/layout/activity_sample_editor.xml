@@ -10,12 +10,13 @@
                 android:id="@+id/sample_CircularProgressView"
                 android:layout_width="@dimen/progress_size"
                 android:layout_height="@dimen/progress_size"
-                app:progressBarColor="@android:color/holo_red_dark"
-                app:progress="20"
-                app:progressThumb="true"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:progress="100"
+                app:progressBarColorArray="@array/rainbow"
+                app:progressBarRounded="true"
+                app:progressThumb="false" />
 
         <android.support.design.widget.FloatingActionButton
                 android:id="@+id/sample_FloatingActionButton"
@@ -25,7 +26,7 @@
                 android:src="@drawable/ic_camera_black_24dp"
                 app:backgroundTint="@color/colorPrimaryDark"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         <View
                 android:id="@+id/const_sep"
@@ -34,10 +35,10 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@color/colorPrimaryDark"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/const_ScrollView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sample_CircularProgressView"
-                app:layout_constraintBottom_toTopOf="@id/const_ScrollView"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sample_CircularProgressView" />
 
         <ScrollView
                 android:id="@+id/const_ScrollView"
@@ -45,44 +46,44 @@
                 android:layout_height="0dp"
                 android:clipToPadding="false"
                 android:fadeScrollbars="false"
-                app:layout_constraintTop_toBottomOf="@+id/sample_CircularProgressView"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sample_CircularProgressView">
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:padding="20dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="10dp"
-                        android:text="@string/hint_for_size"/>
+                        android:text="@string/hint_for_size" />
 
                 <SeekBar
                         android:id="@+id/size_SeekBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:max="200"
-                        android:progress="200"/>
+                        android:progress="200" />
 
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:paddingStart="10dp"
-                        android:text="@string/hint_for_progress_thickness"/>
+                        android:text="@string/hint_for_progress_thickness" />
 
                 <SeekBar
                         android:id="@+id/thickness_SeekBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:max="60"
-                        android:progress="10"/>
+                        android:progress="10" />
 
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -94,32 +95,32 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="10dp"
-                            android:text="@string/hint_for_progress"/>
+                            android:text="@string/hint_for_progress" />
 
                     <Switch
                             android:id="@+id/animated_Switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:checked="false"/>
+                            android:checked="false" />
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/symbol_closing"/>
+                            android:text="@string/symbol_closing" />
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="10dp"
-                            android:text="@string/hint_for_progress_rounded"/>
+                            android:text="@string/hint_for_progress_rounded" />
 
                     <Switch
                             android:id="@+id/rounded_Switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:checked="false"/>
+                            android:checked="true" />
                 </LinearLayout>
 
                 <SeekBar
@@ -127,21 +128,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:max="100"
-                        android:progress="20"/>
+                        android:progress="100" />
 
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:paddingStart="10dp"
-                        android:text="@string/hint_for_angle"/>
+                        android:text="@string/hint_for_angle" />
 
                 <SeekBar
                         android:id="@+id/angle_SeekBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:max="360"
-                        android:progress="275"/>
+                        android:progress="275" />
 
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -153,25 +154,25 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="10dp"
-                            android:text="@string/hint_for_shadow"/>
+                            android:text="@string/hint_for_shadow" />
 
                     <Switch
                             android:id="@+id/shadow_Switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true"/>
+                            android:checked="true" />
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="20dp"
-                            android:text="@string/hint_for_thumb"/>
+                            android:text="@string/hint_for_thumb" />
 
                     <Switch
                             android:id="@+id/thumb_Switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true"/>
+                            android:checked="false" />
 
                 </LinearLayout>
 
@@ -185,39 +186,39 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="10dp"
-                            android:text="@string/hint_for_reverse"/>
+                            android:text="@string/hint_for_reverse" />
 
                     <Switch
                             android:id="@+id/reverse_Switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="false"/>
+                            android:checked="false" />
                 </LinearLayout>
 
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:paddingStart="10dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp">
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/hint_for_color"/>
+                            android:text="@string/hint_for_color" />
 
                     <Switch
                             android:id="@+id/colors_Switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:checked="true"/>
+                            android:checked="true" />
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/symbol_closing"/>
+                            android:text="@string/symbol_closing" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -230,25 +231,25 @@
                             android:id="@+id/color_r_SeekBar"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:max="255"
-                            android:progress="204"
-                            android:layout_weight="1"/>
+                            android:progress="204" />
 
                     <SeekBar
                             android:id="@+id/color_g_SeekBar"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:max="255"
-                            android:progress="0"
-                            android:layout_weight="1"/>
+                            android:progress="0" />
 
                     <SeekBar
                             android:id="@+id/color_b_SeekBar"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:max="255"
-                            android:progress="0"
-                            android:layout_weight="1"/>
+                            android:progress="0" />
 
                 </LinearLayout>
 
@@ -256,14 +257,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:paddingStart="10dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp">
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/hint_for_background_color"/>
+                            android:text="@string/hint_for_background_color" />
 
 
                 </LinearLayout>
@@ -271,39 +272,39 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp">
 
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="10dp"
-                            android:text="@string/hint_for_transparent"/>
+                            android:text="@string/hint_for_transparent" />
 
                     <Switch
                             android:id="@+id/transparent_Switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"/>
+                            android:layout_marginStart="5dp" />
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/hint_for_alpha"/>
+                            android:text="@string/hint_for_alpha" />
 
                     <Switch
                             android:id="@+id/alpha_Switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:layout_marginStart="5dp"/>
+                            android:layout_marginStart="5dp"
+                            android:checked="true" />
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/symbol_closing"/>
+                            android:text="@string/symbol_closing" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -316,25 +317,25 @@
                             android:id="@+id/bg_r_SeekBar"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:max="255"
-                            android:progress="204"
-                            android:layout_weight="1"/>
+                            android:progress="204" />
 
                     <SeekBar
                             android:id="@+id/bg_g_SeekBar"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:max="255"
-                            android:progress="0"
-                            android:layout_weight="1"/>
+                            android:progress="0" />
 
                     <SeekBar
                             android:id="@+id/bg_b_SeekBar"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:max="255"
-                            android:progress="0"
-                            android:layout_weight="1"/>
+                            android:progress="0" />
 
                 </LinearLayout>
 

@@ -9,19 +9,19 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by gdelgado on 30/08/2017.
- */
 @SuppressWarnings("unused")
 public class CircularProgressView extends View {
 
@@ -73,6 +73,10 @@ public class CircularProgressView extends View {
     private TimeInterpolator mInterpolator;
     private Animator mProgressAnimator;
     private OnProgressChangeAnimationCallback mCallback;
+    private Shader mShader;
+    private int[] mShaderColors;
+    private float[] mShaderPositions;
+    private boolean mInitShader;
 
     public interface OnProgressChangeAnimationCallback {
         void onProgressChanged(float progress);
@@ -128,6 +132,16 @@ public class CircularProgressView extends View {
                 mBackgroundColor = typedArray.getInt(R.styleable.CircularProgressView_backgroundColor, mProgressColor);
                 mBackgroundAlphaEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_backgroundAlphaEnabled, true);
                 mReverseEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_reverse, false);
+
+                int colorsId = typedArray.getResourceId(R.styleable.CircularProgressView_progressBarColorArray, -1);
+                boolean duplicate = typedArray.getBoolean(R.styleable.CircularProgressView_duplicateFirstColorInArray, true);
+                if (colorsId != -1) {
+                    mShaderColors = typedArray.getResources().getIntArray(colorsId);
+                    if (duplicate) {
+                        mShaderColors = duplicateFirstColor(mShaderColors);
+                    }
+                    mInitShader = true;
+                }
             } finally {
                 typedArray.recycle();
             }
@@ -141,10 +155,14 @@ public class CircularProgressView extends View {
             mBackgroundAlphaEnabled = true;
             mReverseEnabled = false;
             mProgressRounded = false;
+            mShader = null;
+            mShaderColors = null;
+            mShaderPositions = null;
         }
 
         resetBackgroundPaint();
         mProgressPaint.setColor(mProgressColor);
+        setShader(mShader);
         mProgressPaint.setStrokeCap(mProgressRounded ? Paint.Cap.ROUND : Paint.Cap.SQUARE);
         mShadowPaint.setColor(adjustAlpha(Color.BLACK, 0.2f));
         mShadowPaint.setStrokeCap(mProgressPaint.getStrokeCap());
@@ -222,6 +240,7 @@ public class CircularProgressView extends View {
             setBackgroundColor(color);
         }
         mProgressPaint.setColor(color);
+        setShader(null);
         invalidate();
     }
 
@@ -237,6 +256,45 @@ public class CircularProgressView extends View {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setProgressColor(Color color) {
         setProgressColor(color.toArgb());
+    }
+
+    /**
+     * This will create a SweepGradient and use it as progress color. Rainboooowwwww!
+     *
+     * @param colors         The colors to be distributed between around the center.
+     *                       There must be at least 2 colors in the array.
+     * @param positions      May be NULL. The relative position of
+     *                       each corresponding color in the colors array, beginning
+     *                       with 0 and ending with 1.0. If the values are not
+     *                       monotonic, the drawing may produce unexpected results.
+     *                       If positions is NULL, then the colors are automatically
+     *                       spaced evenly.
+     * @param duplicateFirst to create a perfect stitch the last color from the array must be equal to the first. If true it will do it for you.
+     */
+    public void setProgressColors(@NonNull @ColorInt int[] colors, @Nullable float[] positions, boolean duplicateFirst) {
+        if (duplicateFirst) {
+            colors = duplicateFirstColor(colors);
+        }
+        mShaderColors = colors;
+        mShaderPositions = positions;
+        setShader(new SweepGradient(mProgressRectF.centerX(), mProgressRectF.centerY(), colors, positions));
+        invalidate();
+    }
+
+    public void setProgressColors(@NonNull @ColorInt int[] colors, @Nullable float[] positions) {
+        setProgressColors(colors, positions, true);
+    }
+
+    private int[] duplicateFirstColor(@ColorInt @NonNull int[] colors) {
+        int[] aux = Arrays.copyOf(colors, colors.length + 1);
+        aux[colors.length] = colors[0];
+        colors = aux;
+        return colors;
+    }
+
+    private void setShader(Shader shader) {
+        mShader = shader;
+        mProgressPaint.setShader(shader);
     }
 
     public int getProgressColor() {
@@ -560,6 +618,11 @@ public class CircularProgressView extends View {
         }
 
         //Progress logic
+        if (mInitShader) {
+            mInitShader = false;
+            setShader(new SweepGradient(mProgressRectF.centerX(), mProgressRectF.centerY(), mShaderColors, mShaderPositions));
+        }
+
         for (int i = 0; i < mValuesToDrawList.size(); i++) {
             if (!mMultipleArcsEnabled) {
                 //No background will be used when "multiple-arc-progress" is enable because it will be mixed with the "progress-colors"

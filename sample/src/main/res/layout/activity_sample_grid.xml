@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
             android:fadeScrollbars="false">
 
         <android.support.constraint.ConstraintLayout
@@ -17,216 +17,203 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="100"
-                    app:progressBarColor="@android:color/white"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/circularProgressView2"
                     app:layout_constraintTop_toTopOf="parent"
-                    layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintRight_toLeftOf="@+id/circularProgressView2"/>
+                    app:progress="100"
+                    app:progressBarColor="@android:color/white" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView2"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="90"
-                    app:progressBarColor="@android:color/holo_blue_dark"
-                    layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@+id/circularProgressView"
+                    app:layout_constraintEnd_toStartOf="@+id/circularProgressView3"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/circularProgressView3"
-                    app:layout_constraintLeft_toRightOf="@+id/circularProgressView"
-            />
+                    app:progress="90"
+                    app:progressBarColor="@android:color/holo_blue_dark" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView3"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="20"
-                    app:progressBarThickness="10dp"
-                    app:progressBarColor="@android:color/holo_green_dark"
+                    app:layout_constraintStart_toEndOf="@+id/circularProgressView2"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintLeft_toRightOf="@+id/circularProgressView2"/>
+                    app:progress="20"
+                    app:progressBarColor="@android:color/holo_green_dark"
+                    app:progressBarThickness="10dp" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView4"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:shadow="false"
-                    app:progress="70"
-                    app:progressBarThickness="10dp"
-                    app:progressBarColor="@android:color/holo_orange_dark"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/circularProgressView5"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView"
-                    app:layout_constraintRight_toLeftOf="@+id/circularProgressView5"/>
+                    app:progress="70"
+                    app:progressBarColor="@android:color/holo_orange_dark"
+                    app:progressBarThickness="10dp"
+                    app:shadow="false" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView5"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="-60"
-                    app:progressBarThickness="10dp"
-                    app:progressBarColor="@android:color/holo_purple"
-                    layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@+id/circularProgressView4"
+                    app:layout_constraintEnd_toStartOf="@+id/circularProgressView6"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView2"
-                    app:layout_constraintLeft_toRightOf="@+id/circularProgressView4"
-                    app:layout_constraintRight_toLeftOf="@+id/circularProgressView6"
-            />
+                    app:progress="-60"
+                    app:progressBarColor="@android:color/holo_purple"
+                    app:progressBarThickness="10dp" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView6"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="50"
-                    app:startingAngle="200"
-                    app:progressBarThickness="10dp"
-                    app:progressBarColor="#FFFF00"
-                    layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@+id/circularProgressView5"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView3"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/circularProgressView5"
-            />
+                    app:progress="50"
+                    app:progressBarColor="#FFFF00"
+                    app:progressBarThickness="10dp"
+                    app:startingAngle="200" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView7"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="40"
-                    app:progressBarThickness="10dp"
-                    app:progressBarColor="@android:color/holo_red_dark"
-                    layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/circularProgressView8"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView4"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/circularProgressView8"
-            />
+                    app:progress="40"
+                    app:progressBarColor="@android:color/holo_red_dark"
+                    app:progressBarThickness="10dp" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView8"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="30"
-                    app:startingAngle="90"
-                    app:progressBarThickness="10dp"
-                    layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@+id/circularProgressView7"
+                    app:layout_constraintEnd_toStartOf="@+id/circularProgressView9"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView5"
-                    app:layout_constraintLeft_toRightOf="@+id/circularProgressView7"
-                    app:layout_constraintRight_toLeftOf="@+id/circularProgressView9"
-            />
+                    app:progress="30"
+                    app:progressBarThickness="10dp"
+                    app:startingAngle="90" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView9"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:shadow="false"
-                    app:progress="20"
-                    app:progressBarThickness="10dp"
-                    app:progressBarColor="@android:color/holo_blue_dark"
-                    app:progressThumb="true"
-                    layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/circularProgressView8"
+                    app:layout_constraintStart_toEndOf="@+id/circularProgressView8"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView6"
-            />
+                    app:progress="20"
+                    app:progressBarColor="@android:color/holo_blue_dark"
+                    app:progressBarThickness="10dp"
+                    app:progressThumb="true"
+                    app:shadow="false" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView10"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progressThumb="true"
-                    app:progress="10"
-                    app:progressBarThickness="10dp"
-                    app:progressBarColor="@android:color/holo_green_dark"
-                    layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/circularProgressView11"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView7"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/circularProgressView11"/>
+                    app:progress="10"
+                    app:progressBarColor="@android:color/holo_green_dark"
+                    app:progressBarThickness="10dp"
+                    app:progressThumb="true" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView11"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="0"
-                    app:progressBarThickness="5dp"
-                    app:progressBarColor="@android:color/holo_orange_dark"
-                    app:progressThumb="true"
-                    layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintLeft_toRightOf="@+id/circularProgressView10"
+                    app:layout_constraintStart_toEndOf="@+id/circularProgressView10"
+                    app:layout_constraintEnd_toStartOf="@+id/circularProgressView12"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView8"
-                    app:layout_constraintRight_toLeftOf="@+id/circularProgressView12"/>
+                    app:progress="0"
+                    app:progressBarColor="@android:color/holo_orange_dark"
+                    app:progressBarThickness="5dp"
+                    app:progressThumb="true" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView12"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="-10"
-                    app:progressBarThickness="5dp"
-                    app:progressBarColor="@android:color/holo_purple"
-                    app:progressThumb="true"
-                    layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintLeft_toRightOf="@+id/circularProgressView11"
+                    app:layout_constraintStart_toEndOf="@+id/circularProgressView11"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView9"
-                    app:layout_constraintRight_toRightOf="parent"/>
+                    app:progress="-10"
+                    app:progressBarColor="@android:color/holo_purple"
+                    app:progressBarThickness="5dp"
+                    app:progressThumb="true" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView13"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="20"
-                    app:progressBarThickness="5dp"
-                    app:progressBarColor="#FFFF00"
-                    app:progressThumb="true"
-                    layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/circularProgressView14"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressView10"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:progress="20"
+                    app:progressBarColor="#FFFF00"
+                    app:progressBarThickness="5dp"
+                    app:progressThumb="true" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView14"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="30"
-                    app:progressBarThickness="5dp"
-                    app:progressBarColor="@android:color/holo_red_dark"
                     app:backgroundColor="@android:color/transparent"
-                    app:progressThumb="true"
-                    layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintEnd_toStartOf="@+id/circularProgressView15"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/circularProgressView11"
                     app:layout_constraintStart_toEndOf="@+id/circularProgressView13"
-            />
+                    app:layout_constraintTop_toBottomOf="@+id/circularProgressView11"
+                    app:progress="30"
+                    app:progressBarColor="@android:color/holo_red_dark"
+                    app:progressBarThickness="5dp"
+                    app:progressThumb="true" />
 
             <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView15"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
-                    app:progress="40"
                     app:backgroundColor="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/circularProgressView14"
+                    app:layout_constraintTop_toBottomOf="@+id/circularProgressView12"
+                    app:progress="40"
                     app:progressBarThickness="5dp"
                     app:progressThumb="true"
-                    app:shadow="false"
-                    layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:shadow="false" />
+
+            <com.github.guilhe.views.CircularProgressView
+                    android:id="@+id/circularProgressView16"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/circularProgressView12"
-                    app:layout_constraintStart_toEndOf="@+id/circularProgressView14"
-            />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/circularProgressView13"
+                    app:shadow="false"
+                    app:startingAngle="100"
+                    app:progress="100"
+                    app:progressBarColorArray="@array/rainbow"/>
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

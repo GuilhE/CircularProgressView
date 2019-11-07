@@ -7,9 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.Toast;
-import com.github.guilhe.views.CircularProgressView;
+
 import com.github.guilhe.circularprogressview.sample.R;
 import com.github.guilhe.circularprogressview.sample.databinding.ActivitySampleEditorBinding;
+import com.github.guilhe.views.CircularProgressView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +71,6 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
                 mToast.show();
             }
         });
-
         mBinding.sampleFloatingActionButton.setOnClickListener(v -> {
             List<Float> values = new ArrayList<Float>() {{
                 add(12.5f);

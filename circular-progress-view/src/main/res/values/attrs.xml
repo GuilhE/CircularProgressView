@@ -8,9 +8,11 @@
         <attr name="progress" format="integer"/>
         <attr name="progressBarThickness" format="dimension"/>
         <attr name="progressBarColor" format="color"/>
+        <attr name="progressBarColorArray" format="reference"/>
         <attr name="progressBarRounded" format="boolean"/>
         <attr name="backgroundColor" format="color"/>
         <attr name="backgroundAlphaEnabled" format="boolean"/>
         <attr name="reverse" format="boolean"/>
+        <attr name="duplicateFirstColorInArray" format="boolean"/>
     </declare-styleable>
 </resources>
