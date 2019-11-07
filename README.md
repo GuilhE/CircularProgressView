@@ -1,5 +1,5 @@
 # CircularProgressView:
-![header](sample1.png)
+![header](.imgs/banner.png)
 
 [![Build Status](https://travis-ci.org/GuilhE/android-circular-progress-view.svg?branch=master)](https://travis-ci.org/GuilhE/android-circular-progress-view) 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6cb896704b2648288ec8512a84277c5c)](https://www.codacy.com/app/GuilhE/android-circular-progress-view?utm_source=github.com&utm_medium=referral&utm_content=GuilhE/android-circular-progress-view&utm_campaign=badger)  [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CircularProgressView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6152) [![Preview-Appetize.io](https://img.shields.io/badge/Preview-Appetize.io-brightgreen.svg?style=flat.svg)](https://appetize.io/app/7367zekaq62q5upw2c3y17wme4)
@@ -40,27 +40,71 @@ Attributes accepted in xml:
     <attr name="progressBarThickness" format="dimension"/>
     <attr name="progressBarColor" format="color"/>
     <attr name="progressBarColorArray" format="reference"/>    
+    <attr name="progressBarColorArrayPositions" format="reference"/>
+    <attr name="duplicateFirstColorInArray" format="boolean"/>
     <attr name="progressBarRounded" format="boolean"/>
     <attr name="backgroundColor" format="color"/>
     <attr name="backgroundAlphaEnabled" format="boolean"/>
     <attr name="reverse" format="boolean"/>
-    <attr name="duplicateFirstColorInArray" format="boolean"/>
 </declare-styleable>
 ```
 Example:
 ```xml
 <com.github.guilhe.views.CircularProgressView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    app:progress="60"
-                    app:progressBarThickness="10dp"
-                    app:progressBarColor="@android:color/holo_purple"/>
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    app:progress="60"
+    app:progressBarThickness="10dp"
+    app:progressBarColor="@android:color/holo_purple"/>
  ```
+
+### @BindingAdatpers:
+You can take advantage of [Binding Adapters (from Data Binding)](https://developer.android.com/topic/libraries/data-binding/binding-adapters#kotlin) to create some helper attributes, example:  
+```java
+@BindingAdapter("progressAnimated")
+fun setProgressAnimated(view: CircularProgressView, progress: Int) {
+    view.setProgress(progress, true);
+}
+```  
+```xml
+<com.github.guilhe.views.CircularProgressView 
+    app:progressAnimated="@{viewModel.progress}"/>
+``` 
+
+### About gradient as progress color:  
+For the given array of colors:
+```xml
+<array name="rainbow">
+    <item>#FFF60000</item>
+    <item>#FFFF8C00</item>
+    <item>#FFFFEE00</item>
+    <item>#FF4DE94C</item>
+    <item>#FF3783FF</item>
+    <item>#FF4815AA</item>
+</array>
+```
+The default result will be (left):  
+![rainbow](.imgs/rainbow.png)  
+To achieve the result on the right side you have two options: either copy the first color and add it as last, or use the helper attribute/method that does that for you:
+```xml
+<attr name="duplicateFirstColorInArray" format="boolean"/>
+```  
+```java
+setProgressColors(@NonNull @ColorInt int[] colors, @Nullable float[] positions, boolean duplicateFirst)
+```  
+Finally, you may also use the attribute `progressBarColorArrayPositions` to pass a `float[] positions`:
+```xml
+<array name="rainbow_positions">
+    <item type="dimen" format="float">.44</item>
+    ...
+ </array>
+```
+ __note:__ when using the helper function __and__ `positions[]`, you'll have to add an extra position for the last one being copied.
 
 There are many methods to help you customize this `View` by code. For more details checkout the __sample app__, _javadocs_ or the code itself.
 
 ## Sample
-<img src="sample.gif" alt="Sample" width="30%"/>
+<img src=".imgs/sample.gif" alt="Sample" width="30%"/>
 
 _Animation last update on April, 2019_
 

@@ -134,13 +134,22 @@ public class CircularProgressView extends View {
                 mReverseEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_reverse, false);
 
                 int colorsId = typedArray.getResourceId(R.styleable.CircularProgressView_progressBarColorArray, -1);
-                boolean duplicate = typedArray.getBoolean(R.styleable.CircularProgressView_duplicateFirstColorInArray, true);
+                boolean duplicate = typedArray.getBoolean(R.styleable.CircularProgressView_duplicateFirstColorInArray, false);
                 if (colorsId != -1) {
                     mShaderColors = typedArray.getResources().getIntArray(colorsId);
                     if (duplicate) {
                         mShaderColors = duplicateFirstColor(mShaderColors);
                     }
                     mInitShader = true;
+                }
+                int positionsId = typedArray.getResourceId(R.styleable.CircularProgressView_progressBarColorArrayPositions, -1);
+                if (positionsId != -1) {
+                    TypedArray floats = typedArray.getResources().obtainTypedArray(positionsId);
+                    mShaderPositions = new float[floats.length()];
+                    for (int i = 0; i < floats.length(); i++) {
+                        mShaderPositions[i] = floats.getFloat(i, 0f);
+                    }
+                    floats.recycle();
                 }
             } finally {
                 typedArray.recycle();
@@ -282,7 +291,7 @@ public class CircularProgressView extends View {
     }
 
     public void setProgressColors(@NonNull @ColorInt int[] colors, @Nullable float[] positions) {
-        setProgressColors(colors, positions, true);
+        setProgressColors(colors, positions, false);
     }
 
     private int[] duplicateFirstColor(@ColorInt @NonNull int[] colors) {

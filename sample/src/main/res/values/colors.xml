@@ -5,8 +5,12 @@
     <color name="colorAccent">#FF4081</color>
 
     <array name="rainbow">
-        <item>@android:color/holo_red_dark</item>
-        <item>@android:color/holo_green_dark</item>
-        <item>@android:color/holo_blue_dark</item>
+        <item>#FFF60000</item>
+        <item>#FFFF8C00</item>
+        <item>#FFFFEE00</item>
+        <item>#FF4DE94C</item>
+        <item>#FF3783FF</item>
+        <item>#FF4815AA</item>
+        <item>#FFF60000</item>
     </array>
 </resources>
