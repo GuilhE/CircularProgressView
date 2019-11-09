@@ -1,4 +1,4 @@
-# CircularProgressView:
+# CircularProgressView
 ![header](.imgs/banner.png)
 
 [![Build Status](https://travis-ci.org/GuilhE/android-circular-progress-view.svg?branch=master)](https://travis-ci.org/GuilhE/android-circular-progress-view) 
@@ -17,7 +17,6 @@ A fancy CircularProgressView.
 
 
 ## Getting started
-
 Include it into your project, for example, as a Gradle dependency:
 
 ```groovy
@@ -25,8 +24,7 @@ implementation 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
 ```
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.guilhe/circular-progress-view/badge.svg)](https://search.maven.org/search?q=a:circular-progress-view)  [![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg)](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion)  
 
-## Sample usage
-
+## Usage
 Check out the __sample__ module where you can find a few examples of how to create it by `xml` or `java`.
 
 Attributes accepted in xml:
@@ -58,7 +56,7 @@ Example:
     app:progressBarColor="@android:color/holo_purple"/>
  ```
 
-### @BindingAdatpers:
+## @BindingAdapters
 You can take advantage of [Binding Adapters (from Data Binding)](https://developer.android.com/topic/libraries/data-binding/binding-adapters#kotlin) to create some helper attributes, example:  
 ```java
 @BindingAdapter("progressAnimated")
@@ -67,11 +65,12 @@ fun setProgressAnimated(view: CircularProgressView, progress: Int) {
 }
 ```  
 ```xml
-<com.github.guilhe.views.CircularProgressView 
+<com.github.guilhe.views.CircularProgressView
+    ...
     app:progressAnimated="@{viewModel.progress}"/>
 ``` 
 
-### About gradient as progress color:  
+## Using progress colors for gradient
 For the given array of colors:
 ```xml
 <array name="rainbow">
@@ -103,6 +102,14 @@ Finally, you may also use the attribute `progressBarColorArrayPositions` to pass
 
 There are many methods to help you customize this `View` by code. For more details checkout the __sample app__, _javadocs_ or the code itself.
 
+## "Multiple Progress"
+![piechart](.imgs/piechart.png)
+```java
+setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList)
+```
+This mode can be used to display a simple pie chart. It will disable the progress thumb, the background color and the progress will not be round.  
+
+
 ## Sample
 <img src=".imgs/sample.gif" alt="Sample" width="30%"/>
 
@@ -111,7 +118,6 @@ _Animation last update on April, 2019_
 <a href='https://play.google.com/store/apps/details?id=com.github.guilhe.cicularprogressview.sample&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="30%" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
 ## Binaries
-
 Binaries and dependency information for Gradle, Maven, Ivy and others can be found at [https://search.maven.org](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22circular-progress-view%22).
 
 <a href='https://bintray.com/gdelgado/android/circular-progress-view?source=watch' alt='Get automatic notifications about new "circular-progress-view" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_bw.png'></a>
@@ -120,12 +126,10 @@ Binaries and dependency information for Gradle, Maven, Ivy and others can be fou
 - [com.android.support:support-annotations](https://developer.android.com/topic/libraries/support-library/packages.html#annotations)
 
 ## Bugs and Feedback
-
 For bugs, questions and discussions please use the [Github Issues](https://github.com/GuilhE/android-circular-progress-view/issues).
 
  
 ## LICENSE
-
 Copyright (c) 2017-present, GuilhE.
 
 Licensed under the Apache License, Version 2.0 (the "License");
