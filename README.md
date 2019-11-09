@@ -56,7 +56,7 @@ Example:
     app:progressBarColor="@android:color/holo_purple"/>
  ```
 
-## @BindingAdapters
+### @BindingAdapters
 You can take advantage of [Binding Adapters (from Data Binding)](https://developer.android.com/topic/libraries/data-binding/binding-adapters#kotlin) to create some helper attributes, example:  
 ```java
 @BindingAdapter("progressAnimated")
@@ -70,7 +70,7 @@ fun setProgressAnimated(view: CircularProgressView, progress: Int) {
     app:progressAnimated="@{viewModel.progress}"/>
 ``` 
 
-## Using progress colors for gradient
+### Progress with gradient
 For the given array of colors:
 ```xml
 <array name="rainbow">
@@ -102,7 +102,7 @@ Finally, you may also use the attribute `progressBarColorArrayPositions` to pass
 
 There are many methods to help you customize this `View` by code. For more details checkout the __sample app__, _javadocs_ or the code itself.
 
-## "Multiple Progress"
+### "Multiple Progress" for PieChart
 ![piechart](.imgs/piechart.png)
 ```java
 setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList)
