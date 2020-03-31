@@ -83,7 +83,8 @@ For the given array of colors:
 </array>
 ```
 The default result will be (left):  
-![rainbow](.imgs/rainbow.png)  
+<img src="https://raw.githubusercontent.com/Guilhe/android-circular-progress-view/master/.imgs/rainbow.png" />
+
 To achieve the result on the right side you have two options: either copy the first color and add it as last, or use the helper attribute/method that does that for you:
 ```xml
 <attr name="duplicateFirstColorInArray" format="boolean"/>
@@ -103,7 +104,8 @@ Finally, you may also use the attribute `progressBarColorArrayPositions` to pass
 There are many methods to help you customize this `View` by code. For more details checkout the __sample app__, _javadocs_ or the code itself.
 
 ### "Multiple Progress" for PieChart
-![piechart](.imgs/piechart.png)
+<img src="https://raw.githubusercontent.com/Guilhe/android-circular-progress-view/master/.imgs/piechart.png" />
+
 ```java
 setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList)
 ```
@@ -111,7 +113,7 @@ This mode can be used to display a simple pie chart. It will disable the progres
 
 
 ## Sample
-<img src=".imgs/sample.gif" alt="Sample" width="30%"/>
+<img src="https://raw.githubusercontent.com/Guilhe/android-circular-progress-view/master/.imgs/sample.gif"  alt="Sample" width="30%"/>
 
 _Animation last update on April, 2019_
 
