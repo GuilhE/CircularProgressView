@@ -1,5 +1,5 @@
 # CircularProgressView
-<img src=".imgs/banner.png" alt="Header"/>
+<img src="./.imgs/banner.png"/>
 
 [![Build Status](https://travis-ci.org/GuilhE/android-circular-progress-view.svg?branch=master)](https://travis-ci.org/GuilhE/android-circular-progress-view) 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6cb896704b2648288ec8512a84277c5c)](https://www.codacy.com/app/GuilhE/android-circular-progress-view?utm_source=github.com&utm_medium=referral&utm_content=GuilhE/android-circular-progress-view&utm_campaign=badger)  [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CircularProgressView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6152) [![Preview-Appetize.io](https://img.shields.io/badge/Preview-Appetize.io-brightgreen.svg?style=flat.svg)](https://appetize.io/app/jeftbchvbfuafwpeaf00fba8bm)
