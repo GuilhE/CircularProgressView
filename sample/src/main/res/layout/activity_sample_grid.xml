@@ -12,7 +12,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -23,7 +23,7 @@
                     app:progress="100"
                     app:progressBarColor="@android:color/white" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView2"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -34,7 +34,7 @@
                     app:progress="90"
                     app:progressBarColor="@android:color/holo_blue_dark" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView3"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -46,7 +46,7 @@
                     app:progressBarColor="@android:color/holo_green_dark"
                     app:progressBarThickness="10dp" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView4"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -59,7 +59,7 @@
                     app:progressBarThickness="10dp"
                     app:shadow="false" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView5"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -71,7 +71,7 @@
                     app:progressBarColor="@android:color/holo_purple"
                     app:progressBarThickness="10dp" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView6"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -84,7 +84,7 @@
                     app:progressBarThickness="10dp"
                     app:startingAngle="200" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView7"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -96,7 +96,7 @@
                     app:progressBarColor="@android:color/holo_red_dark"
                     app:progressBarThickness="10dp" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView8"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -108,7 +108,7 @@
                     app:progressBarThickness="10dp"
                     app:startingAngle="90" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView9"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -122,7 +122,7 @@
                     app:progressThumb="true"
                     app:shadow="false" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView10"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -135,7 +135,7 @@
                     app:progressBarThickness="10dp"
                     app:progressThumb="true" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView11"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -148,7 +148,7 @@
                     app:progressBarThickness="5dp"
                     app:progressThumb="true" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView12"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -161,7 +161,7 @@
                     app:progressBarThickness="5dp"
                     app:progressThumb="true" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView13"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -174,7 +174,7 @@
                     app:progressBarThickness="5dp"
                     app:progressThumb="true" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView14"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -188,7 +188,7 @@
                     app:progressBarThickness="5dp"
                     app:progressThumb="true" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView15"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -202,7 +202,7 @@
                     app:progressThumb="true"
                     app:shadow="false" />
 
-            <com.github.guilhe.views.circularprogress.CircularProgressView
+            <com.github.guilhe.views.CircularProgressView
                     android:id="@+id/circularProgressView16"
                     android:layout_width="100dp"
                     android:layout_height="100dp"

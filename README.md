@@ -47,7 +47,7 @@ Attributes accepted in xml:
 ```
 Example:
 ```xml
-<com.github.guilhe.views.circularprogress.CircularProgressView
+<com.github.guilhe.views.CircularProgressView
     android:layout_width="100dp"
     android:layout_height="100dp"
     app:progress="60"
@@ -64,7 +64,7 @@ fun setProgressAnimated(view: CircularProgressView, progress: Int) {
 }
 ```  
 ```xml
-<com.github.guilhe.views.circularprogress.CircularProgressView
+<com.github.guilhe.views.CircularProgressView
     ...
     app:progressAnimated="@{viewModel.progress}"/>
 ``` 

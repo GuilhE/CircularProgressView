@@ -1,4 +1,4 @@
-package com.github.guilhe.views.circularprogress;
+package com.github.guilhe.views;
 
 import android.animation.Animator;
 import android.animation.FloatEvaluator;
@@ -18,7 +18,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-import com.github.guilhe.views.R;
+import com.github.guilhe.views.circularprogress.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
