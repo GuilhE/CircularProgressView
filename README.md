@@ -1,5 +1,5 @@
 # CircularProgressView
-![header](.imgs/banner.png)
+<img src="https://raw.githubusercontent.com/Guilhe/android-circular-progress-view/master/.imgs/banner.png" />
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CircularProgressView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6152) [![Preview-Appetize.io](https://img.shields.io/badge/Preview-Appetize.io-brightgreen.svg?style=flat.svg)](https://appetize.io/app/jeftbchvbfuafwpeaf00fba8bm)
 
@@ -82,7 +82,8 @@ For the given array of colors:
 </array>
 ```
 The default result will be (left):  
-![rainbow](.imgs/rainbow.png)  
+<img src="https://raw.githubusercontent.com/Guilhe/android-circular-progress-view/master/.imgs/rainbow.png" />
+
 To achieve the result on the right side you have two options: either copy the first color and add it as last, or use the helper attribute/method that does that for you:
 ```xml
 <attr name="duplicateFirstColorInArray" format="boolean"/>
@@ -102,7 +103,8 @@ Finally, you may also use the attribute `progressBarColorArrayPositions` to pass
 There are many methods to help you customize this `View` by code. For more details checkout the __sample app__, _javadocs_ or the code itself.
 
 ### "Multiple Progress" for PieChart
-![piechart](.imgs/piechart.png)
+<img src="https://raw.githubusercontent.com/Guilhe/android-circular-progress-view/master/.imgs/piechart.png" />
+
 ```java
 setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList)
 ```
@@ -110,14 +112,14 @@ This mode can be used to display a simple pie chart. It will disable the progres
 
 
 ## Sample
-<img src=".imgs/sample.gif" alt="Sample" width="30%"/>
+<img src="https://raw.githubusercontent.com/Guilhe/android-circular-progress-view/master/.imgs/sample.gif"  alt="Sample" width="30%"/>
 
 _Animation last update on April, 2019_
 
 <a href='https://play.google.com/store/apps/details?id=com.github.guilhe.cicularprogressview.sample&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="30%" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
 ## Binaries
-Binaries and dependency information for Gradle, Maven, Ivy and others can be found at [https://search.maven.org](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22circular-progress-view%22).
+Binaries and dependency information for Gradle, Maven, Ivy and others can be found [here](https://search.maven.org/artifact/com.github.guilhe/circular-progress-view).
 
 <a href='https://bintray.com/gdelgado/android/circular-progress-view?source=watch' alt='Get automatic notifications about new "circular-progress-view" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_bw.png'></a>
 
