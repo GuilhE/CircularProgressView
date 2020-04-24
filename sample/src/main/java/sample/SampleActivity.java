@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.github.guilhe.circularprogressview.sample.R;
 import com.github.guilhe.circularprogressview.sample.databinding.ActivitySampleEditorBinding;
-import com.github.guilhe.views.CircularProgressView;
+import com.github.guilhe.views.circularprogress.CircularProgressView;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,7 @@
 # CircularProgressView
 ![header](.imgs/banner.png)
 
-[![Build Status](https://travis-ci.org/GuilhE/android-circular-progress-view.svg?branch=master)](https://travis-ci.org/GuilhE/android-circular-progress-view) 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6cb896704b2648288ec8512a84277c5c)](https://www.codacy.com/app/GuilhE/android-circular-progress-view?utm_source=github.com&utm_medium=referral&utm_content=GuilhE/android-circular-progress-view&utm_campaign=badger)  [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CircularProgressView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6152) [![Preview-Appetize.io](https://img.shields.io/badge/Preview-Appetize.io-brightgreen.svg?style=flat.svg)](https://appetize.io/app/jeftbchvbfuafwpeaf00fba8bm)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CircularProgressView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6152) [![Preview-Appetize.io](https://img.shields.io/badge/Preview-Appetize.io-brightgreen.svg?style=flat.svg)](https://appetize.io/app/jeftbchvbfuafwpeaf00fba8bm)
 
 A fancy CircularProgressView.
 
@@ -22,7 +21,7 @@ Include it into your project, for example, as a Gradle dependency:
 ```groovy
 implementation 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
 ```
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.guilhe/circular-progress-view/badge.svg)](https://search.maven.org/search?q=a:circular-progress-view)  [![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg)](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion)  
+ [![Maven Central](https://img.shields.io/maven-central/v/com.github.guilhe/circular-progress-view.svg)](https://search.maven.org/search?q=g:com.github.guilhe%20AND%20circular-progress-view) [![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg)](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion)  
 
 ## Usage
 Check out the __sample__ module where you can find a few examples of how to create it by `xml` or `java`.
@@ -48,7 +47,7 @@ Attributes accepted in xml:
 ```
 Example:
 ```xml
-<com.github.guilhe.views.CircularProgressView
+<com.github.guilhe.views.circularprogress.CircularProgressView
     android:layout_width="100dp"
     android:layout_height="100dp"
     app:progress="60"
@@ -65,7 +64,7 @@ fun setProgressAnimated(view: CircularProgressView, progress: Int) {
 }
 ```  
 ```xml
-<com.github.guilhe.views.CircularProgressView
+<com.github.guilhe.views.circularprogress.CircularProgressView
     ...
     app:progressAnimated="@{viewModel.progress}"/>
 ``` 
