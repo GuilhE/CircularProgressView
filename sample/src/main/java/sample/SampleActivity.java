@@ -33,6 +33,7 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
         mBinding.sizeSeekBar.setOnSeekBarChangeListener(this);
         mBinding.thicknessSeekBar.setOnSeekBarChangeListener(this);
+        mBinding.thumbsizeSeekBar.setOnSeekBarChangeListener(this);
         mBinding.progressSeekBar.setOnSeekBarChangeListener(this);
         mBinding.angleSeekBar.setOnSeekBarChangeListener(this);
         mBinding.colorRSeekBar.setOnSeekBarChangeListener(this);
@@ -94,6 +95,9 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
                 break;
             case R.id.thickness_SeekBar:
                 mBinding.sampleCircularProgressView.setProgressStrokeThickness((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
+                break;
+            case R.id.thumbsize_SeekBar:
+                mBinding.sampleCircularProgressView.setProgressThumbSize((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
                 break;
             case R.id.progress_SeekBar:
                 mBinding.sampleCircularProgressView.setProgress(progress, mBinding.animatedSwitch.isChecked());

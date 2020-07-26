@@ -3,6 +3,7 @@
     <attr name="max" format="integer" />
     <attr name="shadow" format="boolean" />
     <attr name="progressThumb" format="boolean" />
+    <attr name="progressThumbSize" format="dimension" />
     <attr name="startingAngle" format="integer" />
     <attr name="progress" format="integer" />
     <attr name="progressBarThickness" format="dimension" />
@@ -19,6 +20,7 @@
         <attr name="max" />
         <attr name="shadow" />
         <attr name="progressThumb" />
+        <attr name="progressThumbSize" />
         <attr name="startingAngle" />
         <attr name="progress" />
         <attr name="progressBarThickness" />

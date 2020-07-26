@@ -2,6 +2,7 @@
     <string name="app_name">circular-progress-view</string>
     <string name="hint_for_size">Size</string>
     <string name="hint_for_progress_thickness">Thickness</string>
+    <string name="hint_for_progress_thumb_size">Thumb Size</string>
     <string name="hint_for_progress">Progress (animated: </string>
     <string name="hint_for_progress_rounded">Rounded: </string>
     <string name="hint_for_angle">Starting angle</string>
