@@ -178,6 +178,7 @@ public class CircularProgressView extends View {
         } else {
             mProgressStrokeThickness = mDefaultStrokeThickness;
             mProgressThumbSize = mDefaultThumbSize;
+            mProgressThumbScaleType = AUTO;
             mMaxThumbSizeRate = DEFAULT_MAXIMUM_THUMB_SIZE_RATE;
             mShadowEnabled = true;
             mMax = DEFAULT_MAX;
@@ -451,6 +452,14 @@ public class CircularProgressView extends View {
         }
     }
 
+    public void setProgressThumbScaleType(int index) {
+        mProgressThumbScaleType = ProgressThumbScaleType.values()[Math.max(Math.min(index, 0), values().length-1)];
+    }
+
+    public void setProgressThumbScaleType(ProgressThumbScaleType scaleType) {
+        mProgressThumbScaleType = scaleType;
+    }
+
     public ProgressThumbScaleType getProgressThumbScaleType() {
         return mProgressThumbScaleType;
     }
@@ -626,10 +635,14 @@ public class CircularProgressView extends View {
         }
 
         // if ThumbSize diameter is thicker than Stroke
-        if (mProgressThumbEnabled
-                && thumbSize * 2 > mProgressStrokeThickness) {
+        if (mProgressThumbEnabled) {
             // increase progress width
-            progressWidth += thumbSize - mProgressStrokeThickness + mProgressStrokeThickness / 2;
+            if (mProgressThumbScaleType == POINT && thumbSize * 2 > mProgressStrokeThickness) {
+                progressWidth += thumbSize - mProgressStrokeThickness + mProgressStrokeThickness / 2;
+            } else if (mProgressThumbScaleType == RATE) {
+                if (thumbSize > mProgressStrokeThickness)
+                    progressWidth += (thumbSize-mProgressStrokeThickness) / 2;
+            }
         }
         float arcDim = progressWidth + mDefaultViewPadding;
         mProgressRectF.set(arcDim, arcDim, rawMeasuredDim - arcDim, rawMeasuredDim - arcDim);
@@ -663,15 +676,19 @@ public class CircularProgressView extends View {
 
         float angle;
         float previousAngle = mStartingAngle;
+        float radius = (float) getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2;
+
         float thumbSize = 0;
         if (mProgressThumbScaleType == POINT) {
             thumbSize = mProgressThumbSize;
+            radius -= (thumbSize - mProgressStrokeThickness / 2);
         } else if (mProgressThumbScaleType == RATE) {
-            thumbSize = mProgressStrokeThickness * mProgressThumbSize;
+            thumbSize = (mProgressStrokeThickness / 2) * mProgressThumbSize;
+            if (mProgressThumbSize > 1)
+                radius -= thumbSize - mProgressStrokeThickness / 2;
         } else {
             thumbSize = mProgressStrokeThickness;
         }
-        float radius = (float) getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2 - (thumbSize - mProgressStrokeThickness / 2);
         double endX, endY;
 
         //Shadow logic
