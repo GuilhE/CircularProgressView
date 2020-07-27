@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.github.guilhe.views.ProgressThumbScaleType.*;
+
 @SuppressWarnings("unused")
 public class CircularProgressView extends View {
 
@@ -35,6 +37,7 @@ public class CircularProgressView extends View {
     private static final float DEFAULT_SHADOW_PADDING_DP = 5;
     private static final float DEFAULT_STROKE_THICKNESS_DP = 10;
     private static final float DEFAULT_THUMB_SIZE_DP = 10;
+    private static final float DEFAULT_MAXIMUM_THUMB_SIZE_RATE = 2;
     private static final int DEFAULT_MAX_WIDTH_DP = 100;
     private static final int DEFAULT_MAX = 100;
     private static final int DEFAULT_STARTING_ANGLE = 270;
@@ -52,6 +55,9 @@ public class CircularProgressView extends View {
     private int mMax;
     private boolean mShadowEnabled;
     private boolean mProgressThumbEnabled;
+//    private boolean autoThumb;
+    private ProgressThumbScaleType mProgressThumbScaleType;
+    private float mMaxThumbSizeRate;
     private int mStartingAngle;
     private boolean mMultipleArcsEnabled;
     private float mProgressListTotal;
@@ -136,6 +142,8 @@ public class CircularProgressView extends View {
                 mMax = typedArray.getInt(R.styleable.CircularProgressView_max, DEFAULT_MAX);
                 mShadowEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_shadow, true);
                 mProgressThumbEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_progressThumb, false);
+                mProgressThumbScaleType = values()[typedArray.getInteger(R.styleable.CircularProgressView_progressThumbScaleType, 0)];
+                mMaxThumbSizeRate = typedArray.getFloat(R.styleable.CircularProgressView_progressThumbSizeMaxRate, DEFAULT_MAXIMUM_THUMB_SIZE_RATE);
                 mStartingAngle = typedArray.getInteger(R.styleable.CircularProgressView_startingAngle, DEFAULT_STARTING_ANGLE);
                 mProgress = typedArray.getFloat(R.styleable.CircularProgressView_progress, 0);
                 mProgressStrokeThickness = typedArray.getDimension(R.styleable.CircularProgressView_progressBarThickness, mDefaultStrokeThickness);
@@ -170,6 +178,7 @@ public class CircularProgressView extends View {
         } else {
             mProgressStrokeThickness = mDefaultStrokeThickness;
             mProgressThumbSize = mDefaultThumbSize;
+            mMaxThumbSizeRate = DEFAULT_MAXIMUM_THUMB_SIZE_RATE;
             mShadowEnabled = true;
             mMax = DEFAULT_MAX;
             mStartingAngle = DEFAULT_STARTING_ANGLE;
@@ -422,19 +431,27 @@ public class CircularProgressView extends View {
         }
     }
 
+    public float getProgressStrokeThickness() {
+        return mProgressStrokeThickness;
+    }
+
     public void setProgressThumbSize(float size) {
         setThumbSize(size, true);
     }
 
     private void setThumbSize(float size, boolean requestLayout) {
-        mProgressThumbSize = size;
+        if (mProgressThumbScaleType == POINT)
+            mProgressThumbSize = size;
+        else
+            mProgressThumbSize = Math.max(Math.min(size, mMaxThumbSizeRate), 0); // To prevent the Thumb size too big
+
         if (requestLayout) {
             requestLayout();
         }
     }
 
-    public float getProgressStrokeThickness() {
-        return mProgressStrokeThickness;
+    public ProgressThumbScaleType getProgressThumbScaleType() {
+        return mProgressThumbScaleType;
     }
 
     public void setProgress(float progress) {
@@ -598,10 +615,20 @@ public class CircularProgressView extends View {
         int rawMeasuredDim = Math.max(Math.min(width, height), 0);
         float progressWidth = mProgressStrokeThickness;
 
+        float thumbSize = 0;
+        if (mProgressThumbScaleType == POINT) {
+            thumbSize = mProgressThumbSize;
+        } else if (mProgressThumbScaleType == RATE) {
+            thumbSize = mProgressStrokeThickness * mProgressThumbSize;
+        } else {
+            thumbSize = mProgressStrokeThickness;
+        }
+
         // if ThumbSize diameter is thicker than Stroke
-        if (mProgressThumbEnabled && mProgressThumbSize * 2 > mProgressStrokeThickness) {
+        if (mProgressThumbEnabled
+                && thumbSize * 2 > mProgressStrokeThickness) {
             // increase progress width
-            progressWidth += mProgressThumbSize - mProgressStrokeThickness + mProgressStrokeThickness / 2;
+            progressWidth += thumbSize - mProgressStrokeThickness + mProgressStrokeThickness / 2;
         }
         float arcDim = progressWidth + mDefaultViewPadding;
         mProgressRectF.set(arcDim, arcDim, rawMeasuredDim - arcDim, rawMeasuredDim - arcDim);
@@ -635,7 +662,15 @@ public class CircularProgressView extends View {
 
         float angle;
         float previousAngle = mStartingAngle;
-        float radius = (float) getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2 - (mProgressThumbSize - mProgressStrokeThickness / 2);
+        float thumbSize = 0;
+        if (mProgressThumbScaleType == POINT) {
+            thumbSize = mProgressThumbSize;
+        } else if (mProgressThumbScaleType == RATE) {
+            thumbSize = mProgressStrokeThickness * mProgressThumbSize;
+        } else {
+            thumbSize = mProgressStrokeThickness;
+        }
+        float radius = (float) getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2 - (thumbSize - mProgressStrokeThickness / 2);
         double endX, endY;
 
         //Shadow logic
@@ -655,8 +690,16 @@ public class CircularProgressView extends View {
                 endX = (Math.cos(Math.toRadians(previousAngle + angle)) * radius);
                 endY = (Math.sin(Math.toRadians(previousAngle + angle)) * radius);
                 mShadowThumbPaint.set(mShadowPaint); // shadow stroke style copy
-                mShadowThumbPaint.setStyle(Paint.Style.FILL);
-                canvas.drawCircle((float) endX + mShadowRectF.centerX(), (float) endY + mShadowRectF.centerY(), mProgressThumbSize, mShadowThumbPaint);
+                switch(mProgressThumbScaleType) {
+                    case POINT:
+                    case RATE:
+                        mShadowThumbPaint.setStyle(Paint.Style.FILL);
+                        break;
+                    case AUTO:
+                    default:
+                        mShadowThumbPaint.setStyle(Paint.Style.STROKE);
+                }
+                canvas.drawCircle((float) endX + mShadowRectF.centerX(), (float) endY + mShadowRectF.centerY(), thumbSize, mShadowThumbPaint);
             }
             canvas.drawArc(mShadowRectF, previousAngle, angle, false, mShadowPaint);
         }
@@ -685,8 +728,16 @@ public class CircularProgressView extends View {
                 endY = (Math.sin(Math.toRadians(previousAngle + angle)) * radius);
 
                 mThumbPaint.set(mProgressPaintList.get(i)); // stroke style copy
-                mThumbPaint.setStyle(Paint.Style.FILL);
-                canvas.drawCircle((float) endX + mProgressRectF.centerX(), (float) endY + mProgressRectF.centerY(), mProgressThumbSize, mThumbPaint);
+                switch(mProgressThumbScaleType) {
+                    case POINT:
+                    case RATE:
+                        mThumbPaint.setStyle(Paint.Style.FILL);
+                        break;
+                    case AUTO:
+                    default:
+                        mThumbPaint.setStyle(Paint.Style.STROKE);
+                }
+                canvas.drawCircle((float) endX + mProgressRectF.centerX(), (float) endY + mProgressRectF.centerY(), thumbSize, mThumbPaint);
             }
             previousAngle += angle;
         }

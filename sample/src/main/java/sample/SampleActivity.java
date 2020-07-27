@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.github.guilhe.circularprogressview.sample.R;
 import com.github.guilhe.circularprogressview.sample.databinding.ActivitySampleEditorBinding;
 import com.github.guilhe.views.CircularProgressView;
+import com.github.guilhe.views.ProgressThumbScaleType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +98,12 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
                 mBinding.sampleCircularProgressView.setProgressStrokeThickness((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
                 break;
             case R.id.thumbsize_SeekBar:
-                mBinding.sampleCircularProgressView.setProgressThumbSize((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
+                float size;
+                if (mBinding.sampleCircularProgressView.getProgressThumbScaleType() == ProgressThumbScaleType.RATE)
+                    size = progress / ((float) seekBar.getMax() / 2);
+                else
+                    size = (progress * getResources().getDisplayMetrics().density + 0.5f);
+                mBinding.sampleCircularProgressView.setProgressThumbSize(size);
                 break;
             case R.id.progress_SeekBar:
                 mBinding.sampleCircularProgressView.setProgress(progress, mBinding.animatedSwitch.isChecked());

@@ -14,6 +14,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:progress="100"
+                app:progressThumbScaleType="point"
                 app:progressBarColorArray="@array/rainbow"
                 app:progressBarRounded="true"
                 app:progressThumb="false" />
