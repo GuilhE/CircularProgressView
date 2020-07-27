@@ -8,7 +8,7 @@
     <string name="hint_for_angle">Starting angle</string>
     <string name="hint_for_color">Color RGB (Progress &amp; Background:</string>
     <string name="hint_for_shadow">Shadow:</string>
-    <string name="hint_for_thumb">Thumb:</string>
+    <string name="hint_for_thumb">Thumb &amp; ScaleTypes (Enable :</string>
     <string name="hint_for_reverse">Reverse:</string>
     <string name="hint_for_shadow_padding">Shadow padding</string>
     <string name="hint_for_background_color">Background color RGB</string>

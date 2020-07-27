@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ import java.util.Random;
  * Created by gdelgado on 30/08/2017.
  */
 
-public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, RadioGroup.OnCheckedChangeListener {
 
     private ActivitySampleEditorBinding mBinding;
     private boolean mTransparent;
@@ -43,10 +44,16 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
         mBinding.bgRSeekBar.setOnSeekBarChangeListener(this);
         mBinding.bgGSeekBar.setOnSeekBarChangeListener(this);
         mBinding.bgBSeekBar.setOnSeekBarChangeListener(this);
+        mBinding.thumbScaleGroup.setOnCheckedChangeListener(this);
 
         mBinding.roundedSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressRounded(checked));
         mBinding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setShadowEnabled(checked));
-        mBinding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressThumbEnabled(checked));
+        mBinding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
+            mBinding.sampleCircularProgressView.setProgressThumbEnabled(checked);
+            mBinding.thumbScaleAuto.setEnabled(checked);
+            mBinding.thumbScalePoint.setEnabled(checked);
+            mBinding.thumbScaleRate.setEnabled(checked);
+        });
         mBinding.reverseSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setReverseEnabled(checked));
         mBinding.alphaSwitch.setOnCheckedChangeListener(((compoundButton, checked) -> mBinding.sampleCircularProgressView.setBackgroundAlphaEnabled(checked)));
         mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
@@ -162,5 +169,21 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.thumb_scale_point:
+                mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.POINT);
+                break;
+            case R.id.thumb_scale_rate:
+                mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.RATE);
+                break;
+            case R.id.thumb_scale_auto:
+            default:
+                mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.AUTO);
+        }
+        mBinding.sampleCircularProgressView.setProgressThumbSize(mBinding.thumbsizeSeekBar.getProgress());
     }
 }

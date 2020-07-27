@@ -14,7 +14,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:progress="100"
-                app:progressThumbScaleType="point"
                 app:progressBarColorArray="@array/rainbow"
                 app:progressBarRounded="true"
                 app:progressThumb="false" />
@@ -177,17 +176,6 @@
                             android:layout_height="wrap_content"
                             android:checked="true" />
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="20dp"
-                            android:text="@string/hint_for_thumb" />
-
-                    <Switch
-                            android:id="@+id/thumb_Switch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="false" />
 
                 </LinearLayout>
 
@@ -353,6 +341,55 @@
                             android:progress="0" />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="20dp"
+                        android:text="@string/hint_for_thumb" />
+
+                    <Switch
+                        android:id="@+id/thumb_Switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false" />
+                </LinearLayout>
+
+                <RadioGroup
+                    android:id="@+id/thumb_Scale_Group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <RadioButton
+                        android:id="@+id/thumb_scale_auto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:text="AUTO"
+                        android:checked="true"
+                        android:layout_weight="1"/>
+                    <RadioButton
+                        android:id="@+id/thumb_scale_point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:text="POINT"
+                        android:layout_weight="1"/>
+                    <RadioButton
+                        android:id="@+id/thumb_scale_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:text="RATE"
+                        android:layout_weight="1"/>
+                </RadioGroup>
 
             </LinearLayout>
 
