@@ -440,10 +440,11 @@ public class CircularProgressView extends View {
     }
 
     private void setThumbSize(float size, boolean requestLayout) {
-        if (mProgressThumbScaleType == POINT)
-            mProgressThumbSize = size;
-        else
+        if (mProgressThumbScaleType == RATE) {
             mProgressThumbSize = Math.max(Math.min(size, mMaxThumbSizeRate), 0); // To prevent the Thumb size too big
+        } else {
+            mProgressThumbSize = size;
+        }
 
         if (requestLayout) {
             requestLayout();
