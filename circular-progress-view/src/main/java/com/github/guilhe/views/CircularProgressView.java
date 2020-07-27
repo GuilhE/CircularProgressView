@@ -390,6 +390,7 @@ public class CircularProgressView extends View {
     public void setProgressThumbEnabled(boolean enable) {
         mProgressThumbEnabled = enable;
         invalidate();
+        requestLayout();
     }
 
     public boolean isProgressThumbEnabled() {
@@ -595,15 +596,21 @@ public class CircularProgressView extends View {
         int height = MeasureSpec.getMode(heightMeasureSpec) != MeasureSpec.UNSPECIFIED ? MeasureSpec.getSize(heightMeasureSpec) : mDefaultMaxWidth;
 
         int rawMeasuredDim = Math.max(Math.min(width, height), 0);
-        float arcDim = mProgressStrokeThickness + mDefaultViewPadding;
+        float progressWidth = mProgressStrokeThickness;
+
+        // if ThumbSize diameter is thicker than Stroke
+        if (mProgressThumbEnabled && mProgressThumbSize * 2 > mProgressStrokeThickness) {
+            // increase progress width
+            progressWidth += mProgressThumbSize - mProgressStrokeThickness + mProgressStrokeThickness / 2;
+        }
+        float arcDim = progressWidth + mDefaultViewPadding;
         mProgressRectF.set(arcDim, arcDim, rawMeasuredDim - arcDim, rawMeasuredDim - arcDim);
 
         //To avoid creating a messy composition
-        if (mProgressRectF.width() <= mProgressStrokeThickness) {
+        if (mProgressRectF.width() <= progressWidth) {
             rawMeasuredDim = mLastValidRawMeasuredDim;
             mProgressRectF.set(arcDim, arcDim, rawMeasuredDim - arcDim, rawMeasuredDim - arcDim);
             setThickness(mLastValidStrokeThickness, false);
-            setThumbSize(mProgressThumbSize, false);
         }
         mLastValidRawMeasuredDim = rawMeasuredDim;
         mLastValidStrokeThickness = mProgressStrokeThickness;
@@ -628,7 +635,7 @@ public class CircularProgressView extends View {
 
         float angle;
         float previousAngle = mStartingAngle;
-        float radius = getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2;
+        float radius = (float) getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2 - (mProgressThumbSize - mProgressStrokeThickness / 2);
         double endX, endY;
 
         //Shadow logic
