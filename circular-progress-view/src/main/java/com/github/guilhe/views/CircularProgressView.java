@@ -20,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -85,8 +86,10 @@ public class CircularProgressView extends View {
     private Paint mThumbPaint;
     private Paint mShadowPaint;
     private Paint mShadowThumbPaint;
-    private int mLastValidRawMeasuredDim;
+    private float mLastValidRawMeasuredDim;
     private float mLastValidStrokeThickness;
+    private float mLastValidThumbSize;
+    private float mLastValidThumbSizeRate;
 
     private TimeInterpolator mInterpolator;
     private Animator mProgressAnimator;
@@ -125,6 +128,8 @@ public class CircularProgressView extends View {
 
     private void init(Context context, AttributeSet attrs) {
         mLastValidStrokeThickness = mDefaultStrokeThickness;
+        mLastValidThumbSize = mDefaultThumbSize;
+        mLastValidThumbSizeRate = DEFAULT_MAXIMUM_THUMB_SIZE_RATE;
         mInterpolator = DEFAULT_INTERPOLATOR;
         mProgressRectF = new RectF();
         mShadowRectF = new RectF();
@@ -673,17 +678,22 @@ public class CircularProgressView extends View {
                 progressWidth += (thumbSize-mProgressStrokeThickness) / 2;
             }
         }
-        float arcDim = progressWidth + mDefaultViewPadding;
+        float arcDim = Math.max(progressWidth, 0) + mDefaultViewPadding;
         mProgressRectF.set(arcDim, arcDim, rawMeasuredDim - arcDim, rawMeasuredDim - arcDim);
 
         //To avoid creating a messy composition
         if (mProgressRectF.width() <= progressWidth) {
-            rawMeasuredDim = mLastValidRawMeasuredDim;
+            arcDim = mLastValidRawMeasuredDim;
             mProgressRectF.set(arcDim, arcDim, rawMeasuredDim - arcDim, rawMeasuredDim - arcDim);
             setThickness(mLastValidStrokeThickness, false);
+            setThumbSize(mLastValidThumbSize, false);
+            setThumbSizeRate(mLastValidThumbSizeRate, false);
+        } else {
+            mLastValidRawMeasuredDim = arcDim;
+            mLastValidStrokeThickness = mProgressStrokeThickness;
+            mLastValidThumbSize = mProgressThumbSize;
+            mLastValidThumbSizeRate = mProgressThumbSizeRate;
         }
-        mLastValidRawMeasuredDim = rawMeasuredDim;
-        mLastValidStrokeThickness = mProgressStrokeThickness;
 
         mShadowRectF.set(mProgressRectF.left, mDefaultShadowPadding + mProgressRectF.top, mProgressRectF.right, mDefaultShadowPadding + mProgressRectF.bottom);
         setMeasuredDimension(rawMeasuredDim, rawMeasuredDim);
