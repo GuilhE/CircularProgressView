@@ -7,7 +7,12 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.SweepGradient;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -15,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -55,7 +59,6 @@ public class CircularProgressView extends View {
     private int mMax;
     private boolean mShadowEnabled;
     private boolean mProgressThumbEnabled;
-//    private boolean autoThumb;
     private ProgressThumbScaleType mProgressThumbScaleType;
     private float mMaxThumbSizeRate;
     private int mStartingAngle;
@@ -66,6 +69,7 @@ public class CircularProgressView extends View {
     private float mProgress;
     private float mProgressStrokeThickness;
     private float mProgressThumbSize;
+    private float mProgressThumbSizeRate;
     private float mProgressIconThickness;
     private int mProgressColor;
     private int mBackgroundColor;
@@ -148,6 +152,7 @@ public class CircularProgressView extends View {
                 mProgress = typedArray.getFloat(R.styleable.CircularProgressView_progress, 0);
                 mProgressStrokeThickness = typedArray.getDimension(R.styleable.CircularProgressView_progressBarThickness, mDefaultStrokeThickness);
                 mProgressThumbSize = typedArray.getDimension(R.styleable.CircularProgressView_progressThumbSize, mDefaultThumbSize);
+                setProgressThumbSizeRate(typedArray.getFloat(R.styleable.CircularProgressView_progressThumbSizeRate, DEFAULT_MAXIMUM_THUMB_SIZE_RATE));
                 mProgressColor = typedArray.getInt(R.styleable.CircularProgressView_progressBarColor, DEFAULT_PROGRESS_COLOR);
                 mProgressRounded = typedArray.getBoolean(R.styleable.CircularProgressView_progressBarRounded, false);
                 mBackgroundColor = typedArray.getInt(R.styleable.CircularProgressView_backgroundColor, mProgressColor);
@@ -178,6 +183,7 @@ public class CircularProgressView extends View {
         } else {
             mProgressStrokeThickness = mDefaultStrokeThickness;
             mProgressThumbSize = mDefaultThumbSize;
+            mProgressThumbSizeRate = DEFAULT_MAXIMUM_THUMB_SIZE_RATE;
             mProgressThumbScaleType = AUTO;
             mMaxThumbSizeRate = DEFAULT_MAXIMUM_THUMB_SIZE_RATE;
             mShadowEnabled = true;
@@ -441,15 +447,39 @@ public class CircularProgressView extends View {
     }
 
     private void setThumbSize(float size, boolean requestLayout) {
-        if (mProgressThumbScaleType == RATE) {
-            mProgressThumbSize = Math.max(Math.min(size, mMaxThumbSizeRate), 0); // To prevent the Thumb size too big
-        } else {
-            mProgressThumbSize = size;
-        }
+        mProgressThumbSize = size;
 
         if (requestLayout) {
             requestLayout();
         }
+    }
+
+    public float getProgressThumbSize() {
+        return mProgressThumbSize;
+    }
+
+    public void setProgressThumbSizeRate(float rate) {
+        setThumbSizeRate(rate, true);
+    }
+
+    private void setThumbSizeRate(float size, boolean requestLayout) {
+        mProgressThumbSizeRate = Math.max(Math.min(size, mMaxThumbSizeRate), 0); // To prevent the Thumb size too big
+
+        if (requestLayout) {
+            requestLayout();
+        }
+    }
+
+    public float getProgressThumbSizeRate() {
+        return mProgressThumbSizeRate;
+    }
+
+    public void setProgressMaxThumbSizeRate(float maxRate) {
+        mMaxThumbSizeRate = maxRate;
+    }
+
+    public float getProgressMaxThumbSizeRate() {
+        return mMaxThumbSizeRate;
     }
 
     public void setProgressThumbScaleType(int index) {
@@ -629,7 +659,7 @@ public class CircularProgressView extends View {
         if (mProgressThumbScaleType == POINT) {
             thumbSize = mProgressThumbSize;
         } else if (mProgressThumbScaleType == RATE) {
-            thumbSize = mProgressStrokeThickness * mProgressThumbSize;
+            thumbSize = mProgressStrokeThickness * mProgressThumbSizeRate;
         } else {
             thumbSize = mProgressStrokeThickness;
         }
@@ -639,9 +669,8 @@ public class CircularProgressView extends View {
             // increase progress width
             if (mProgressThumbScaleType == POINT && thumbSize * 2 > mProgressStrokeThickness) {
                 progressWidth += thumbSize - mProgressStrokeThickness + mProgressStrokeThickness / 2;
-            } else if (mProgressThumbScaleType == RATE) {
-                if (thumbSize > mProgressStrokeThickness)
-                    progressWidth += (thumbSize-mProgressStrokeThickness) / 2;
+            } else if (mProgressThumbScaleType == RATE && thumbSize > mProgressStrokeThickness) {
+                progressWidth += (thumbSize-mProgressStrokeThickness) / 2;
             }
         }
         float arcDim = progressWidth + mDefaultViewPadding;
@@ -683,9 +712,10 @@ public class CircularProgressView extends View {
             thumbSize = mProgressThumbSize;
             radius -= (thumbSize - mProgressStrokeThickness / 2);
         } else if (mProgressThumbScaleType == RATE) {
-            thumbSize = (mProgressStrokeThickness / 2) * mProgressThumbSize;
-            if (mProgressThumbSize > 1)
+            thumbSize = (mProgressStrokeThickness / 2) * mProgressThumbSizeRate;
+            if (mProgressThumbSizeRate > 1) {
                 radius -= thumbSize - mProgressStrokeThickness / 2;
+            }
         } else {
             thumbSize = mProgressStrokeThickness;
         }

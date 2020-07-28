@@ -14,9 +14,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:progress="100"
+                app:progressThumbScaleType="rate"
+                app:progressThumbSize="35dp"
+                app:progressThumbSizeRate="2"
+                app:progressBarThickness="10dp"
                 app:progressBarColorArray="@array/rainbow"
                 app:progressBarRounded="true"
-                app:progressThumb="false" />
+                app:progressThumb="true" />
 
         <android.support.design.widget.FloatingActionButton
                 android:id="@+id/sample_FloatingActionButton"

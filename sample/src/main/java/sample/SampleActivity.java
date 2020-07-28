@@ -106,11 +106,14 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
                 break;
             case R.id.thumbsize_SeekBar:
                 float size;
-                if (mBinding.sampleCircularProgressView.getProgressThumbScaleType() == ProgressThumbScaleType.RATE)
+                if (mBinding.sampleCircularProgressView.getProgressThumbScaleType() == ProgressThumbScaleType.RATE) {
                     size = progress / ((float) seekBar.getMax() / 2);
-                else
+                    mBinding.sampleCircularProgressView.setProgressThumbSizeRate(size);
+                } else {
                     size = (progress * getResources().getDisplayMetrics().density + 0.5f);
-                mBinding.sampleCircularProgressView.setProgressThumbSize(size);
+                    mBinding.sampleCircularProgressView.setProgressThumbSize(size);
+                }
+
                 break;
             case R.id.progress_SeekBar:
                 mBinding.sampleCircularProgressView.setProgress(progress, mBinding.animatedSwitch.isChecked());
@@ -176,14 +179,17 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
         switch (checkedId) {
             case R.id.thumb_scale_point:
                 mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.POINT);
+                mBinding.sampleCircularProgressView.setProgressThumbSize((mBinding.thumbsizeSeekBar.getProgress() * getResources().getDisplayMetrics().density + 0.5f));
                 break;
             case R.id.thumb_scale_rate:
                 mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.RATE);
+                float rate = (mBinding.thumbsizeSeekBar.getProgress() / (mBinding.thumbsizeSeekBar.getMax() / mBinding.sampleCircularProgressView.getProgressMaxThumbSizeRate()));
+                mBinding.sampleCircularProgressView.setProgressThumbSizeRate(rate);
                 break;
             case R.id.thumb_scale_auto:
             default:
                 mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.AUTO);
+                mBinding.sampleCircularProgressView.requestLayout();
         }
-        mBinding.sampleCircularProgressView.setProgressThumbSize(mBinding.thumbsizeSeekBar.getProgress());
     }
 }
