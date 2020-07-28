@@ -727,7 +727,7 @@ public class CircularProgressView extends View {
                 radius -= thumbSize - mProgressStrokeThickness / 2;
             }
         } else {
-            thumbSize = mProgressStrokeThickness;
+            thumbSize = mProgressIconThickness;
         }
         double endX, endY;
 
