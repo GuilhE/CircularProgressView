@@ -664,25 +664,26 @@ public class CircularProgressView extends View {
         if (mProgressThumbScaleType == POINT) {
             thumbSize = mProgressThumbSize;
         } else if (mProgressThumbScaleType == RATE) {
-            thumbSize = mProgressStrokeThickness * mProgressThumbSizeRate;
+            thumbSize = (mProgressStrokeThickness / 2) * mProgressThumbSizeRate;
         } else {
             thumbSize = mProgressStrokeThickness;
         }
 
         // if ThumbSize diameter is thicker than Stroke
-        if (mProgressThumbEnabled) {
-            // increase progress width
-            if (mProgressThumbScaleType == POINT && thumbSize * 2 > mProgressStrokeThickness) {
-                progressWidth += thumbSize - mProgressStrokeThickness + mProgressStrokeThickness / 2;
-            } else if (mProgressThumbScaleType == RATE && thumbSize > mProgressStrokeThickness) {
-                progressWidth += (thumbSize-mProgressStrokeThickness) / 2;
+        if (mProgressThumbEnabled && mProgressThumbScaleType != AUTO) {
+            if (thumbSize * 2 > mProgressStrokeThickness) {
+                // increase progressWidth by thumbSize
+                progressWidth += thumbSize - mProgressStrokeThickness;
+            } else {
+                progressWidth = mProgressStrokeThickness / 2;
             }
         }
+
         float arcDim = Math.max(progressWidth, 0) + mDefaultViewPadding;
         mProgressRectF.set(arcDim, arcDim, rawMeasuredDim - arcDim, rawMeasuredDim - arcDim);
 
         //To avoid creating a messy composition
-        if (mProgressRectF.width() <= progressWidth) {
+        if (mProgressRectF.width() <= (Math.max(progressWidth, thumbSize))) {
             arcDim = mLastValidRawMeasuredDim;
             mProgressRectF.set(arcDim, arcDim, rawMeasuredDim - arcDim, rawMeasuredDim - arcDim);
             setThickness(mLastValidStrokeThickness, false);
@@ -715,19 +716,27 @@ public class CircularProgressView extends View {
 
         float angle;
         float previousAngle = mStartingAngle;
-        float radius = (float) getWidth() / 2 - mDefaultViewPadding - mProgressIconThickness - mProgressStrokeThickness / 2;
+        float radius = (float) getWidth() / 2 - mDefaultViewPadding;
 
         float thumbSize = 0;
-        if (mProgressThumbScaleType == POINT) {
-            thumbSize = mProgressThumbSize;
-            radius -= (thumbSize - mProgressStrokeThickness / 2);
-        } else if (mProgressThumbScaleType == RATE) {
-            thumbSize = (mProgressStrokeThickness / 2) * mProgressThumbSizeRate;
-            if (mProgressThumbSizeRate > 1) {
-                radius -= thumbSize - mProgressStrokeThickness / 2;
-            }
-        } else {
+        if (mProgressThumbScaleType == AUTO) {
             thumbSize = mProgressIconThickness;
+            radius -= (mProgressIconThickness + mProgressStrokeThickness / 2);
+        } else {
+            boolean isThicker = false;
+            if (mProgressThumbScaleType == POINT) {
+                thumbSize = mProgressThumbSize;
+                isThicker = mProgressThumbSize * 2 > mProgressStrokeThickness;
+            } else if (mProgressThumbScaleType == RATE) {
+                thumbSize = (mProgressStrokeThickness / 2) * mProgressThumbSizeRate;
+                isThicker = mProgressThumbSizeRate > 1;
+            }
+
+            if (isThicker) {
+                radius -= thumbSize;
+            } else {
+                radius -= mProgressStrokeThickness / 2;
+            }
         }
         double endX, endY;
 

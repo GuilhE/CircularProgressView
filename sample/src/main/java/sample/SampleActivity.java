@@ -189,7 +189,7 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
             case R.id.thumb_scale_auto:
             default:
                 mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.AUTO);
-                mBinding.sampleCircularProgressView.requestLayout();
         }
+        mBinding.sampleCircularProgressView.requestLayout();
     }
 }
