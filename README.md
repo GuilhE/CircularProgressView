@@ -6,6 +6,7 @@
 A fancy CircularProgressView.
 
 #### Version 1.x
+- **Jul, 2019**       - Added thumb size configurations support
 - **Nov, 2019**       - Added "gradient color" (SweepGradient) for progress
 - **Apr, 2019**       - Added rounded progress
 - **Jun, 2018**       - Added reverse progress
@@ -28,22 +29,28 @@ Check out the __sample__ module where you can find a few examples of how to crea
 
 Attributes accepted in xml:
 ```xml
-<declare-styleable name="CircularProgressView">
-    <attr name="max" format="integer"/>
-    <attr name="shadow" format="boolean"/>
-    <attr name="progressThumb" format="boolean"/>
-    <attr name="startingAngle" format="integer"/>
-    <attr name="progress" format="integer"/>
-    <attr name="progressBarThickness" format="dimension"/>
-    <attr name="progressBarColor" format="color"/>
-    <attr name="progressBarColorArray" format="reference"/>    
-    <attr name="progressBarColorArrayPositions" format="reference"/>
-    <attr name="duplicateFirstColorInArray" format="boolean"/>
-    <attr name="progressBarRounded" format="boolean"/>
-    <attr name="backgroundColor" format="color"/>
-    <attr name="backgroundAlphaEnabled" format="boolean"/>
-    <attr name="reverse" format="boolean"/>
-</declare-styleable>
+    <attr name="max" format="integer" />
+    <attr name="shadow" format="boolean" />
+    <attr name="progressThumb" format="boolean" />
+    <attr name="progressThumbSize" format="dimension" />
+    <attr name="progressThumbSizeRate" format="float" />
+    <attr name="progressThumbSizeMaxRate" format="float" />
+    <attr name="startingAngle" format="integer" />
+    <attr name="progress" format="integer" />
+    <attr name="progressBarThickness" format="dimension" />
+    <attr name="progressBarColor" format="color" />
+    <attr name="progressBarColorArray" format="reference" />
+    <attr name="progressBarColorArrayPositions" format="reference" />
+    <attr name="duplicateFirstColorInArray" format="boolean" />
+    <attr name="progressBarRounded" format="boolean" />
+    <attr name="backgroundColor" format="color" />
+    <attr name="backgroundAlphaEnabled" format="boolean" />
+    <attr name="reverse" format="boolean" />
+    <attr format="enum" name="progressThumbScaleType">
+        <enum name="auto" value="0"/>
+        <enum name="point" value="1"/>
+        <enum name="rate" value="2"/>
+    </attr>
 ```
 Example:
 ```xml
