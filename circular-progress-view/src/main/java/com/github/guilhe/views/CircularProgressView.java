@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -30,7 +29,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.github.guilhe.views.ProgressThumbScaleType.*;
+import static com.github.guilhe.views.ProgressThumbScaleType.AUTO;
+import static com.github.guilhe.views.ProgressThumbScaleType.POINT;
+import static com.github.guilhe.views.ProgressThumbScaleType.RATE;
+import static com.github.guilhe.views.ProgressThumbScaleType.values;
 
 @SuppressWarnings("unused")
 public class CircularProgressView extends View {
