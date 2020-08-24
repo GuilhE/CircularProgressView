@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -23,8 +24,12 @@ android {
 
 dependencies {
     implementation "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 if (project.rootProject.file('local.properties').exists()) {
     apply from: 'deploy.gradle'
+}
+repositories {
+    mavenCentral()
 }
