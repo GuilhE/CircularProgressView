@@ -51,14 +51,12 @@ class CircularProgressView @JvmOverloads constructor(
     private var progress = 0f
     private var progressThumbSizeRate = DEFAULT_MAXIMUM_THUMB_SIZE_RATE
     private var progressIconThickness = 0f
-    private var progressBackgroundAlphaEnabled = true
-    private var reverseEnabled = false
-    private var progressRounded = false
+    private var progressStrokeThickness = defaultStrokeThickness
     private var lastValidRawMeasuredDim = 0f
     private var lastValidStrokeThickness = defaultStrokeThickness
     private var lastValidThumbSize = defaultThumbSize
     private var lastValidThumbSizeRate = DEFAULT_MAXIMUM_THUMB_SIZE_RATE
-    private var interpolator: TimeInterpolator = DEFAULT_INTERPOLATOR
+    private var progressInterpolator: TimeInterpolator = DEFAULT_INTERPOLATOR
     private var shader: Shader? = null
     private var shaderColors: IntArray = intArrayOf()
     private var shaderPositions: FloatArray = floatArrayOf()
@@ -85,7 +83,7 @@ class CircularProgressView @JvmOverloads constructor(
     var isProgressRounded: Boolean = false
         set(enabled) {
             field = enabled
-            progressPaint.strokeCap = if (progressRounded) Paint.Cap.ROUND else Paint.Cap.SQUARE
+            progressPaint.strokeCap = if (isProgressRounded) Paint.Cap.ROUND else Paint.Cap.SQUARE
             shadowPaint.strokeCap = progressPaint.strokeCap
             invalidate()
         }
@@ -119,14 +117,6 @@ class CircularProgressView @JvmOverloads constructor(
             field = color
             resetBackgroundPaint()
             invalidate()
-        }
-
-    /**
-     * Changes progressBar & progressIcon, background and shadow line width. Thickness in pixels.
-     */
-    var progressStrokeThickness: Float = defaultStrokeThickness
-        set(thickness) {
-            setThickness(thickness, true)
         }
 
     var progressThumbScaleType: ProgressThumbScaleType = AUTO
@@ -190,10 +180,10 @@ class CircularProgressView @JvmOverloads constructor(
                 progressThumbSize = typedArray.getDimension(R.styleable.CircularProgressView_progressThumbSize, defaultThumbSize)
                 progressThumbSizeRate = typedArray.getFloat(R.styleable.CircularProgressView_progressThumbSizeRate, DEFAULT_MAXIMUM_THUMB_SIZE_RATE)
                 progressColor = typedArray.getInt(R.styleable.CircularProgressView_progressBarColor, DEFAULT_PROGRESS_COLOR)
-                progressRounded = typedArray.getBoolean(R.styleable.CircularProgressView_progressBarRounded, false)
+                isProgressRounded = typedArray.getBoolean(R.styleable.CircularProgressView_progressBarRounded, false)
                 progressBackgroundColor = typedArray.getInt(R.styleable.CircularProgressView_progressBackgroundColor, progressColor)
-                progressBackgroundAlphaEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_progressBackgroundAlphaEnabled, true)
-                reverseEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_reverse, false)
+                isBackgroundAlphaEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_progressBackgroundAlphaEnabled, true)
+                isReverseEnabled = typedArray.getBoolean(R.styleable.CircularProgressView_reverse, false)
                 val colorsId = typedArray.getResourceId(R.styleable.CircularProgressView_progressBarColorArray, -1)
                 val duplicate = typedArray.getBoolean(R.styleable.CircularProgressView_duplicateFirstColorInArray, false)
                 if (colorsId != -1) {
@@ -220,7 +210,7 @@ class CircularProgressView @JvmOverloads constructor(
         resetBackgroundPaint()
         progressPaint.color = progressColor
         setShader(shader)
-        progressPaint.strokeCap = if (progressRounded) Paint.Cap.ROUND else Paint.Cap.SQUARE
+        progressPaint.strokeCap = if (isProgressRounded) Paint.Cap.ROUND else Paint.Cap.SQUARE
         shadowPaint.color = adjustAlpha(Color.BLACK, 0.2f)
         shadowPaint.strokeCap = progressPaint.strokeCap
         setThickness(progressStrokeThickness, false)
@@ -313,6 +303,11 @@ class CircularProgressView @JvmOverloads constructor(
     @RequiresApi(api = Build.VERSION_CODES.O)
     fun setBackgroundColor(color: Color) = setBackgroundColor(color.toArgb())
 
+    /**
+     * Changes progressBar & progressIcon, background and shadow line width. Thickness in pixels.
+     */
+    fun setProgressStrokeThickness(value: Float) = setThickness(value, true)
+
     private fun setThickness(thickness: Float, requestLayout: Boolean) {
         progressStrokeThickness = thickness
         progressIconThickness = progressStrokeThickness / 2
@@ -342,7 +337,7 @@ class CircularProgressView @JvmOverloads constructor(
      */
     @Throws(RuntimeException::class)
     fun setProgress(progressList: List<Float>, progressColorList: List<Int>) {
-        progressRounded = false
+        isProgressRounded = false
         progressListTotal = 0f
         progress = progressListTotal
         for (value in progressList) {
@@ -370,11 +365,11 @@ class CircularProgressView @JvmOverloads constructor(
     }
 
     fun setAnimationInterpolator(interpolator: TimeInterpolator?) {
-        this.interpolator = interpolator ?: DEFAULT_INTERPOLATOR
+        progressInterpolator = interpolator ?: DEFAULT_INTERPOLATOR
     }
 
     private fun resetBackgroundPaint() {
-        backgroundPaint.color = if (progressBackgroundAlphaEnabled) adjustAlpha(progressBackgroundColor, DEFAULT_BACKGROUND_ALPHA) else progressBackgroundColor
+        backgroundPaint.color = if (isBackgroundAlphaEnabled) adjustAlpha(progressBackgroundColor, DEFAULT_BACKGROUND_ALPHA) else progressBackgroundColor
     }
 
     /**
@@ -387,10 +382,10 @@ class CircularProgressView @JvmOverloads constructor(
             if (::progressAnimator.isInitialized) {
                 progressAnimator.cancel()
             }
-            progressAnimator = getAnimator(progress.toDouble(), if (clockwise) progress.toDouble() else 0.toDouble(), duration, AnimatorUpdateListener { valueAnimator ->
+            progressAnimator = getAnimator(this.progress.toDouble(), if (clockwise) progress.toDouble() else 0.toDouble(), duration) { valueAnimator ->
                 setProgressValue(valueAnimator.animatedValue as Float)
                 actionCallback?.onProgressChanged(progress)
-            })
+            }
             progressAnimator.addListener(object : Animator.AnimatorListener {
                 override fun onAnimationEnd(animation: Animator) {
                     actionCallback?.onAnimationFinished(progress)
@@ -414,7 +409,7 @@ class CircularProgressView @JvmOverloads constructor(
     }
 
     private fun getAnimator(current: Double, next: Double, duration: Long, updateListener: AnimatorUpdateListener) = ValueAnimator().apply {
-        this.interpolator = interpolator
+        this.interpolator = progressInterpolator
         this.duration = duration
         this.setObjectValues(current, next)
         this.setEvaluator(object : FloatEvaluator() {
@@ -522,7 +517,7 @@ class CircularProgressView @JvmOverloads constructor(
         //Shadow logic
         if (isShadowEnabled) {
             angle = 360 * (if (multipleArcsEnabled) progressListTotal else progress) / max
-            if (reverseEnabled) {
+            if (isReverseEnabled) {
                 angle *= -1f
             }
             if (!multipleArcsEnabled && isProgressThumbEnabled) {
@@ -548,10 +543,10 @@ class CircularProgressView @JvmOverloads constructor(
         //Progress logic
         if (initShader) {
             initShader = false
-            setShader(SweepGradient(progressRectF.centerX(), progressRectF.centerY(), shaderColors, shaderPositions))
+            setShader(SweepGradient(progressRectF.centerX(), progressRectF.centerY(), shaderColors, if(shaderPositions.isEmpty()) null else shaderPositions))
         } else if (sizeChanged) {
             sizeChanged = false
-            setShader(SweepGradient(progressRectF.centerX(), progressRectF.centerY(), shaderColors, shaderPositions))
+            setShader(SweepGradient(progressRectF.centerX(), progressRectF.centerY(), shaderColors, if(shaderPositions.isEmpty()) null else shaderPositions))
         }
         for (i in valuesToDrawList.indices) {
             if (!multipleArcsEnabled) {
@@ -559,10 +554,10 @@ class CircularProgressView @JvmOverloads constructor(
                 canvas.drawOval(progressRectF, backgroundPaint)
             }
             angle = 360 * valuesToDrawList[i] / max
-            if (reverseEnabled) {
+            if (isReverseEnabled) {
                 angle *= -1f
             }
-            val offset: Float = if (!reverseEnabled && multipleArcsEnabled) ANGLE_OFFSET_FOR_MULTIPLE_ARC_PROGRESS else 0f //to better glue all the "pieces"
+            val offset: Float = if (!isReverseEnabled && multipleArcsEnabled) ANGLE_OFFSET_FOR_MULTIPLE_ARC_PROGRESS else 0f //to better glue all the "pieces"
             canvas.drawArc(progressRectF, previousAngle - offset, angle + offset, false, progressPaintList[i])
             if (!multipleArcsEnabled && isProgressThumbEnabled) {
                 //Only in "single-arc-progress", otherwise we'll end up with N thumbs
