@@ -18,7 +18,6 @@ import android.view.animation.DecelerateInterpolator
 import com.github.guilhe.views.ProgressThumbScaleType.*
 import com.github.guilhe.views.circularprogress.R
 import java.util.*
-import kotlin.jvm.Throws
 import kotlin.math.*
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
@@ -63,6 +62,7 @@ class CircularProgressView @JvmOverloads constructor(
     private var initShader = false
     private var sizeChanged = false
 
+    var progressThumbScaleType: ProgressThumbScaleType = AUTO
     var progressMaxThumbSizeRate = DEFAULT_MAXIMUM_THUMB_SIZE_RATE
     var progressThumbSize = defaultThumbSize
     var actionCallback: CircularProgressViewActionCallback? = null
@@ -117,11 +117,6 @@ class CircularProgressView @JvmOverloads constructor(
             field = color
             resetBackgroundPaint()
             invalidate()
-        }
-
-    var progressThumbScaleType: ProgressThumbScaleType = AUTO
-        set(type) {
-            field = values()[max(min(type.ordinal, 0), values().size - 1)]
         }
 
     /**
@@ -489,6 +484,7 @@ class CircularProgressView @JvmOverloads constructor(
         } else {
             valuesToDrawList.addAll(progressList)
         }
+
         var angle: Float
         var previousAngle = startingAngle.toFloat()
         var radius = width.toFloat() / 2 - defaultViewPadding
@@ -505,11 +501,7 @@ class CircularProgressView @JvmOverloads constructor(
                 thumbSize = progressStrokeThickness / 2 * progressThumbSizeRate
                 isThicker = progressThumbSizeRate > 1
             }
-            radius -= if (isThicker) {
-                thumbSize
-            } else {
-                progressStrokeThickness / 2
-            }
+            radius -= if (isThicker) thumbSize else progressStrokeThickness / 2
         }
         var endX: Double
         var endY: Double
@@ -543,10 +535,10 @@ class CircularProgressView @JvmOverloads constructor(
         //Progress logic
         if (initShader) {
             initShader = false
-            setShader(SweepGradient(progressRectF.centerX(), progressRectF.centerY(), shaderColors, if(shaderPositions.isEmpty()) null else shaderPositions))
+            setShader(SweepGradient(progressRectF.centerX(), progressRectF.centerY(), shaderColors, if (shaderPositions.isEmpty()) null else shaderPositions))
         } else if (sizeChanged) {
             sizeChanged = false
-            setShader(SweepGradient(progressRectF.centerX(), progressRectF.centerY(), shaderColors, if(shaderPositions.isEmpty()) null else shaderPositions))
+            setShader(SweepGradient(progressRectF.centerX(), progressRectF.centerY(), shaderColors, if (shaderPositions.isEmpty()) null else shaderPositions))
         }
         for (i in valuesToDrawList.indices) {
             if (!multipleArcsEnabled) {
