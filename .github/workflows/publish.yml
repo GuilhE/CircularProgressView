@@ -25,7 +25,6 @@ jobs:
           mavenCentralPwd: ${{ secrets.OSS_PASSWORD }}
 
       - name: Run assembleRelease
-        run: ./gradlew assembleRelease
-        
+        run: ./gradlew assembleRelease        
       - name: Run bintrayUpload
-        run: ./gradlw bintrayUpload
+        run: ./gradlew bintrayUpload
