@@ -18,12 +18,12 @@ jobs:
       - name: Grant Permission to Execute
         run: chmod +x gradlew
 
-      - name: Publish Library
+      - name: Assembling Library
+        run: ./gradlew assembleRelease
+        
+      - name: Uploading to Bintray
         env:
           bintrayUser: ${{ secrets.BINTRAY_USER }}
           bintrayApiKey: ${{ secrets.BINTRAY_API_KEY }}
           mavenCentralPwd: ${{ secrets.OSS_PASSWORD }}
-        run: ./gradlew assembleRelease
-        
-      - name: Upload        
         run: ./gradlew bintrayUpload
