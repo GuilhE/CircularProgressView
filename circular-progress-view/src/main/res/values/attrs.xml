@@ -14,8 +14,8 @@
     <attr name="progressBarColorArrayPositions" format="reference" />
     <attr name="duplicateFirstColorInArray" format="boolean" />
     <attr name="progressBarRounded" format="boolean" />
-    <attr name="backgroundColor" format="color" />
-    <attr name="backgroundAlphaEnabled" format="boolean" />
+    <attr name="progressBackgroundColor" format="color" />
+    <attr name="progressBackgroundAlphaEnabled" format="boolean" />
     <attr name="reverse" format="boolean" />
     <attr format="enum" name="progressThumbScaleType">
         <enum name="auto" value="0"/>
@@ -39,8 +39,8 @@
         <attr name="progressBarColorArrayPositions" />
         <attr name="duplicateFirstColorInArray" />
         <attr name="progressBarRounded" />
-        <attr name="backgroundColor" />
-        <attr name="backgroundAlphaEnabled" />
+        <attr name="progressBackgroundColor" />
+        <attr name="progressBackgroundAlphaEnabled" />
         <attr name="reverse" />
     </declare-styleable>
 </resources>

@@ -18,76 +18,72 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by gdelgado on 30/08/2017.
- */
-
 public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, RadioGroup.OnCheckedChangeListener {
 
-    private ActivitySampleEditorBinding mBinding;
-    private boolean mTransparent;
-    private Toast mToast;
+    private ActivitySampleEditorBinding binding;
+    private boolean transparent;
+    private Toast toast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_sample_editor);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sample_editor);
 
-        mBinding.sizeSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.thicknessSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.thumbsizeSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.progressSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.angleSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.colorRSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.colorGSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.colorBSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.bgRSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.bgGSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.bgBSeekBar.setOnSeekBarChangeListener(this);
-        mBinding.thumbScaleGroup.setOnCheckedChangeListener(this);
+        binding.sizeSeekBar.setOnSeekBarChangeListener(this);
+        binding.thicknessSeekBar.setOnSeekBarChangeListener(this);
+        binding.thumbsizeSeekBar.setOnSeekBarChangeListener(this);
+        binding.progressSeekBar.setOnSeekBarChangeListener(this);
+        binding.angleSeekBar.setOnSeekBarChangeListener(this);
+        binding.colorRSeekBar.setOnSeekBarChangeListener(this);
+        binding.colorGSeekBar.setOnSeekBarChangeListener(this);
+        binding.colorBSeekBar.setOnSeekBarChangeListener(this);
+        binding.bgRSeekBar.setOnSeekBarChangeListener(this);
+        binding.bgGSeekBar.setOnSeekBarChangeListener(this);
+        binding.bgBSeekBar.setOnSeekBarChangeListener(this);
+        binding.thumbScaleGroup.setOnCheckedChangeListener(this);
 
-        mBinding.roundedSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setProgressRounded(checked));
-        mBinding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setShadowEnabled(checked));
-        mBinding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
-            mBinding.sampleCircularProgressView.setProgressThumbEnabled(checked);
-            mBinding.thumbScaleAuto.setEnabled(checked);
-            mBinding.thumbScalePoint.setEnabled(checked);
-            mBinding.thumbScaleRate.setEnabled(checked);
+        binding.roundedSwitch.setOnCheckedChangeListener((compoundButton, checked) -> binding.sampleCircularProgressView.setProgressRounded(checked));
+        binding.shadowSwitch.setOnCheckedChangeListener((compoundButton, checked) -> binding.sampleCircularProgressView.setShadowEnabled(checked));
+        binding.thumbSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
+            binding.sampleCircularProgressView.setProgressThumbEnabled(checked);
+            binding.thumbScaleAuto.setEnabled(checked);
+            binding.thumbScalePoint.setEnabled(checked);
+            binding.thumbScaleRate.setEnabled(checked);
         });
-        mBinding.reverseSwitch.setOnCheckedChangeListener((compoundButton, checked) -> mBinding.sampleCircularProgressView.setReverseEnabled(checked));
-        mBinding.alphaSwitch.setOnCheckedChangeListener(((compoundButton, checked) -> mBinding.sampleCircularProgressView.setBackgroundAlphaEnabled(checked)));
-        mBinding.colorsSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
-            if (!mTransparent) {
-                mBinding.sampleCircularProgressView.setBackgroundColor(mBinding.sampleCircularProgressView.getProgressColor());
+        binding.reverseSwitch.setOnCheckedChangeListener((compoundButton, checked) -> binding.sampleCircularProgressView.setReverseEnabled(checked));
+        binding.alphaSwitch.setOnCheckedChangeListener(((compoundButton, checked) -> binding.sampleCircularProgressView.setBackgroundAlphaEnabled(checked)));
+        binding.colorsSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
+            if (!transparent) {
+                binding.sampleCircularProgressView.setProgressBackgroundColor(binding.sampleCircularProgressView.getProgressColor());
             }
         });
-        mBinding.transparentSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
-            mTransparent = checked;
-            mBinding.sampleCircularProgressView.setBackgroundColor(Color.TRANSPARENT);
+        binding.transparentSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
+            transparent = checked;
+            binding.sampleCircularProgressView.setProgressBackgroundColor(Color.TRANSPARENT);
         });
 
-        mBinding.sampleCircularProgressView.setProgressAnimationCallback(new CircularProgressView.OnProgressChangeAnimationCallback() {
+        binding.sampleCircularProgressView.setActionCallback(new CircularProgressView.CircularProgressViewActionCallback() {
             @Override
             public void onProgressChanged(float progress) {
             }
 
             @Override
             public void onAnimationFinished(float progress) {
-                if (mToast != null) {
-                    mToast.cancel(); //Prevent toasts from overlapping.
+                if (toast != null) {
+                    toast.cancel(); //Prevent toasts from overlapping.
                 }
-                mToast = Toast.makeText(SampleActivity.this, String.valueOf(progress) + "%", Toast.LENGTH_SHORT);
-                mToast.show();
+                toast = Toast.makeText(SampleActivity.this, progress + "%", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
-        mBinding.sampleFloatingActionButton.setOnClickListener(v -> {
+        binding.sampleFloatingActionButton.setOnClickListener(v -> {
             List<Float> values = new ArrayList<Float>() {{
                 add(12.5f);
 //                add(12.5f);
                 add(25f);
                 add(50f);
             }};
-            mBinding.sampleCircularProgressView.setProgress(values, new ArrayList<Integer>() {{
+            binding.sampleCircularProgressView.setProgress(values, new ArrayList<Integer>() {{
                 for (Float ignored : values) {
                     add(Color.rgb(new Random().nextInt(), new Random().nextInt(), new Random().nextInt()));
                 }
@@ -99,68 +95,68 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()) {
             case R.id.size_SeekBar:
-                mBinding.sampleCircularProgressView.setSize((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
+                binding.sampleCircularProgressView.setSize((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
                 break;
             case R.id.thickness_SeekBar:
-                mBinding.sampleCircularProgressView.setProgressStrokeThickness((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
+                binding.sampleCircularProgressView.setProgressStrokeThickness((int) (progress * getResources().getDisplayMetrics().density + 0.5f));
                 break;
             case R.id.thumbsize_SeekBar:
                 float size;
-                if (mBinding.sampleCircularProgressView.getProgressThumbScaleType() == ProgressThumbScaleType.RATE) {
+                if (binding.sampleCircularProgressView.getProgressThumbScaleType() == ProgressThumbScaleType.RATE) {
                     size = progress / ((float) seekBar.getMax() / 2);
-                    mBinding.sampleCircularProgressView.setProgressThumbSizeRate(size);
+                    binding.sampleCircularProgressView.setProgressMaxThumbSizeRate(size);
                 } else {
                     size = (progress * getResources().getDisplayMetrics().density + 0.5f);
-                    mBinding.sampleCircularProgressView.setProgressThumbSize(size);
+                    binding.sampleCircularProgressView.setProgressThumbSize(size);
                 }
 
                 break;
             case R.id.progress_SeekBar:
-                mBinding.sampleCircularProgressView.setProgress(progress, mBinding.animatedSwitch.isChecked());
+                binding.sampleCircularProgressView.setProgress(progress, binding.animatedSwitch.isChecked());
                 break;
             case R.id.angle_SeekBar:
-                mBinding.sampleCircularProgressView.setStartingAngle(progress);
+                binding.sampleCircularProgressView.setStartingAngle(progress);
                 break;
             case R.id.color_r_SeekBar:
-                if (mBinding.colorsSwitch.isChecked()) {
-                    mBinding.bgRSeekBar.setProgress(progress);
+                if (binding.colorsSwitch.isChecked()) {
+                    binding.bgRSeekBar.setProgress(progress);
                 }
-                mBinding.sampleCircularProgressView.setProgressColor(Color.rgb(progress, mBinding.colorGSeekBar.getProgress(), mBinding.colorBSeekBar.getProgress()));
+                binding.sampleCircularProgressView.setProgressColor(Color.rgb(progress, binding.colorGSeekBar.getProgress(), binding.colorBSeekBar.getProgress()));
                 break;
             case R.id.color_g_SeekBar:
-                if (mBinding.colorsSwitch.isChecked()) {
-                    mBinding.bgGSeekBar.setProgress(progress);
+                if (binding.colorsSwitch.isChecked()) {
+                    binding.bgGSeekBar.setProgress(progress);
                 }
-                mBinding.sampleCircularProgressView.setProgressColor(Color.rgb(mBinding.colorRSeekBar.getProgress(), progress, mBinding.colorBSeekBar.getProgress()));
+                binding.sampleCircularProgressView.setProgressColor(Color.rgb(binding.colorRSeekBar.getProgress(), progress, binding.colorBSeekBar.getProgress()));
                 break;
             case R.id.color_b_SeekBar:
-                if (mBinding.colorsSwitch.isChecked()) {
-                    mBinding.bgBSeekBar.setProgress(progress);
+                if (binding.colorsSwitch.isChecked()) {
+                    binding.bgBSeekBar.setProgress(progress);
                 }
-                mBinding.sampleCircularProgressView.setProgressColor(Color.rgb(mBinding.colorRSeekBar.getProgress(), mBinding.colorGSeekBar.getProgress(), progress));
+                binding.sampleCircularProgressView.setProgressColor(Color.rgb(binding.colorRSeekBar.getProgress(), binding.colorGSeekBar.getProgress(), progress));
                 break;
             case R.id.bg_r_SeekBar:
-                if (mBinding.colorsSwitch.isChecked()) {
-                    mBinding.colorRSeekBar.setProgress(progress);
+                if (binding.colorsSwitch.isChecked()) {
+                    binding.colorRSeekBar.setProgress(progress);
                 }
-                if (!mTransparent) {
-                    mBinding.sampleCircularProgressView.setBackgroundColor(Color.rgb(progress, mBinding.bgGSeekBar.getProgress(), mBinding.bgBSeekBar.getProgress()));
+                if (!transparent) {
+                    binding.sampleCircularProgressView.setProgressBackgroundColor(Color.rgb(progress, binding.bgGSeekBar.getProgress(), binding.bgBSeekBar.getProgress()));
                 }
                 break;
             case R.id.bg_g_SeekBar:
-                if (mBinding.colorsSwitch.isChecked()) {
-                    mBinding.colorGSeekBar.setProgress(progress);
+                if (binding.colorsSwitch.isChecked()) {
+                    binding.colorGSeekBar.setProgress(progress);
                 }
-                if (!mTransparent) {
-                    mBinding.sampleCircularProgressView.setBackgroundColor(Color.rgb(mBinding.bgRSeekBar.getProgress(), progress, mBinding.bgBSeekBar.getProgress()));
+                if (!transparent) {
+                    binding.sampleCircularProgressView.setProgressBackgroundColor(Color.rgb(binding.bgRSeekBar.getProgress(), progress, binding.bgBSeekBar.getProgress()));
                 }
                 break;
             case R.id.bg_b_SeekBar:
-                if (mBinding.colorsSwitch.isChecked()) {
-                    mBinding.colorBSeekBar.setProgress(progress);
+                if (binding.colorsSwitch.isChecked()) {
+                    binding.colorBSeekBar.setProgress(progress);
                 }
-                if (!mTransparent) {
-                    mBinding.sampleCircularProgressView.setBackgroundColor(Color.rgb(mBinding.bgRSeekBar.getProgress(), mBinding.bgGSeekBar.getProgress(), progress));
+                if (!transparent) {
+                    binding.sampleCircularProgressView.setProgressBackgroundColor(Color.rgb(binding.bgRSeekBar.getProgress(), binding.bgGSeekBar.getProgress(), progress));
                 }
                 break;
         }
@@ -178,18 +174,18 @@ public class SampleActivity extends AppCompatActivity implements SeekBar.OnSeekB
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.thumb_scale_point:
-                mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.POINT);
-                mBinding.sampleCircularProgressView.setProgressThumbSize((mBinding.thumbsizeSeekBar.getProgress() * getResources().getDisplayMetrics().density + 0.5f));
+                binding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.POINT);
+                binding.sampleCircularProgressView.setProgressThumbSize((binding.thumbsizeSeekBar.getProgress() * getResources().getDisplayMetrics().density + 0.5f));
                 break;
             case R.id.thumb_scale_rate:
-                mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.RATE);
-                float rate = (mBinding.thumbsizeSeekBar.getProgress() / (mBinding.thumbsizeSeekBar.getMax() / mBinding.sampleCircularProgressView.getProgressMaxThumbSizeRate()));
-                mBinding.sampleCircularProgressView.setProgressThumbSizeRate(rate);
+                binding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.RATE);
+                float rate = (binding.thumbsizeSeekBar.getProgress() / (binding.thumbsizeSeekBar.getMax() / binding.sampleCircularProgressView.getProgressMaxThumbSizeRate()));
+                binding.sampleCircularProgressView.setProgressMaxThumbSizeRate(rate);
                 break;
             case R.id.thumb_scale_auto:
             default:
-                mBinding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.AUTO);
+                binding.sampleCircularProgressView.setProgressThumbScaleType(ProgressThumbScaleType.AUTO);
         }
-        mBinding.sampleCircularProgressView.requestLayout();
+        binding.sampleCircularProgressView.requestLayout();
     }
 }
