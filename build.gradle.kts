@@ -8,6 +8,7 @@ buildscript {
         classpath(Libs.com_android_tools_build_gradle)
         classpath(Libs.org_jetbrains_kotlin_kotlin_gradle_plugin)
         classpath(Libs.com_jfrog_bintray_gradle_bintray_plugin)
+        classpath(Libs.dokka_gradle_plugin)
     }
 }
 
@@ -33,7 +34,6 @@ tasks.withType<Javadoc> {
         this as StandardJavadocDocletOptions
         addStringOption("Xdoclint:none", "-quiet")
         addStringOption("encoding", "UTF-8")
-        exclude("**/*.kt")
     }
 }
 

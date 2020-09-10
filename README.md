@@ -6,14 +6,15 @@
 
 A fancy CircularProgressView.
 
-## Getting started
-Include it into your project, for example, as a Gradle dependency:
+## Installation
+
+CircularProgressView is distributed through [Maven Central](https://search.maven.org/artifact/com.github.guilhe/circular-progress-view), [Jcenter](https://bintray.com/gdelgado/android/circular-progress-view) and [Jitpack](https://jitpack.io/#GuilhE/circular-progress-view).
 
 ```groovy
 implementation 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
 ```
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.guilhe/circular-progress-view.svg)](https://search.maven.org/search?q=g:com.github.guilhe%20AND%20circular-progress-view) [![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg)](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion)
-![Bintray](https://img.shields.io/bintray/dt/gdelgado/android/circular-progress-view)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.guilhe/circular-progress-view.svg)](https://search.maven.org/search?q=g:com.github.guilhe%20AND%20circular-progress-view) [![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg)](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion) ![Bintray](https://img.shields.io/bintray/dt/gdelgado/android/circular-progress-view)
+
 ## Usage
 Check out the __sample__ module where you can find a few examples of how to create it by `xml` or `java`.
 
@@ -107,7 +108,6 @@ setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressCo
 ```
 This mode can be used to display a simple pie chart. It will disable the progress thumb, the background color and the progress will not be round.  
 
-
 ## Sample
 <img src="meida/sample.gif"  alt="Sample" width="30%"/>
 
@@ -115,18 +115,12 @@ _Animation last update on April, 2019_
 
 <a href='https://play.google.com/store/apps/details?id=com.github.guilhe.cicularprogressview.sample&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="30%" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
-## Binaries
-Binaries and dependency information for Gradle, Maven, Ivy and others can be found [here](https://search.maven.org/artifact/com.github.guilhe/circular-progress-view).
-
-<a href='https://bintray.com/gdelgado/android/circular-progress-view?source=watch' alt='Get automatic notifications about new "circular-progress-view" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_bw.png'></a>
-
 ## Dependencies
 - [com.android.support:support-annotations](https://developer.android.com/topic/libraries/support-library/packages.html#annotations)
 
 ## Bugs and Feedback
 For bugs, questions and discussions please use the [Github Issues](https://github.com/GuilhE/android-circular-progress-view/issues).
 
- 
 ## LICENSE
 Copyright (c) 2017-present, GuilhE.
 

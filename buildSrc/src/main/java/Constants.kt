@@ -5,7 +5,7 @@ object AndroidConstants {
     const val minSdkVersion = 23
     const val targetSdkVersion = 30
     const val compileSdkVersions = 30
-    const val buildToolsVersion = "30.0.1"
+    const val buildToolsVersion = "30.0.2"
 }
 
 object Versions {
@@ -14,7 +14,7 @@ object Versions {
     const val bintray_plugin_version = "1.8.5"
 
     const val bintray = "1.8.5"
-    const val dokka_version = "0.10.1"
+    const val dokka_version = "1.4.0"
 
     const val android_support = "28.0.0"
 }
