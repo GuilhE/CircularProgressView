@@ -35,7 +35,7 @@ configure<BintrayExtension> {
     } else {
         user = System.getenv("bintrayUser")
         key = System.getenv("bintrayApiKey")
-        ossPwd = System.getenv("mavenCentralPwd")
+        ossPwd = System.getenv("mavenCentralPwd") ?: ""
     }
 
     setPublications(bintrayRepo)
@@ -56,9 +56,12 @@ configure<BintrayExtension> {
             vcsTag = libraryVersion
             desc = libraryDescription
             released = Date().toString()
-            mavenCentralSync.sync = true
-            mavenCentralSync.user = user
-            mavenCentralSync.password = ossPwd
+            if (ossPwd.isNotEmpty())
+                mavenCentralSync.apply {
+                    sync = true
+                    user = user
+                    password = ossPwd
+                }
         }
     }
 }
