@@ -2,13 +2,12 @@
 <img src="media/banner.png" />
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CircularProgressView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6152) [![Preview-Appetize.io](https://img.shields.io/badge/Preview-Appetize.io-brightgreen.svg?style=flat.svg)](https://appetize.io/app/jeftbchvbfuafwpeaf00fba8bm)
-![Bintray](https://img.shields.io/bintray/dt/gdelgado/android/circular-progress-view)
 
 A fancy CircularProgressView.
 
 ## Installation
 
-CircularProgressView is distributed through [Maven Central](https://search.maven.org/artifact/com.github.guilhe/circular-progress-view), [Jcenter](https://bintray.com/gdelgado/android/circular-progress-view) and [Jitpack](https://jitpack.io/#GuilhE/circular-progress-view).
+CircularProgressView is distributed through [Maven Central](https://search.maven.org/artifact/com.github.guilhe/circular-progress-view), [Jcenter](https://bintray.com/gdelgado/android/circular-progress-view) and [Jitpack](https://jitpack.io/#GuilhE/android-circular-progress-view).
 
 ```groovy
 implementation 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
@@ -109,7 +108,7 @@ setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressCo
 This mode can be used to display a simple pie chart. It will disable the progress thumb, the background color and the progress will not be round.  
 
 ## Sample
-<img src="meida/sample.gif"  alt="Sample" width="30%"/>
+<img src="media/sample.gif"  alt="Sample" width="30%"/>
 
 _Animation last update on April, 2019_
 
