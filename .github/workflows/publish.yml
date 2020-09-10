@@ -23,4 +23,6 @@ jobs:
           bintrayUser: ${{ secrets.BINTRAY_USER }}
           bintrayApiKey: ${{ secrets.BINTRAY_API_KEY }}
           mavenCentralPwd: ${{ secrets.OSS_PASSWORD }}
-        run: ./gradlew bintrayUpload
+        run: 
+          ./gradlew assembleRelease
+          ./gradlew bintrayUpload
