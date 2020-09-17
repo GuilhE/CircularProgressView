@@ -84,10 +84,10 @@ configure<PublishingExtension> {
             artifactId = artifact
             version = libraryVersion
 
-            artifact(tasks.named("sourcesJar"))
-            artifact(tasks.named("dokkaJar"))
+            artifact(tasks.getByName("sourcesJar"))
+            artifact(tasks.getByName("dokkaJar"))
             artifact("$buildDir/outputs/aar/${artifactId}-release.aar") {
-                builtBy(tasks.named("assemble"))
+                builtBy(tasks.getByName("assemble"))
             }
 
             pom {
