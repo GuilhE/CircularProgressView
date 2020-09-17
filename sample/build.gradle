@@ -10,7 +10,7 @@ android {
         applicationId "com.github.guilhe.cicularprogressview.sample"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
+        versionCode 9
         versionName "2.0.0"
     }
 
