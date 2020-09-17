@@ -1,2 +1,2 @@
-rootProject.name = "android-circular-progress-view"
+rootProject.name = "CircularProgressView"
 include("sample", "circular-progress-view")

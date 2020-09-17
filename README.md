@@ -7,7 +7,7 @@ A fancy CircularProgressView.
 
 ## Installation
 
-CircularProgressView is distributed through [Maven Central](https://search.maven.org/artifact/com.github.guilhe/circular-progress-view), [Jcenter](https://bintray.com/gdelgado/android/circular-progress-view) and [Jitpack](https://jitpack.io/#GuilhE/android-circular-progress-view).
+CircularProgressView is distributed through [Maven Central](https://search.maven.org/artifact/com.github.guilhe/circular-progress-view), [Jcenter](https://bintray.com/gdelgado/android/circular-progress-view) and [Jitpack](https://jitpack.io/#GuilhE/CircularProgressView).
 
 ```groovy
 implementation 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
@@ -118,7 +118,7 @@ _Animation last update on April, 2019_
 - [com.android.support:support-annotations](https://developer.android.com/topic/libraries/support-library/packages.html#annotations)
 
 ## Bugs and Feedback
-For bugs, questions and discussions please use the [Github Issues](https://github.com/GuilhE/android-circular-progress-view/issues).
+For bugs, questions and discussions please use the [Github Issues](https://github.com/GuilhE/CircularProgressView/issues).
 
 ## LICENSE
 Copyright (c) 2017-present, GuilhE.
