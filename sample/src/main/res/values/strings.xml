@@ -12,8 +12,7 @@
     <string name="hint_for_thumb">Thumb &amp; ScaleTypes (Enable:</string>
     <string name="hint_for_reverse">Reverse:</string>
     <string name="hint_for_shadow_padding">Shadow padding</string>
-    <string name="hint_for_background_color">Background color RGB</string>
-    <string name="hint_for_alpha">(Alpha:</string>
-    <string name="hint_for_transparent">Transparent:</string>
+    <string name="hint_for_background_color">Background RGB (Transparent:</string>
+    <string name="hint_for_alpha">Alpha:</string>
     <string name="symbol_closing">)</string>
 </resources>

@@ -225,12 +225,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/hint_for_background_color" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="10dp"
-                        android:text="@string/hint_for_transparent" />
-
                     <Switch
                         android:id="@+id/transparent_Switch"
                         android:layout_width="wrap_content"
