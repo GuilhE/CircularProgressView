@@ -25,5 +25,6 @@ jobs:
         env:
           bintrayUser: ${{ secrets.BINTRAY_USER }}
           bintrayApiKey: ${{ secrets.BINTRAY_API_KEY }}
-          mavenCentralPwd: ${{ secrets.OSS_PASSWORD }}
+          mavenUser: ${{ secrets.MAVEN_USER }}
+          mavenToken: ${{ secrets.MAVEN_TOKEN }}
         run: ./gradlew bintrayUpload

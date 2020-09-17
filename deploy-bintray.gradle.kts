@@ -17,25 +17,29 @@ apply(plugin = Libs.maven_publish)
 plugins.apply(BintrayPlugin::class.java) //https://github.com/bintray/gradle-bintray-plugin/issues/301
 
 val bintrayRepo = properties["bintrayRepo"].toString()
-val bintrayName = properties["bintrayName"].toString()
 val libraryVersion = properties["libraryVersion"].toString()
 val libraryDescription = properties["libraryDescription"].toString()
 val siteUrl = properties["siteUrl"].toString()
 val gitUrl = properties["gitUrl"].toString()
 
 configure<BintrayExtension> {
-    var ossPwd = ""
+    val bintrayName = properties["bintrayName"].toString()
+    var mavenUser: String
+    var mavenToken: String
+
     if (project.rootProject.file("local.properties").exists()) {
         val fis = FileInputStream(project.rootProject.file("local.properties"))
         val prop = Properties()
         prop.load(fis)
         user = prop.getProperty("bintray.user", "")
         key = prop.getProperty("bintray.apiKey", "")
-        ossPwd = prop.getProperty("bintray.ossPwd", "")
+        mavenUser = prop.getProperty("maven.user", "")
+        mavenToken = prop.getProperty("maven.token", "")
     } else {
         user = System.getenv("bintrayUser")
         key = System.getenv("bintrayApiKey")
-        ossPwd = System.getenv("mavenCentralPwd") ?: ""
+        mavenUser = System.getenv("mavenUser") ?: ""
+        mavenToken = System.getenv("mavenToken") ?: ""
     }
 
     setPublications(bintrayRepo)
@@ -56,11 +60,11 @@ configure<BintrayExtension> {
             vcsTag = libraryVersion
             desc = libraryDescription
             released = Date().toString()
-            if (ossPwd.isNotEmpty())
+            if (mavenToken.isNotEmpty())
                 mavenCentralSync.apply {
                     sync = true
-                    user = user
-                    password = ossPwd
+                    user = mavenUser
+                    password = mavenToken
                 }
         }
     }
@@ -82,7 +86,9 @@ configure<PublishingExtension> {
 
             artifact(tasks.named("sourcesJar"))
             artifact(tasks.named("dokkaJar"))
-            artifact("$buildDir/outputs/aar/${artifactId}-release.aar")
+            artifact("$buildDir/outputs/aar/${artifactId}-release.aar") {
+                builtBy(tasks.named("assemble"))
+            }
 
             pom {
                 packaging = "aar"
