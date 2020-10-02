@@ -8,8 +8,8 @@ remote_branch: gh-pages
 theme:
   name: material
   palette:
-    primary: 'white'
-    accent: 'red'
+    primary: white
+    accent: red
   font:
     text: Open Sans
     code: Roboto Mono
