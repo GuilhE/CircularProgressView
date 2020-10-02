@@ -51,7 +51,7 @@ Example:
     app:progress="60"
     app:progressBarThickness="10dp"
     app:progressBarColor="@android:color/holo_purple"/>
- ```
+``` 
 
 ### BindingAdapters
 You can take advantage of [Binding Adapters (from Data Binding)](https://developer.android.com/topic/libraries/data-binding/binding-adapters#kotlin) to create some helper attributes, example:  
@@ -90,7 +90,7 @@ To achieve the result on the right side you have two options: either copy the fi
 ```
 
 ```kotlin
-setProgressColors(@NonNull @ColorInt int[] colors, @Nullable float[] positions, boolean duplicateFirst)
+fun setProgressColors(@NonNull @ColorInt int[] colors, @Nullable float[] positions, boolean duplicateFirst)
 ```
 
 Finally, you may also use the attribute `progressBarColorArrayPositions` to pass a `float[] positions`:
@@ -108,7 +108,7 @@ There are many methods to help you customize this `View` by code. For more detai
 <img src="media/piechart.png" />
 
 ```kotlin
-setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList)
+fun setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList)
 ```
 This mode can be used to display a simple pie chart. It will disable the progress thumb, the background color and the progress will not be round.  
 
