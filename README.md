@@ -54,7 +54,7 @@ Example:
  ```
 
 ### BindingAdapters
-You can take advantage of [Binding Adapters (from Data Binding)](https://developer.android.com/topic/libraries/data-binding/binding-adapters#kotlin) to create some helper attributes, example:
+You can take advantage of [Binding Adapters (from Data Binding)](https://developer.android.com/topic/libraries/data-binding/binding-adapters#kotlin) to create some helper attributes, example:  
 
 ```kotlin
 @BindingAdapter("progressAnimated")
@@ -98,7 +98,7 @@ Finally, you may also use the attribute `progressBarColorArrayPositions` to pass
 <array name="rainbow_positions">
     <item type="dimen" format="float">.44</item>
     ...
- </array>
+</array>
 ```
  __note:__ when using the helper function __and__ `positions[]`, you'll have to add an extra position for the last one being copied.
 
