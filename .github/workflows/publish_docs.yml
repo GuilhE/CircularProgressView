@@ -1,0 +1,35 @@
+name: Publish docs via GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "README.md"
+      - "CHANGELOG.md"
+      - "mkdocs.yml"
+      - ".github/workflows/publish_docs.yml"
+      - ".github/workflows/prepare_mkdocs.sh"
+
+jobs:
+  deploy:
+    name: Generate API docs and deploy docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Cache Gradle
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Prepare Docs
+        run: sudo bash ./tools/prepare_docs.sh
+
+      - name: Deploy docs
+        uses: mhausenblas/mkdocs-deploy-gh-pages@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
