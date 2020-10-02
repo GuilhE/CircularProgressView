@@ -42,6 +42,7 @@ Attributes accepted in xml:
         <enum name="rate" value="2"/>
     </attr>
 ```
+
 Example:
 ```xml
 <com.github.guilhe.views.CircularProgressView
@@ -53,13 +54,15 @@ Example:
  ```
 
 ### @BindingAdapters
-You can take advantage of [Binding Adapters (from Data Binding)](https://developer.android.com/topic/libraries/data-binding/binding-adapters#kotlin) to create some helper attributes, example:  
-```java
+You can take advantage of [Binding Adapters (from Data Binding)](https://developer.android.com/topic/libraries/data-binding/binding-adapters#kotlin) to create some helper attributes, example:
+
+```kotlin
 @BindingAdapter("progressAnimated")
 fun setProgressAnimated(view: CircularProgressView, progress: Int) {
     view.setProgress(progress, true);
 }
-```  
+```
+
 ```xml
 <com.github.guilhe.views.CircularProgressView
     ...
@@ -84,10 +87,12 @@ The default result will be (left):
 To achieve the result on the right side you have two options: either copy the first color and add it as last, or use the helper attribute/method that does that for you:
 ```xml
 <attr name="duplicateFirstColorInArray" format="boolean"/>
-```  
-```java
+```
+
+```kotlin
 setProgressColors(@NonNull @ColorInt int[] colors, @Nullable float[] positions, boolean duplicateFirst)
-```  
+```
+
 Finally, you may also use the attribute `progressBarColorArrayPositions` to pass a `float[] positions`:
 ```xml
 <array name="rainbow_positions">
@@ -102,7 +107,7 @@ There are many methods to help you customize this `View` by code. For more detai
 ### "Multiple Progress" for PieChart
 <img src="media/piechart.png" />
 
-```java
+```kotlin
 setProgress(@NonNull List<Float> progressList, @NonNull List<Integer> progressColorList)
 ```
 This mode can be used to display a simple pie chart. It will disable the progress thumb, the background color and the progress will not be round.  
