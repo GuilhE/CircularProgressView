@@ -1,0 +1,50 @@
+site_name: CircularProgressView
+repo_name: GuilhE/CircularProgressView
+repo_url: https://github.com/GuilhE/CircularProgressView
+site_author: GuilhE
+copyright: 'Copyright (c) 2020-present GuilhE'
+remote_branch: gh-pages
+
+theme:
+  name: material
+  palette:
+    primary: 'white'
+    accent: 'red'
+  font:
+    text: Open Sans
+    code: Roboto Mono
+
+extra:
+  manifest: manifest.webmanifest
+
+nav:
+  - "Overview": index.md
+  - "Changelog": changelog.md
+  - "Contributing": contributing.md
+  - "Code of Conduct": conduct.md
+
+markdown_extensions:
+  - admonition
+  - smarty
+  - codehilite:
+      guess_lang: false
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.smartsymbols
+  - pymdownx.tabbed
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+  - tables
+  
+plugins:
+  - search
