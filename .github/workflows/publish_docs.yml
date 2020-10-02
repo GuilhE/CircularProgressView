@@ -27,7 +27,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Prepare Docs
-        run: sudo bash ./tools/prepare_docs.sh
+        run: sudo bash .github/workflows/prepare_mkdocs.sh
 
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
