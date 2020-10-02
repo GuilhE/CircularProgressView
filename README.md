@@ -53,7 +53,7 @@ Example:
     app:progressBarColor="@android:color/holo_purple"/>
  ```
 
-### @BindingAdapters
+### BindingAdapters
 You can take advantage of [Binding Adapters (from Data Binding)](https://developer.android.com/topic/libraries/data-binding/binding-adapters#kotlin) to create some helper attributes, example:
 
 ```kotlin
