@@ -7,12 +7,12 @@ A fancy CircularProgressView.
 
 ## Installation
 
-CircularProgressView is distributed through [Maven Central](https://search.maven.org/artifact/com.github.guilhe/circular-progress-view), [Jcenter](https://bintray.com/gdelgado/android/circular-progress-view) and [Jitpack](https://jitpack.io/#GuilhE/CircularProgressView).
+CircularProgressView is distributed through [Maven Central](https://search.maven.org/artifact/com.github.guilhe/circular-progress-view) and [Jitpack](https://jitpack.io/#GuilhE/CircularProgressView).
 
 ```groovy
 implementation 'com.github.guilhe:circular-progress-view:${LATEST_VERSION}'
 ```
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.guilhe/circular-progress-view.svg)](https://search.maven.org/search?q=g:com.github.guilhe%20AND%20circular-progress-view) [![Download](https://api.bintray.com/packages/gdelgado/android/circular-progress-view/images/download.svg)](https://bintray.com/gdelgado/android/circular-progress-view/_latestVersion) ![Bintray](https://img.shields.io/bintray/dt/gdelgado/android/circular-progress-view)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.guilhe/circular-progress-view.svg)](https://search.maven.org/search?q=g:com.github.guilhe%20AND%20circular-progress-view)
 
 ## Usage
 Check out the __sample__ module where you can find a few examples of how to create it by `xml` or `java`.
